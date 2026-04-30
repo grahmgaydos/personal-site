@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>404 — Grahm Gaydos</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0A0A0B;
+    --bg-2: #0F0F11;
+    --bg-3: #16161A;
+    --border: rgba(255, 255, 255, 0.08);
+    --border-2: rgba(255, 255, 255, 0.14);
+    --text: #F5F5F7;
+    --text-2: #A8A8AD;
+    --text-3: #6E6E76;
+    --accent: #2D55FF;
+    --accent-bright: #3D6BFF;
+    --sans: "Geist", -apple-system, BlinkMacSystemFont, sans-serif;
+    --serif: "Instrument Serif", Georgia, serif;
+    --mono: "Geist Mono", ui-monospace, monospace;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+    padding: 32px;
+    background-image:
+      radial-gradient(ellipse at top, rgba(45,85,255,0.06), transparent 60%);
+  }
+  .wrap { max-width: 640px; }
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text-3);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .eyebrow::before {
+    content: "";
+    width: 24px;
+    height: 1px;
+    background: var(--accent-bright);
+  }
+  h1 {
+    font-family: var(--sans);
+    font-weight: 500;
+    font-size: clamp(40px, 7vw, 88px);
+    line-height: 1;
+    letter-spacing: -0.035em;
+    margin-bottom: 24px;
+  }
+  h1 .serif {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 400;
+  }
+  h1 .accent {
+    color: var(--accent-bright);
+  }
+  p {
+    font-size: 17px;
+    line-height: 1.55;
+    color: var(--text-2);
+    margin-bottom: 32px;
+  }
+  a {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 20px;
+    border-radius: 10px;
+    font-family: var(--sans);
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text);
+    text-decoration: none;
+    background: var(--accent);
+    transition: all 0.2s ease;
+  }
+  a:hover {
+    background: var(--accent-bright);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 32px -8px var(--accent);
+  }
+  a .arrow { transition: transform 0.2s ease; }
+  a:hover .arrow { transform: translateX(3px); }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="eyebrow">Error · 404</div>
+    <h1>This page <span class="serif">isn't where it</span><br/><span class="accent">should be.</span></h1>
+    <p>The link you followed is broken, or the page has moved. The rest of the site is intact — head back to the homepage and try again from there.</p>
+    <a href="/">
+      Back home <span class="arrow">→</span>
+    </a>
+  </div>
+</body>
+</html>

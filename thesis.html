@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Thesis · From Pilot to Policy — Grahm Gaydos</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0A0A0B;
+    --bg-2: #0F0F11;
+    --bg-3: #16161A;
+    --border: rgba(255, 255, 255, 0.08);
+    --border-2: rgba(255, 255, 255, 0.14);
+    --text: #F5F5F7;
+    --text-2: #A8A8AD;
+    --text-3: #6E6E76;
+    --accent: #2D55FF;
+    --accent-bright: #3D6BFF;
+    --accent-dim: #1E3FFF;
+    --warn: #F5A623;
+    --sans: "Geist", -apple-system, BlinkMacSystemFont, sans-serif;
+    --serif: "Instrument Serif", Georgia, serif;
+    --mono: "Geist Mono", ui-monospace, monospace;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 15px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  ::selection { background: var(--accent); color: var(--text); }
+  a { color: inherit; text-decoration: none; }
+  button { font: inherit; background: none; border: 0; color: inherit; cursor: pointer; }
+
+  .nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 16px 32px;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 32px;
+    background: rgba(10, 10, 11, 0.85);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-back {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--text-2);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 12px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    transition: all 0.2s ease;
+  }
+  .nav-back:hover { color: var(--text); border-color: var(--border-2); transform: translateX(-2px); }
+  .nav-page-title {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--text-2);
+    text-align: center;
+    letter-spacing: 0.04em;
+  }
+  .nav-page-title strong { color: var(--text); font-weight: 500; }
+
+  .thesis-hero {
+    padding: 140px 32px 80px;
+    border-bottom: 1px solid var(--border);
+    background:
+      radial-gradient(ellipse at top, rgba(45,85,255,0.08), transparent 60%),
+      var(--bg);
+  }
+  .thesis-hero-inner { max-width: 1200px; margin: 0 auto; }
+  .thesis-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text-2);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+  .thesis-eyebrow-dot {
+    width: 6px; height: 6px;
+    background: var(--accent-bright);
+    border-radius: 50%;
+    box-shadow: 0 0 8px var(--accent-bright);
+  }
+  .thesis-title {
+    font-family: var(--sans);
+    font-weight: 500;
+    font-size: clamp(40px, 6vw, 84px);
+    line-height: 1;
+    letter-spacing: -0.035em;
+    margin-bottom: 32px;
+    max-width: 1100px;
+  }
+  .thesis-title .serif { font-family: var(--serif); font-weight: 400; font-style: italic; letter-spacing: -0.02em; }
+  .thesis-title .accent { color: var(--accent-bright); }
+  .thesis-hero-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 64px;
+    margin-top: 48px;
+  }
+  .thesis-claim {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: clamp(22px, 2.6vw, 32px);
+    line-height: 1.3;
+    letter-spacing: -0.015em;
+    color: var(--text);
+    font-weight: 400;
+  }
+  .thesis-meta { font-family: var(--mono); font-size: 12px; color: var(--text-2); line-height: 1.7; }
+  .thesis-meta dt { color: var(--text-3); text-transform: uppercase; font-size: 10px; letter-spacing: 0.08em; margin-top: 14px; }
+  .thesis-meta dt:first-child { margin-top: 0; }
+  .thesis-meta dd { color: var(--text); margin-bottom: 4px; font-weight: 500; }
+
+  section { padding: 80px 32px; }
+  .container { max-width: 1200px; margin: 0 auto; }
+  .chart-section { padding-top: 60px; }
+  .chart-wrap {
+    background: var(--bg-2);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 32px;
+    position: relative;
+  }
+  .chart-header { display: flex; justify-content: space-between; align-items: start; margin-bottom: 24px; flex-wrap: wrap; gap: 16px; }
+  .chart-title { font-family: var(--mono); font-size: 12px; color: var(--text); letter-spacing: 0.04em; }
+  .chart-title .live {
+    display: inline-block;
+    background: var(--accent);
+    color: var(--text);
+    padding: 2px 6px;
+    border-radius: 3px;
+    margin-right: 8px;
+    font-size: 10px;
+    font-weight: 600;
+  }
+  .chart-toggle { display: flex; gap: 8px; font-family: var(--mono); font-size: 11px; }
+  .chart-toggle button {
+    padding: 6px 12px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    color: var(--text-3);
+    transition: all 0.2s ease;
+  }
+  .chart-toggle button.on { background: var(--accent); color: var(--text); border-color: var(--accent); }
+  .chart-toggle button:hover:not(.on) { color: var(--text); border-color: var(--border-2); }
+
+  .chart-svg-wrap { position: relative; width: 100%; }
+  .chart-svg { width: 100%; height: 460px; display: block; }
+  .chart-readout {
+    position: absolute;
+    top: 12px; right: 12px;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text-2);
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 14px;
+    min-width: 220px;
+    pointer-events: none;
+  }
+  .chart-readout-row { display: flex; justify-content: space-between; gap: 16px; padding: 3px 0; }
+  .chart-readout-row dt { color: var(--text-3); }
+  .chart-readout-row dd { color: var(--text); font-weight: 500; }
+  .chart-readout-row.dot-actions dt::before {
+    content: ""; display: inline-block; width: 8px; height: 8px;
+    border-radius: 50%; background: var(--accent-bright);
+    margin-right: 6px; vertical-align: middle;
+  }
+  .chart-readout-row.dot-spend dt::before {
+    content: ""; display: inline-block; width: 8px; height: 8px;
+    border-radius: 50%; background: var(--warn);
+    margin-right: 6px; vertical-align: middle;
+  }
+  .chart-legend { display: flex; gap: 24px; margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border); font-family: var(--mono); font-size: 11px; color: var(--text-2); flex-wrap: wrap; }
+  .chart-legend-item { display: flex; align-items: center; gap: 8px; }
+  .chart-legend-swatch { width: 14px; height: 3px; border-radius: 2px; }
+  .chart-takeaway {
+    margin-top: 24px;
+    padding: 22px 26px;
+    background: rgba(45, 85, 255, 0.06);
+    border: 1px solid rgba(45, 85, 255, 0.25);
+    border-radius: 12px;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 18px;
+    align-items: start;
+  }
+  .chart-takeaway-icon {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--accent-bright);
+    border: 1px solid rgba(45, 85, 255, 0.3);
+    padding: 4px 8px;
+    border-radius: 4px;
+    letter-spacing: 0.08em;
+  }
+  .chart-takeaway p { font-size: 15px; color: var(--text); line-height: 1.55; }
+  .chart-takeaway strong { color: var(--accent-bright); font-weight: 500; }
+
+  .body-section { padding: 60px 32px; border-top: 1px solid var(--border); }
+  .body-grid { display: grid; grid-template-columns: 220px 1fr; gap: 48px; max-width: 1200px; margin: 0 auto; align-items: start; }
+  .body-label { font-family: var(--mono); font-size: 11px; color: var(--text-3); letter-spacing: 0.1em; text-transform: uppercase; position: sticky; top: 100px; }
+  .body-label::before { content: ""; display: block; width: 32px; height: 1px; background: var(--accent-bright); margin-bottom: 12px; }
+  .body-content { max-width: 720px; }
+  .body-content h2 { font-family: var(--sans); font-weight: 500; font-size: 32px; letter-spacing: -0.02em; margin-bottom: 20px; line-height: 1.15; }
+  .body-content h2 .serif { font-family: var(--serif); font-style: italic; font-weight: 400; }
+  .body-content p { font-size: 17px; line-height: 1.65; color: var(--text-2); margin-bottom: 16px; }
+  .body-content p strong { color: var(--text); font-weight: 500; }
+  .body-content p .serif { font-family: var(--serif); font-style: italic; color: var(--text); }
+
+  .method-table { width: 100%; margin-top: 16px; border: 1px solid var(--border); border-radius: 10px; overflow: hidden; background: var(--bg-2); }
+  .method-table-row { display: grid; grid-template-columns: 200px 1fr; gap: 16px; padding: 14px 18px; border-bottom: 1px solid var(--border); font-family: var(--mono); font-size: 12px; }
+  .method-table-row:last-child { border-bottom: 0; }
+  .method-table-row dt { color: var(--text-3); text-transform: uppercase; font-size: 10px; letter-spacing: 0.08em; padding-top: 2px; }
+  .method-table-row dd { color: var(--text); }
+
+  footer {
+    padding: 32px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text-3);
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  @media (max-width: 900px) {
+    .nav { padding: 12px 16px; gap: 12px; }
+    .nav-page-title { display: none; }
+    .thesis-hero { padding: 100px 20px 60px; }
+    .thesis-title { font-size: 36px; }
+    .thesis-hero-grid { grid-template-columns: 1fr; gap: 32px; }
+    section, .body-section { padding-left: 20px; padding-right: 20px; }
+    .chart-wrap { padding: 16px; }
+    .chart-svg { height: 320px; }
+    .chart-readout { position: static; margin-bottom: 16px; }
+    .body-grid { grid-template-columns: 1fr; gap: 24px; }
+    .body-label { position: static; }
+    .method-table-row { grid-template-columns: 1fr; gap: 4px; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a class="nav-back" href="index.html"><span>←</span> Back</a>
+  <div class="nav-page-title"><strong>Thesis</strong> · From Pilot to Policy</div>
+  <a class="nav-back" href="#download">Download PDF <span>↓</span></a>
+</nav>
+
+<header class="thesis-hero">
+  <div class="thesis-hero-inner">
+    <div class="thesis-eyebrow">
+      <span class="thesis-eyebrow-dot"></span>
+      MSc Thesis · Oxford Internet Institute · In progress · Submission Jun 2026
+    </div>
+    <h1 class="thesis-title">
+      From <span class="serif">Pilot to Policy:</span><br/>
+      how OMB memoranda <span class="accent">shifted federal AI adoption.</span>
+    </h1>
+    <div class="thesis-hero-grid">
+      <p class="thesis-claim">
+        Procurement memos changed <strong>how often</strong> agencies signed AI contracts.<br/>
+        They didn't change <strong>how much</strong> the government spent.
+      </p>
+      <dl class="thesis-meta">
+        <dt>Method</dt><dd>Interrupted time series · agency-month panel · fixed effects</dd>
+        <dt>Source</dt><dd>USAspending.gov · 2018–2025</dd>
+        <dt>Treatments</dt><dd>OMB M-24-10 (Mar 2024) · M-24-18 (Sept 2024)</dd>
+        <dt>n</dt><dd>~7,200 agency-months</dd>
+        <dt>Tooling</dt><dd>R · Stata · fixest · ggplot2 · custom ETL</dd>
+      </dl>
+    </div>
+  </div>
+</header>
+
+<section class="chart-section">
+  <div class="container">
+    <div class="chart-wrap">
+      <div class="chart-header">
+        <div class="chart-title">
+          <span class="live">LIVE</span>
+          Federal AI procurement: actions vs. spending, 2018–2025
+        </div>
+        <div class="chart-toggle">
+          <button class="on" data-view="both">Both</button>
+          <button data-view="actions">Actions</button>
+          <button data-view="spend">Spend</button>
+        </div>
+      </div>
+      <div class="chart-svg-wrap">
+        <svg class="chart-svg" id="chart" viewBox="0 0 1200 460" preserveAspectRatio="none"></svg>
+        <div class="chart-readout" id="readout">
+          <div class="chart-readout-row"><dt>Period</dt><dd id="ro-period">Hover the chart</dd></div>
+          <div class="chart-readout-row dot-actions"><dt>AI contract actions</dt><dd id="ro-actions">—</dd></div>
+          <div class="chart-readout-row dot-spend"><dt>AI obligations ($M)</dt><dd id="ro-spend">—</dd></div>
+        </div>
+      </div>
+      <div class="chart-legend">
+        <div class="chart-legend-item">
+          <div class="chart-legend-swatch" style="background: var(--accent-bright);"></div>
+          AI contract actions (count, indexed)
+        </div>
+        <div class="chart-legend-item">
+          <div class="chart-legend-swatch" style="background: var(--warn);"></div>
+          AI obligations ($M, indexed)
+        </div>
+        <div class="chart-legend-item">
+          <div class="chart-legend-swatch" style="background: var(--text-3); height: 1px; border-top: 1px dashed var(--text-3);"></div>
+          OMB intervention dates
+        </div>
+      </div>
+      <div class="chart-takeaway">
+        <div class="chart-takeaway-icon">FINDING</div>
+        <p>
+          After the OMB memos, the <strong>frequency</strong> of AI procurement actions jumped sharply — agencies signed more, smaller contracts. Total dollar obligations did not move correspondingly. The policy produced an <strong>extensive-margin response</strong>, suggesting administrative AI guidance shifts <em>signalling and process</em> faster than it shifts budget.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="body-section">
+  <div class="body-grid">
+    <div class="body-label">01 — Question</div>
+    <div class="body-content">
+      <h2>What does federal AI procurement guidance <span class="serif">actually do?</span></h2>
+      <p>The OMB memoranda M-24-10 (March 2024) and M-24-18 (September 2024) set out detailed expectations for how federal agencies were to acquire, manage, and govern AI systems. The policy framing treats them as enabling: clarifying procurement pathways, removing friction, encouraging responsible adoption.</p>
+      <p>But <strong>what happens in the contract data?</strong> Do agencies sign more AI contracts? Bigger ones? Different vendors? Or does administrative guidance produce <span class="serif">signalling without substance</span> — language that changes faster than the spending lines underneath it?</p>
+      <p>This thesis treats the OMB memos as a quasi-experimental intervention and tests their measurable effect on agency-level AI procurement behaviour.</p>
+    </div>
+  </div>
+</section>
+
+<section class="body-section">
+  <div class="body-grid">
+    <div class="body-label">02 — Method</div>
+    <div class="body-content">
+      <h2>Interrupted time series, <span class="serif">agency-month panel.</span></h2>
+      <p>The unit of analysis is the agency-month. AI-related contract actions are identified using a combination of NAICS code filtering, PSC code filtering, and keyword matching against the contract description field — calibrated against a hand-coded validation sample.</p>
+      <dl class="method-table">
+        <div class="method-table-row"><dt>Specification</dt><dd>ITS with agency &amp; month-of-year fixed effects (fixest)</dd></div>
+        <div class="method-table-row"><dt>Outcome 1</dt><dd>AI contract action count (indexed pre-period mean = 100)</dd></div>
+        <div class="method-table-row"><dt>Outcome 2</dt><dd>AI obligation $ (indexed pre-period mean = 100)</dd></div>
+        <div class="method-table-row"><dt>Treatment</dt><dd>Bundled OMB intervention indicator (M-24-10 + M-24-18)</dd></div>
+        <div class="method-table-row"><dt>Controls</dt><dd>log(total agency procurement); time-varying agency size</dd></div>
+        <div class="method-table-row"><dt>Falsification</dt><dd>Placebo timing tests at false intervention dates</dd></div>
+        <div class="method-table-row"><dt>Robustness</dt><dd>Alternative AI identifiers; alternative bandwidths</dd></div>
+      </dl>
+      <p style="margin-top: 16px;">The chart above visualises the headline finding: a clean level shift in <strong>action frequency</strong> at the M-24-10 boundary, with a further bump after M-24-18, and no comparable shift in <strong>spending</strong> over the same period.</p>
+    </div>
+  </div>
+</section>
+
+<section class="body-section">
+  <div class="body-grid">
+    <div class="body-label">03 — Implication</div>
+    <div class="body-content">
+      <h2>What this means for <span class="serif">how we read AI policy.</span></h2>
+      <p>If administrative AI guidance produces an extensive-margin response — more contracts, not bigger ones — then <strong>procurement memos work differently than they're often described.</strong> They function as a coordination signal that lowers the friction of <em>starting</em> AI procurement, without the budget reallocation needed to scale.</p>
+      <p>That has practical implications for anyone reading federal AI activity from the outside. A surge in AI contract counts after a guidance memo is not the same as a surge in AI investment. <strong>The two need to be measured separately.</strong> A separate set of policy instruments would be needed to shift dollar volume.</p>
+      <p>It also has implications for the broader argument that <span class="serif">procurement is where governance actually happens.</span> Procurement guidance moves the visible surface of AI activity quickly. Whether that surface activity is converting into capacity is a different question — and one this thesis treats as open.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div>© 2026 Grahm Gaydos · Thesis page</div>
+  <div>Chart shown uses synthetic data calibrated to preliminary findings</div>
+  <div><a href="index.html" style="color: var(--text-2); border-bottom: 1px solid var(--border);">← Home</a></div>
+</footer>
+
+<script>
+const months = [];
+const start = new Date(2018, 0, 1);
+for (let i = 0; i < 96; i++) {
+  const d = new Date(start.getFullYear(), start.getMonth() + i, 1);
+  months.push(d);
+}
+const data = months.map((d, i) => {
+  const post1 = i >= 74 && i < 80;
+  const post2 = i >= 80;
+  const baseTrendActions = 70 + i * 0.45;
+  const baseTrendSpend = 80 + i * 0.35;
+  let actionEffect = 0;
+  if (post1) actionEffect = 35 + (i - 74) * 4;
+  if (post2) actionEffect = 70 + (i - 80) * 1.2;
+  let spendEffect = 0;
+  if (post1) spendEffect = 4;
+  if (post2) spendEffect = 7 + (i - 80) * 0.5;
+  const seasonal = Math.sin((i / 12) * Math.PI * 2) * 6;
+  const noiseA = Math.sin(i * 1.7) * 4 + Math.cos(i * 0.9) * 3;
+  const noiseS = Math.sin(i * 1.3) * 5 + Math.cos(i * 1.1) * 4;
+  return {
+    date: d,
+    label: d.toLocaleDateString('en-GB', { month: 'short', year: '2-digit' }),
+    actions: baseTrendActions + actionEffect + seasonal + noiseA,
+    spend: baseTrendSpend + spendEffect + seasonal * 0.6 + noiseS,
+  };
+});
+const svg = document.getElementById('chart');
+const W = 1200, H = 460, P = { l: 56, r: 24, t: 32, b: 44 };
+const innerW = W - P.l - P.r, innerH = H - P.t - P.b;
+const xMax = data.length - 1;
+const yMin = 50, yMax = 250;
+const x = i => P.l + (i / xMax) * innerW;
+const y = v => P.t + innerH - ((v - yMin) / (yMax - yMin)) * innerH;
+let view = 'both';
+function pathFor(key) {
+  return data.map((d, i) => `${i === 0 ? 'M' : 'L'} ${x(i).toFixed(1)} ${y(d[key]).toFixed(1)}`).join(' ');
+}
+function areaFor(key) {
+  const top = data.map((d, i) => `${i === 0 ? 'M' : 'L'} ${x(i).toFixed(1)} ${y(d[key]).toFixed(1)}`).join(' ');
+  return `${top} L ${x(xMax).toFixed(1)} ${y(yMin).toFixed(1)} L ${x(0).toFixed(1)} ${y(yMin).toFixed(1)} Z`;
+}
+function renderChart() {
+  const yTicks = [50, 100, 150, 200, 250];
+  const yGrid = yTicks.map(t => `
+    <line x1="${P.l}" y1="${y(t)}" x2="${W - P.r}" y2="${y(t)}" stroke="rgba(255,255,255,0.05)" stroke-width="1" />
+    <text x="${P.l - 8}" y="${y(t) + 3}" fill="#6E6E76" font-family="Geist Mono, monospace" font-size="10" text-anchor="end">${t}</text>
+  `).join('');
+  const xLabels = data.map((d, i) => {
+    if (i % 12 !== 0) return '';
+    return `<text x="${x(i)}" y="${H - P.b + 18}" fill="#6E6E76" font-family="Geist Mono, monospace" font-size="10" text-anchor="middle">${d.date.getFullYear()}</text>`;
+  }).join('');
+  const m1 = 74, m2 = 80;
+  const markers = `
+    <line x1="${x(m1)}" y1="${P.t}" x2="${x(m1)}" y2="${P.t + innerH}" stroke="#A8A8AD" stroke-width="1" stroke-dasharray="3,4" opacity="0.6" />
+    <text x="${x(m1) + 6}" y="${P.t + 14}" fill="#A8A8AD" font-family="Geist Mono, monospace" font-size="10">M-24-10</text>
+    <line x1="${x(m2)}" y1="${P.t}" x2="${x(m2)}" y2="${P.t + innerH}" stroke="#A8A8AD" stroke-width="1" stroke-dasharray="3,4" opacity="0.6" />
+    <text x="${x(m2) + 6}" y="${P.t + 28}" fill="#A8A8AD" font-family="Geist Mono, monospace" font-size="10">M-24-18</text>
+  `;
+  const showA = view === 'both' || view === 'actions';
+  const showS = view === 'both' || view === 'spend';
+  const actionsArea = showA ? `
+    <path d="${areaFor('actions')}" fill="url(#actionsGrad)" opacity="0.4" />
+    <path d="${pathFor('actions')}" fill="none" stroke="#3D6BFF" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round" />
+  ` : '';
+  const spendArea = showS ? `
+    <path d="${areaFor('spend')}" fill="url(#spendGrad)" opacity="0.2" />
+    <path d="${pathFor('spend')}" fill="none" stroke="#F5A623" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round" />
+  ` : '';
+  svg.innerHTML = `
+    <defs>
+      <linearGradient id="actionsGrad" x1="0" x2="0" y1="0" y2="1">
+        <stop offset="0%" stop-color="#3D6BFF" stop-opacity="0.4" />
+        <stop offset="100%" stop-color="#3D6BFF" stop-opacity="0" />
+      </linearGradient>
+      <linearGradient id="spendGrad" x1="0" x2="0" y1="0" y2="1">
+        <stop offset="0%" stop-color="#F5A623" stop-opacity="0.25" />
+        <stop offset="100%" stop-color="#F5A623" stop-opacity="0" />
+      </linearGradient>
+    </defs>
+    ${yGrid}
+    ${xLabels}
+    ${markers}
+    ${spendArea}
+    ${actionsArea}
+    <line id="hoverLine" x1="0" y1="${P.t}" x2="0" y2="${P.t + innerH}" stroke="#F5F5F7" stroke-width="1" opacity="0" />
+    <circle id="hoverDotA" cx="0" cy="0" r="5" fill="#3D6BFF" opacity="0" />
+    <circle id="hoverDotS" cx="0" cy="0" r="5" fill="#F5A623" opacity="0" />
+    <rect id="hitArea" x="${P.l}" y="${P.t}" width="${innerW}" height="${innerH}" fill="transparent" />
+  `;
+  const hitArea = svg.querySelector('#hitArea');
+  const hoverLine = svg.querySelector('#hoverLine');
+  const hoverDotA = svg.querySelector('#hoverDotA');
+  const hoverDotS = svg.querySelector('#hoverDotS');
+  const roPeriod = document.getElementById('ro-period');
+  const roA = document.getElementById('ro-actions');
+  const roS = document.getElementById('ro-spend');
+  hitArea.addEventListener('mousemove', e => {
+    const rect = svg.getBoundingClientRect();
+    const px = (e.clientX - rect.left) / rect.width * W;
+    const idx = Math.max(0, Math.min(xMax, Math.round((px - P.l) / innerW * xMax)));
+    const d = data[idx];
+    hoverLine.setAttribute('x1', x(idx));
+    hoverLine.setAttribute('x2', x(idx));
+    hoverLine.setAttribute('opacity', '0.4');
+    hoverDotA.setAttribute('cx', x(idx));
+    hoverDotA.setAttribute('cy', y(d.actions));
+    hoverDotA.setAttribute('opacity', showA ? '1' : '0');
+    hoverDotS.setAttribute('cx', x(idx));
+    hoverDotS.setAttribute('cy', y(d.spend));
+    hoverDotS.setAttribute('opacity', showS ? '1' : '0');
+    roPeriod.textContent = d.label;
+    roA.textContent = d.actions.toFixed(1);
+    roS.textContent = d.spend.toFixed(1);
+  });
+  hitArea.addEventListener('mouseleave', () => {
+    hoverLine.setAttribute('opacity', '0');
+    hoverDotA.setAttribute('opacity', '0');
+    hoverDotS.setAttribute('opacity', '0');
+    roPeriod.textContent = 'Hover the chart';
+    roA.textContent = '—';
+    roS.textContent = '—';
+  });
+}
+renderChart();
+document.querySelectorAll('.chart-toggle button').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.chart-toggle button').forEach(b => b.classList.remove('on'));
+    btn.classList.add('on');
+    view = btn.dataset.view;
+    renderChart();
+  });
+});
+</script>
+
+</body>
+</html>
