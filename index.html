@@ -852,70 +852,6 @@
     justify-content: space-between;
   }
 
-  /* ============ NOW ============ */
-  .now {
-    background: var(--bg);
-    border-top: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
-  }
-  .now-grid {
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-    gap: 64px;
-    align-items: start;
-  }
-  .now-stamp {
-    font-family: var(--mono);
-    font-size: 11px;
-    color: var(--text-3);
-    line-height: 1.7;
-  }
-  .now-stamp strong { color: var(--text); font-weight: 500; display: block; margin-bottom: 4px; }
-  .now-items {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
-  }
-  .now-item {
-    background: var(--bg-2);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 22px;
-    transition: all 0.3s ease;
-  }
-  .now-item:hover { border-color: var(--border-2); }
-  .now-item dt {
-    font-family: var(--mono);
-    font-size: 10px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--accent-bright);
-    margin-bottom: 14px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .now-item dt::before {
-    content: "";
-    width: 6px; height: 6px;
-    background: var(--accent-bright);
-    border-radius: 50%;
-    box-shadow: 0 0 6px var(--accent-bright);
-  }
-  .now-item dd {
-    font-size: 14px;
-    line-height: 1.5;
-    color: var(--text);
-  }
-  .now-item .meta {
-    font-family: var(--mono);
-    font-size: 11px;
-    color: var(--text-3);
-    margin-top: 12px;
-    padding-top: 12px;
-    border-top: 1px solid var(--border);
-  }
-
   /* ============ CONTACT ============ */
   .contact { padding: 140px 32px 80px; }
   .contact-inner {
@@ -1039,8 +975,6 @@
     .about-grid { grid-template-columns: 1fr; gap: 32px; }
     .about-portrait { position: static; max-width: 320px; }
     .photo-strip-item { width: 220px; }
-    .now-grid { grid-template-columns: 1fr; gap: 32px; }
-    .now-items { grid-template-columns: 1fr; }
     .contact-title { font-size: 56px; }
     .contact-links { grid-template-columns: 1fr 1fr; }
     footer { flex-direction: column; align-items: flex-start; }
@@ -1075,7 +1009,6 @@
     <a href="#work">Work</a>
     <a href="thesis.html">Thesis</a>
     <a href="#about">About</a>
-    <a href="#now">Now</a>
   </div>
   <a class="nav-cta" href="#contact">
     Get in touch <span>↗</span>
@@ -1190,7 +1123,7 @@
         <div class="section-eyebrow">03 — Selected work</div>
         <h2 class="section-title">A selection of <span class="serif">my recent work.</span></h2>
       </div>
-      <a class="section-action" href="#" target="_blank" rel="noopener">Download CV <span>↓</span></a>
+      <a class="section-action" href="files/GaydosResume2026Updated.pdf" target="_blank" rel="noopener">Download CV <span>↓</span></a>
     </div>
 
     <div class="work-filter-wrap">
@@ -1648,11 +1581,12 @@
       <div class="about-text">
         <p>I grew up in Colorado, ran NCAA Cross Country and Track at <strong>Williams College</strong>, and got into policy work because I kept being struck by how often the gap between what governments said about technology and what they actually did came down to <span class="serif">the unglamorous institutional infrastructure underneath</span>—who could translate a regulation into an implementation memo, who shaped requirements before any meeting convened, and who had the institutional standing to make a recommendation stick. I went looking for the work where those gaps get closed, and I have spent the last few years doing just that-in <strong>Jefferson County</strong>, at the <strong>Westminster Foundation for Democracy</strong>, at the <strong>UN</strong>, and now at the <strong>Oxford Internet Institute</strong>.</p>
         <p>I'm someone equally comfortable in <span class="serif">a policy review, a stakeholder negotiation, or a research seminar</span>, and can translate cleanly across all three. I write quickly and tightly—<strong>I would rather hand a team a five-page brief that lands than a fifty-page report nobody opens</strong>. I am comfortable telling leadership that a recommendation will not survive contact with the institution it has to operate inside, and equally comfortable redrafting it until it does.</p>
-        <p>Outside of my work, I race professionally on the <span class="accent">USA Triathlon National Development Team</span>, with an aim towards qualification for the 2028 Olympic Games.<strong> Open to fellowships, research roles, and policy positions</strong>—particularly with teams working on the institutional conditions of AI deployment.</p>
+        <p>Outside of my work, I race professionally on the <span class="accent">USA Triathlon National Development Team</span>, with an aim towards qualification for the 2028 Olympic Games.</p>
+        <p><strong>Open to fellowships, research roles, and policy positions</strong>—particularly with teams working on the institutional conditions of AI deployment.</p>
 
         <div class="about-cta-row">
           <a class="btn btn-primary" href="#contact">Get in touch <span class="arrow">→</span></a>
-          <a class="btn btn-secondary" href="#" target="_blank" rel="noopener">Download CV (PDF) <span class="arrow">↓</span></a>
+          <a class="btn btn-secondary" href="/files/GaydosResume2026Updated.pdf" target="_blank" rel="noopener">Download CV (PDF) <span class="arrow">↓</span></a>
         </div>
       </div>
     </div>
@@ -1688,51 +1622,13 @@
   </div>
 </section>
 
-<!-- ============ NOW ============ -->
-<section id="now" class="now">
-  <div class="container">
-    <div class="section-header">
-      <div>
-        <div class="section-eyebrow">05 — Now</div>
-        <h2 class="section-title">A snapshot, <span class="serif">updated by hand.</span></h2>
-      </div>
-    </div>
-
-    <div class="now-grid">
-      <div class="now-stamp">
-        <strong>Last revised</strong>
-        30 April 2026 · Oxford<br/><br/>
-        Inspired by Derek Sivers' <em>now page</em> convention.<br/>
-        I update this whenever it stops being true.
-      </div>
-      <dl class="now-items">
-        <div class="now-item">
-          <dt>Writing</dt>
-          <dd>Thesis chapter on falsification tests for the OMB intervention timing.</dd>
-          <div class="meta">~6,400 words drafted</div>
-        </div>
-        <div class="now-item">
-          <dt>Reading</dt>
-          <dd>Sanchez-Graells on procurement as governance; Turobov on LLM adoption in the UK Civil Service.</dd>
-          <div class="meta">Stack of 4</div>
-        </div>
-        <div class="now-item">
-          <dt>Training</dt>
-          <dd>Base block — long Z2 hours, threshold once a week. Targeting summer race series.</dd>
-          <div class="meta">~22 hrs/week</div>
-        </div>
-      </dl>
-    </div>
-  </div>
-</section>
-
 <!-- ============ CONTACT ============ -->
 <section id="contact" class="contact">
   <div class="contact-inner">
     <div class="section-eyebrow">06 — Get in touch</div>
     <h2 class="contact-title">Let's <span class="serif">talk.</span></h2>
     <p class="contact-meta">
-      Open to fellowships, research roles, and policy positions in 2026 — particularly with teams working on AI procurement, governance, or the institutional conditions of frontier AI deployment. Reasonably fast on email.
+      Open to fellowships, research roles, and policy positions in 2026—particularly with teams working on AI procurement, governance, or the institutional conditions of frontier AI deployment. Reasonably fast on email.
     </p>
     <div class="contact-links">
       <a class="contact-link" href="mailto:grahm.gaydos@oii.ox.ac.uk">
@@ -1741,10 +1637,10 @@
       <a class="contact-link" href="https://www.linkedin.com/in/grahmtuohygaydos/" target="_blank" rel="noopener">
         <dt>LinkedIn</dt><dd>/in/grahmtuohygaydos</dd>
       </a>
-      <a class="contact-link" href="#" target="_blank" rel="noopener">
-        <dt>Scholar</dt><dd>Google Scholar</dd>
+      <a class="contact-link" href="https://www.instagram.com/grahm.tuohygaydos/" target="_blank" rel="noopener">
+        <dt>Instagram</dt><dd>@grahm.tuohygaydos</dd>
       </a>
-      <a class="contact-link" href="#" target="_blank" rel="noopener">
+      <a class="contact-link" href="/files/GaydosResume2026Updated.pdf" target="_blank" rel="noopener">
         <dt>CV</dt><dd>Download (PDF)</dd>
       </a>
     </div>
