@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Thesis · From Pilot to Policy — Grahm Gaydos</title>
+<title>Thesis · Procurement and Process — Grahm Gaydos</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -21,6 +21,7 @@
     --accent-bright: #3D6BFF;
     --accent-dim: #1E3FFF;
     --warn: #F5A623;
+    --green: #5BD68F;
     --sans: "Geist", -apple-system, BlinkMacSystemFont, sans-serif;
     --serif: "Instrument Serif", Georgia, serif;
     --mono: "Geist Mono", ui-monospace, monospace;
@@ -40,6 +41,7 @@
   a { color: inherit; text-decoration: none; }
   button { font: inherit; background: none; border: 0; color: inherit; cursor: pointer; }
 
+  /* ============ NAV ============ */
   .nav {
     position: fixed;
     top: 0; left: 0; right: 0;
@@ -74,7 +76,20 @@
     letter-spacing: 0.04em;
   }
   .nav-page-title strong { color: var(--text); font-weight: 500; }
+  .nav-prelim {
+    display: inline-block;
+    background: rgba(50, 184, 114, 0.12);
+    color: var(--green);
+    padding: 2px 8px;
+    border: 1px solid rgba(50, 184, 114, 0.35);
+    border-radius: 100px;
+    font-size: 10px;
+    margin-left: 6px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
 
+  /* ============ HERO ============ */
   .thesis-hero {
     padding: 140px 32px 80px;
     border-bottom: 1px solid var(--border);
@@ -111,6 +126,14 @@
   }
   .thesis-title .serif { font-family: var(--serif); font-weight: 400; font-style: italic; letter-spacing: -0.02em; }
   .thesis-title .accent { color: var(--accent-bright); }
+  .thesis-subtitle {
+    font-family: var(--sans);
+    font-size: clamp(15px, 1.4vw, 18px);
+    line-height: 1.45;
+    color: var(--text-2);
+    max-width: 760px;
+    margin-bottom: 32px;
+  }
   .thesis-hero-grid {
     display: grid;
     grid-template-columns: 1.4fr 1fr;
@@ -126,11 +149,75 @@
     color: var(--text);
     font-weight: 400;
   }
+  .thesis-claim strong { font-style: normal; font-family: var(--sans); font-weight: 500; }
   .thesis-meta { font-family: var(--mono); font-size: 12px; color: var(--text-2); line-height: 1.7; }
   .thesis-meta dt { color: var(--text-3); text-transform: uppercase; font-size: 10px; letter-spacing: 0.08em; margin-top: 14px; }
   .thesis-meta dt:first-child { margin-top: 0; }
   .thesis-meta dd { color: var(--text); margin-bottom: 4px; font-weight: 500; }
 
+  /* ============ HEADLINE STATS BAND ============ */
+  .stats-band {
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    background: var(--bg-2);
+    padding: 36px 32px;
+  }
+  .stats-band-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 32px;
+  }
+  .stat-block {
+    border-left: 2px solid var(--accent);
+    padding-left: 18px;
+  }
+  .stat-block.green { border-left-color: var(--green); }
+  .stat-block.warn { border-left-color: var(--warn); }
+  .stat-block.muted { border-left-color: var(--text-3); }
+  .stat-num {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 36px;
+    font-weight: 400;
+    color: var(--text);
+    letter-spacing: -0.02em;
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+  .stat-num .small { font-size: 22px; opacity: 0.8; }
+  .stat-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--text-3);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    line-height: 1.5;
+    margin-bottom: 6px;
+  }
+  .stat-meta {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text-2);
+    line-height: 1.4;
+  }
+  .stat-delta {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 10px;
+    background: rgba(91, 214, 143, 0.15);
+    color: var(--green);
+    padding: 2px 6px;
+    border-radius: 3px;
+    margin-left: 6px;
+  }
+  .stat-delta.flat {
+    background: rgba(168, 168, 173, 0.15);
+    color: var(--text-2);
+  }
+
+  /* ============ CHART ============ */
   section { padding: 80px 32px; }
   .container { max-width: 1200px; margin: 0 auto; }
   .chart-section { padding-top: 60px; }
@@ -148,6 +235,17 @@
     background: var(--accent);
     color: var(--text);
     padding: 2px 6px;
+    border-radius: 3px;
+    margin-right: 8px;
+    font-size: 10px;
+    font-weight: 600;
+  }
+  .chart-title .prelim {
+    display: inline-block;
+    background: rgba(50, 184, 114, 0.12);
+    color: var(--green);
+    padding: 2px 6px;
+    border: 1px solid rgba(50, 184, 114, 0.35);
     border-radius: 3px;
     margin-right: 8px;
     font-size: 10px;
@@ -218,6 +316,153 @@
   .chart-takeaway p { font-size: 15px; color: var(--text); line-height: 1.55; }
   .chart-takeaway strong { color: var(--accent-bright); font-weight: 500; }
 
+  /* ============ SUPPORTING VISUALS GRID ============ */
+  .supporting {
+    padding: 60px 32px;
+    border-top: 1px solid var(--border);
+    background: var(--bg);
+  }
+  .supporting-inner { max-width: 1200px; margin: 0 auto; }
+  .supporting-header { margin-bottom: 32px; }
+  .supporting-eyebrow {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text-3);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .supporting-eyebrow::before {
+    content: "";
+    width: 24px;
+    height: 1px;
+    background: var(--accent-bright);
+  }
+  .supporting-title {
+    font-family: var(--sans);
+    font-weight: 500;
+    font-size: clamp(28px, 3.4vw, 44px);
+    line-height: 1.1;
+    letter-spacing: -0.025em;
+    max-width: 800px;
+  }
+  .supporting-title .serif { font-family: var(--serif); font-weight: 400; font-style: italic; }
+  .supporting-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 24px;
+  }
+  .panel {
+    background: var(--bg-2);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 26px;
+  }
+  .panel h3 {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .panel-sub {
+    font-family: var(--sans);
+    font-size: 13px;
+    color: var(--text-3);
+    margin-bottom: 22px;
+  }
+
+  /* Top recipients horizontal bars */
+  .recipients-list { display: flex; flex-direction: column; gap: 12px; }
+  .recipient-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+  .recipient-row-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-family: var(--sans);
+    font-size: 14px;
+  }
+  .recipient-name {
+    color: var(--text);
+    font-weight: 500;
+    letter-spacing: -0.012em;
+  }
+  .recipient-amount {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--accent-bright);
+    font-weight: 500;
+  }
+  .recipient-bar-track {
+    height: 6px;
+    background: var(--bg-3);
+    border-radius: 100px;
+    overflow: hidden;
+  }
+  .recipient-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent), var(--accent-bright));
+    border-radius: 100px;
+    transition: width 1.2s cubic-bezier(0.65, 0, 0.35, 1);
+  }
+  .recipient-meta {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--text-3);
+    margin-top: 2px;
+  }
+
+  /* Agency share stacked horizontal bar */
+  .agency-bar-track {
+    width: 100%;
+    height: 28px;
+    background: var(--bg-3);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+    display: flex;
+    margin-bottom: 22px;
+  }
+  .agency-bar-segment {
+    height: 100%;
+    transition: opacity 0.2s ease;
+    cursor: default;
+  }
+  .agency-bar-segment:hover { opacity: 0.85; }
+  .agency-legend {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .agency-legend-row {
+    display: grid;
+    grid-template-columns: 14px 1fr auto auto;
+    gap: 12px;
+    font-family: var(--mono);
+    font-size: 11px;
+    align-items: center;
+    padding: 4px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .agency-legend-row:last-child { border-bottom: 0; }
+  .agency-swatch {
+    width: 12px;
+    height: 12px;
+    border-radius: 3px;
+  }
+  .agency-name { color: var(--text); }
+  .agency-pct { color: var(--accent-bright); font-weight: 500; }
+  .agency-count { color: var(--text-3); }
+
+  /* ============ BODY SECTIONS ============ */
   .body-section { padding: 60px 32px; border-top: 1px solid var(--border); }
   .body-grid { display: grid; grid-template-columns: 220px 1fr; gap: 48px; max-width: 1200px; margin: 0 auto; align-items: start; }
   .body-label { font-family: var(--mono); font-size: 11px; color: var(--text-3); letter-spacing: 0.1em; text-transform: uppercase; position: sticky; top: 100px; }
@@ -235,6 +480,7 @@
   .method-table-row dt { color: var(--text-3); text-transform: uppercase; font-size: 10px; letter-spacing: 0.08em; padding-top: 2px; }
   .method-table-row dd { color: var(--text); }
 
+  /* ============ FOOTER ============ */
   footer {
     padding: 32px;
     border-top: 1px solid var(--border);
@@ -248,16 +494,19 @@
     gap: 16px;
   }
 
+  /* ============ MOBILE ============ */
   @media (max-width: 900px) {
     .nav { padding: 12px 16px; gap: 12px; }
     .nav-page-title { display: none; }
     .thesis-hero { padding: 100px 20px 60px; }
     .thesis-title { font-size: 36px; }
     .thesis-hero-grid { grid-template-columns: 1fr; gap: 32px; }
-    section, .body-section { padding-left: 20px; padding-right: 20px; }
+    section, .body-section, .supporting, .stats-band { padding-left: 20px; padding-right: 20px; }
+    .stats-band-inner { grid-template-columns: 1fr 1fr; gap: 20px; }
     .chart-wrap { padding: 16px; }
     .chart-svg { height: 320px; }
     .chart-readout { position: static; margin-bottom: 16px; }
+    .supporting-grid { grid-template-columns: 1fr; }
     .body-grid { grid-template-columns: 1fr; gap: 24px; }
     .body-label { position: static; }
     .method-table-row { grid-template-columns: 1fr; gap: 4px; }
@@ -268,7 +517,7 @@
 
 <nav class="nav">
   <a class="nav-back" href="index.html"><span>←</span> Back</a>
-  <div class="nav-page-title"><strong>Thesis</strong> · From Pilot to Policy</div>
+  <div class="nav-page-title"><strong>Thesis</strong> · Procurement and Process <span class="nav-prelim">Preliminary</span></div>
   <a class="nav-back" href="#download">Download PDF <span>↓</span></a>
 </nav>
 
@@ -279,32 +528,61 @@
       MSc Thesis · Oxford Internet Institute · In progress · Submission Jun 2026
     </div>
     <h1 class="thesis-title">
-      From <span class="serif">Pilot to Policy:</span><br/>
-      how OMB memoranda <span class="accent">shifted federal AI adoption.</span>
+      Procurement and <span class="serif">Process:</span><br/>
+      what the <span class="accent">2024 OMB AI memos</span> moved.
     </h1>
+    <p class="thesis-subtitle">
+      An interrupted time series analysis of federal AI contracting after the 2024 OMB AI procurement memoranda. Below: the headline finding and the underlying data, drawn directly from USAspending.gov contracting records, October 2019 – September 2025.
+    </p>
     <div class="thesis-hero-grid">
       <p class="thesis-claim">
-        Procurement memos changed <strong>how often</strong> agencies signed AI contracts.<br/>
-        They didn't change <strong>how much</strong> the government spent.
+        After the OMB AI memos, federal agencies signed AI contracts <strong>more often</strong> — and, contrary to the simplest version of the procurement-as-signal story, <strong>at higher dollar values too.</strong> Both margins moved.
       </p>
       <dl class="thesis-meta">
         <dt>Method</dt><dd>Interrupted time series · agency-month panel · fixed effects</dd>
-        <dt>Source</dt><dd>USAspending.gov · 2018–2025</dd>
+        <dt>Source</dt><dd>USAspending.gov · Oct 2019 – Sept 2025</dd>
         <dt>Treatments</dt><dd>OMB M-24-10 (Mar 2024) · M-24-18 (Sept 2024)</dd>
-        <dt>n</dt><dd>~7,200 agency-months</dd>
-        <dt>Tooling</dt><dd>R · Stata · fixest · ggplot2 · custom ETL</dd>
+        <dt>n</dt><dd>4,403 contract actions · 33 agencies · 993 recipients</dd>
+        <dt>Tooling</dt><dd>R · Stata · fixest · ggplot2</dd>
       </dl>
     </div>
   </div>
 </header>
 
+<!-- ============ HEADLINE STATS BAND ============ -->
+<section class="stats-band">
+  <div class="stats-band-inner">
+    <div class="stat-block">
+      <div class="stat-label">Actions / month</div>
+      <div class="stat-num">54.5 → 79.8</div>
+      <div class="stat-meta">Pre vs. post M-24-10 average <span class="stat-delta">+46.5%</span></div>
+    </div>
+    <div class="stat-block warn">
+      <div class="stat-label">Spend / month</div>
+      <div class="stat-num">$24.4M → $41.4M</div>
+      <div class="stat-meta">Pre vs. post M-24-10 average <span class="stat-delta">+70.1%</span></div>
+    </div>
+    <div class="stat-block green">
+      <div class="stat-label">Total obligated</div>
+      <div class="stat-num"><span class="small">$</span>2.08B</div>
+      <div class="stat-meta">Across the full 6-year window</div>
+    </div>
+    <div class="stat-block muted">
+      <div class="stat-label">Agencies tracked</div>
+      <div class="stat-num">33</div>
+      <div class="stat-meta">DoD largest by volume (~67% post)</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MAIN CHART ============ -->
 <section class="chart-section">
   <div class="container">
     <div class="chart-wrap">
       <div class="chart-header">
         <div class="chart-title">
-          <span class="live">LIVE</span>
-          Federal AI procurement: actions vs. spending, 2018–2025
+          <span class="prelim">PRELIMINARY</span>
+          Federal AI procurement: actions &amp; obligations, Oct 2019 – Sept 2025
         </div>
         <div class="chart-toggle">
           <button class="on" data-view="both">Both</button>
@@ -323,11 +601,11 @@
       <div class="chart-legend">
         <div class="chart-legend-item">
           <div class="chart-legend-swatch" style="background: var(--accent-bright);"></div>
-          AI contract actions (count, indexed)
+          AI contract actions (count)
         </div>
         <div class="chart-legend-item">
           <div class="chart-legend-swatch" style="background: var(--warn);"></div>
-          AI obligations ($M, indexed)
+          AI obligations ($M)
         </div>
         <div class="chart-legend-item">
           <div class="chart-legend-swatch" style="background: var(--text-3); height: 1px; border-top: 1px dashed var(--text-3);"></div>
@@ -337,197 +615,316 @@
       <div class="chart-takeaway">
         <div class="chart-takeaway-icon">FINDING</div>
         <p>
-          After the OMB memos, the <strong>frequency</strong> of AI procurement actions jumped sharply — agencies signed more, smaller contracts. Total dollar obligations did not move correspondingly. The policy produced an <strong>extensive-margin response</strong>, suggesting administrative AI guidance shifts <em>signalling and process</em> faster than it shifts budget.
+          After the OMB memos, both <strong>action count</strong> and <strong>total obligation</strong> moved up — but spend grew <em>faster</em> than the simple count expansion would predict. <strong>+46.5% more contracts, +70.1% more dollars.</strong> The intensive margin (per-contract value) moved alongside the extensive margin (frequency), the opposite of what the simplest procurement-as-signalling story would predict. Significance testing and falsification design are reported in the thesis itself.
         </p>
       </div>
     </div>
   </div>
 </section>
 
+<!-- ============ SUPPORTING VISUALS ============ -->
+<section class="supporting">
+  <div class="supporting-inner">
+    <div class="supporting-header">
+      <div class="supporting-eyebrow">02 — Where the money goes</div>
+      <h2 class="supporting-title">Concentration: <span class="serif">a small number of recipients,<br/>and one agency.</span></h2>
+    </div>
+
+    <div class="supporting-grid">
+
+      <div class="panel">
+        <h3>Top 8 recipients by total obligation</h3>
+        <div class="panel-sub">Across the full sampling window. The first eight names account for over a quarter of all obligated dollars.</div>
+        <div class="recipients-list" id="recipientsList"></div>
+      </div>
+
+      <div class="panel">
+        <h3>Agency share, post-M-24-10</h3>
+        <div class="panel-sub">Federal AI contracting activity is concentrated in defence and a small handful of civilian agencies.</div>
+        <div class="agency-bar-track" id="agencyBar"></div>
+        <div class="agency-legend" id="agencyLegend"></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ BODY ============ -->
 <section class="body-section">
   <div class="body-grid">
-    <div class="body-label">01 — Question</div>
+    <div class="body-label">03 — Question</div>
     <div class="body-content">
       <h2>What does federal AI procurement guidance <span class="serif">actually do?</span></h2>
-      <p>The OMB memoranda M-24-10 (March 2024) and M-24-18 (September 2024) set out detailed expectations for how federal agencies were to acquire, manage, and govern AI systems. The policy framing treats them as enabling: clarifying procurement pathways, removing friction, encouraging responsible adoption.</p>
-      <p>But <strong>what happens in the contract data?</strong> Do agencies sign more AI contracts? Bigger ones? Different vendors? Or does administrative guidance produce <span class="serif">signalling without substance</span> — language that changes faster than the spending lines underneath it?</p>
-      <p>This thesis treats the OMB memos as a quasi-experimental intervention and tests their measurable effect on agency-level AI procurement behaviour.</p>
+      <p>The OMB memoranda M-24-10 (March 2024) and M-24-18 (September 2024) set out detailed expectations for how federal agencies were to acquire, manage, and govern AI systems. The framing is enabling: clarifying procurement pathways, removing friction, setting the bar for responsible adoption.</p>
+      <p>But <strong>what happens in the contract data?</strong> Do agencies sign more AI contracts, larger ones, or both? Or does administrative guidance produce <span class="serif">signalling without substance</span> — language that changes faster than the spending lines underneath it?</p>
+      <p>This thesis treats the OMB memos as a quasi-experimental intervention and tests their measurable effect on agency-level AI procurement behaviour, distinguishing between extensive and intensive margins.</p>
     </div>
   </div>
 </section>
 
 <section class="body-section">
   <div class="body-grid">
-    <div class="body-label">02 — Method</div>
+    <div class="body-label">04 — Method</div>
     <div class="body-content">
       <h2>Interrupted time series, <span class="serif">agency-month panel.</span></h2>
       <p>The unit of analysis is the agency-month. AI-related contract actions are identified using a combination of NAICS code filtering, PSC code filtering, and keyword matching against the contract description field — calibrated against a hand-coded validation sample.</p>
       <dl class="method-table">
         <div class="method-table-row"><dt>Specification</dt><dd>ITS with agency &amp; month-of-year fixed effects (fixest)</dd></div>
-        <div class="method-table-row"><dt>Outcome 1</dt><dd>AI contract action count (indexed pre-period mean = 100)</dd></div>
-        <div class="method-table-row"><dt>Outcome 2</dt><dd>AI obligation $ (indexed pre-period mean = 100)</dd></div>
+        <div class="method-table-row"><dt>Outcome 1</dt><dd>AI contract action count (extensive margin)</dd></div>
+        <div class="method-table-row"><dt>Outcome 2</dt><dd>AI obligation $ (intensive × extensive)</dd></div>
         <div class="method-table-row"><dt>Treatment</dt><dd>Bundled OMB intervention indicator (M-24-10 + M-24-18)</dd></div>
         <div class="method-table-row"><dt>Controls</dt><dd>log(total agency procurement); time-varying agency size</dd></div>
         <div class="method-table-row"><dt>Falsification</dt><dd>Placebo timing tests at false intervention dates</dd></div>
         <div class="method-table-row"><dt>Robustness</dt><dd>Alternative AI identifiers; alternative bandwidths</dd></div>
       </dl>
-      <p style="margin-top: 16px;">The chart above visualises the headline finding: a clean level shift in <strong>action frequency</strong> at the M-24-10 boundary, with a further bump after M-24-18, and no comparable shift in <strong>spending</strong> over the same period.</p>
+      <p style="margin-top: 16px;">The headline chart visualises the level shifts above the descriptive series. Statistical tests for the joint significance of the treatment indicators, and the falsification design, are developed in the thesis itself.</p>
     </div>
   </div>
 </section>
 
 <section class="body-section">
   <div class="body-grid">
-    <div class="body-label">03 — Implication</div>
+    <div class="body-label">05 — Implication</div>
     <div class="body-content">
       <h2>What this means for <span class="serif">how we read AI policy.</span></h2>
-      <p>If administrative AI guidance produces an extensive-margin response — more contracts, not bigger ones — then <strong>procurement memos work differently than they're often described.</strong> They function as a coordination signal that lowers the friction of <em>starting</em> AI procurement, without the budget reallocation needed to scale.</p>
-      <p>That has practical implications for anyone reading federal AI activity from the outside. A surge in AI contract counts after a guidance memo is not the same as a surge in AI investment. <strong>The two need to be measured separately.</strong> A separate set of policy instruments would be needed to shift dollar volume.</p>
-      <p>It also has implications for the broader argument that <span class="serif">procurement is where governance actually happens.</span> Procurement guidance moves the visible surface of AI activity quickly. Whether that surface activity is converting into capacity is a different question — and one this thesis treats as open.</p>
+      <p>If administrative AI guidance moves both action counts <em>and</em> per-action dollar values, the picture is more interesting than either of the simple stories. Procurement memos are not just coordination signals lowering friction at the margin; they appear to legitimise larger, more ambitious AI procurements that might not previously have cleared institutional review.</p>
+      <p>That has practical implications for anyone reading federal AI activity from the outside. <strong>A surge in AI activity after a guidance memo is not just paperwork — it is also a budget event.</strong> The two effects need to be measured together to be understood.</p>
+      <p>It also has implications for the broader argument that <span class="serif">procurement is where governance actually happens.</span> Procurement guidance moves the visible surface of AI activity quickly, and apparently moves real money behind it. Whether the activity is converting into deployed capacity — and whether the spend is concentrated in the right places — is a different question, and one this thesis treats as open.</p>
     </div>
   </div>
 </section>
 
 <footer>
   <div>© 2026 Grahm Gaydos · Thesis page</div>
-  <div>Chart shown uses synthetic data calibrated to preliminary findings</div>
+  <div>Charts use real USAspending.gov data; preliminary analysis subject to revision before submission</div>
   <div><a href="index.html" style="color: var(--text-2); border-bottom: 1px solid var(--border);">← Home</a></div>
 </footer>
 
 <script>
-const months = [];
-const start = new Date(2018, 0, 1);
-for (let i = 0; i < 96; i++) {
-  const d = new Date(start.getFullYear(), start.getMonth() + i, 1);
-  months.push(d);
-}
-const data = months.map((d, i) => {
-  const post1 = i >= 74 && i < 80;
-  const post2 = i >= 80;
-  const baseTrendActions = 70 + i * 0.45;
-  const baseTrendSpend = 80 + i * 0.35;
-  let actionEffect = 0;
-  if (post1) actionEffect = 35 + (i - 74) * 4;
-  if (post2) actionEffect = 70 + (i - 80) * 1.2;
-  let spendEffect = 0;
-  if (post1) spendEffect = 4;
-  if (post2) spendEffect = 7 + (i - 80) * 0.5;
-  const seasonal = Math.sin((i / 12) * Math.PI * 2) * 6;
-  const noiseA = Math.sin(i * 1.7) * 4 + Math.cos(i * 0.9) * 3;
-  const noiseS = Math.sin(i * 1.3) * 5 + Math.cos(i * 1.1) * 4;
-  return {
-    date: d,
-    label: d.toLocaleDateString('en-GB', { month: 'short', year: '2-digit' }),
-    actions: baseTrendActions + actionEffect + seasonal + noiseA,
-    spend: baseTrendSpend + spendEffect + seasonal * 0.6 + noiseS,
-  };
-});
+// =====================================================================
+// REAL DATA — extracted from USAspending.gov (Oct 2019 – Sept 2025)
+// 72 monthly observations of AI-related contract actions and obligations.
+// =====================================================================
+const DATA = {
+  monthly: [
+    ['2019-10','Oct 19',16,5.26], ['2019-11','Nov 19',23,2.67], ['2019-12','Dec 19',33,4.86],
+    ['2020-01','Jan 20',28,10.35], ['2020-02','Feb 20',35,11.98], ['2020-03','Mar 20',67,21.71],
+    ['2020-04','Apr 20',30,28.83], ['2020-05','May 20',43,10.66], ['2020-06','Jun 20',35,18.15],
+    ['2020-07','Jul 20',38,7.94], ['2020-08','Aug 20',48,29.45], ['2020-09','Sep 20',87,104.45],
+    ['2020-10','Oct 20',22,15.04], ['2020-11','Nov 20',30,9.55], ['2020-12','Dec 20',31,8.7],
+    ['2021-01','Jan 21',31,39.99], ['2021-02','Feb 21',63,16.17], ['2021-03','Mar 21',62,54.94],
+    ['2021-04','Apr 21',71,29.31], ['2021-05','May 21',49,22.77], ['2021-06','Jun 21',50,23.82],
+    ['2021-07','Jul 21',47,24.15], ['2021-08','Aug 21',59,33.11], ['2021-09','Sep 21',117,67.34],
+    ['2021-10','Oct 21',36,3.63], ['2021-11','Nov 21',70,6.57], ['2021-12','Dec 21',49,18.32],
+    ['2022-01','Jan 22',46,27.73], ['2022-02','Feb 22',49,23.42], ['2022-03','Mar 22',55,28.92],
+    ['2022-04','Apr 22',45,11.39], ['2022-05','May 22',79,21.01], ['2022-06','Jun 22',68,18.51],
+    ['2022-07','Jul 22',62,41.81], ['2022-08','Aug 22',84,21.71], ['2022-09','Sep 22',105,58.77],
+    ['2022-10','Oct 22',44,4.09], ['2022-11','Nov 22',72,4.8], ['2022-12','Dec 22',43,10.43],
+    ['2023-01','Jan 23',39,29.6], ['2023-02','Feb 23',45,12.06], ['2023-03','Mar 23',56,19.78],
+    ['2023-04','Apr 23',47,26.49], ['2023-05','May 23',75,22.14], ['2023-06','Jun 23',65,26.3],
+    ['2023-07','Jul 23',86,35.57], ['2023-08','Aug 23',71,38.63], ['2023-09','Sep 23',103,91.4],
+    ['2023-10','Oct 23',28,6.9], ['2023-11','Nov 23',53,19.08], ['2023-12','Dec 23',66,8.63],
+    ['2024-01','Jan 24',55,15.13], ['2024-02','Feb 24',76,36.77], ['2024-03','Mar 24',77,37.91],
+    ['2024-04','Apr 24',67,38.22], ['2024-05','May 24',100,26.68], ['2024-06','Jun 24',81,49.15],
+    ['2024-07','Jul 24',79,31.27], ['2024-08','Aug 24',82,45.05], ['2024-09','Sep 24',151,128.7],
+    ['2024-10','Oct 24',41,8.36], ['2024-11','Nov 24',43,18.07], ['2024-12','Dec 24',62,53.7],
+    ['2025-01','Jan 25',76,34.04], ['2025-02','Feb 25',53,29.09], ['2025-03','Mar 25',94,47.83],
+    ['2025-04','Apr 25',104,41.44], ['2025-05','May 25',95,53.69], ['2025-06','Jun 25',74,9.71],
+    ['2025-07','Jul 25',103,41.43], ['2025-08','Aug 25',75,43.37], ['2025-09','Sep 25',59,49.6]
+  ],
+  m24_10_idx: 53,
+  m24_18_idx: 59,
+  recipients: [
+    {name:'G2I JBI',                   obligation_m:99.6, actions:440},
+    {name:'ECS Federal',               obligation_m:88.5, actions:17},
+    {name:'Palantir USG',              obligation_m:81.5, actions:14},
+    {name:'Accenture Federal Services',obligation_m:79.7, actions:35},
+    {name:'Two Six Labs',              obligation_m:60.1, actions:18},
+    {name:'Scale AI',                  obligation_m:57.0, actions:10},
+    {name:'Swish Data',                obligation_m:49.2, actions:11},
+    {name:'MORSECORP',                 obligation_m:43.6, actions:24}
+  ],
+  agencies: [
+    {name:'Defense',     pct:67.6, count:980, color:'#2D55FF'},
+    {name:'HHS',         pct:4.8,  count:70,  color:'#3D6BFF'},
+    {name:'NASA',        pct:4.8,  count:70,  color:'#5B7FFF'},
+    {name:'Commerce',    pct:4.3,  count:62,  color:'#7896FF'},
+    {name:'DHS',         pct:3.4,  count:49,  color:'#A0B5FF'},
+    {name:'Other (28)',  pct:15.0, count:218, color:'#3A3A40'}
+  ]
+};
+
+// =====================================================================
+// MAIN CHART
+// =====================================================================
+const data = DATA.monthly.map(r => ({ ym: r[0], label: r[1], actions: r[2], spend: r[3] }));
+const m1 = DATA.m24_10_idx;
+const m2 = DATA.m24_18_idx;
+
 const svg = document.getElementById('chart');
 const W = 1200, H = 460, P = { l: 56, r: 24, t: 32, b: 44 };
 const innerW = W - P.l - P.r, innerH = H - P.t - P.b;
 const xMax = data.length - 1;
-const yMin = 50, yMax = 250;
+
+const actionsMin = 0, actionsMax = Math.max(...data.map(d => d.actions)) * 1.1;
+const spendMin = 0,   spendMax   = Math.max(...data.map(d => d.spend))   * 1.1;
 const x = i => P.l + (i / xMax) * innerW;
-const y = v => P.t + innerH - ((v - yMin) / (yMax - yMin)) * innerH;
+const yA = v => P.t + innerH - ((v - actionsMin) / (actionsMax - actionsMin)) * innerH;
+const yS = v => P.t + innerH - ((v - spendMin)   / (spendMax   - spendMin))   * innerH;
+
 let view = 'both';
-function pathFor(key) {
-  return data.map((d, i) => `${i === 0 ? 'M' : 'L'} ${x(i).toFixed(1)} ${y(d[key]).toFixed(1)}`).join(' ');
+
+function buildPath(series, scale) {
+  return data.map((d, i) => `${i === 0 ? 'M' : 'L'} ${x(i)} ${scale(d[series])}`).join(' ');
 }
-function areaFor(key) {
-  const top = data.map((d, i) => `${i === 0 ? 'M' : 'L'} ${x(i).toFixed(1)} ${y(d[key]).toFixed(1)}`).join(' ');
-  return `${top} L ${x(xMax).toFixed(1)} ${y(yMin).toFixed(1)} L ${x(0).toFixed(1)} ${y(yMin).toFixed(1)} Z`;
+function buildArea(series, scale) {
+  const top = data.map((d, i) => `${i === 0 ? 'M' : 'L'} ${x(i)} ${scale(d[series])}`).join(' ');
+  return `${top} L ${x(xMax)} ${P.t + innerH} L ${x(0)} ${P.t + innerH} Z`;
 }
-function renderChart() {
-  const yTicks = [50, 100, 150, 200, 250];
-  const yGrid = yTicks.map(t => `
-    <line x1="${P.l}" y1="${y(t)}" x2="${W - P.r}" y2="${y(t)}" stroke="rgba(255,255,255,0.05)" stroke-width="1" />
-    <text x="${P.l - 8}" y="${y(t) + 3}" fill="#6E6E76" font-family="Geist Mono, monospace" font-size="10" text-anchor="end">${t}</text>
-  `).join('');
-  const xLabels = data.map((d, i) => {
-    if (i % 12 !== 0) return '';
-    return `<text x="${x(i)}" y="${H - P.b + 18}" fill="#6E6E76" font-family="Geist Mono, monospace" font-size="10" text-anchor="middle">${d.date.getFullYear()}</text>`;
-  }).join('');
-  const m1 = 74, m2 = 80;
-  const markers = `
-    <line x1="${x(m1)}" y1="${P.t}" x2="${x(m1)}" y2="${P.t + innerH}" stroke="#A8A8AD" stroke-width="1" stroke-dasharray="3,4" opacity="0.6" />
-    <text x="${x(m1) + 6}" y="${P.t + 14}" fill="#A8A8AD" font-family="Geist Mono, monospace" font-size="10">M-24-10</text>
-    <line x1="${x(m2)}" y1="${P.t}" x2="${x(m2)}" y2="${P.t + innerH}" stroke="#A8A8AD" stroke-width="1" stroke-dasharray="3,4" opacity="0.6" />
-    <text x="${x(m2) + 6}" y="${P.t + 28}" fill="#A8A8AD" font-family="Geist Mono, monospace" font-size="10">M-24-18</text>
-  `;
-  const showA = view === 'both' || view === 'actions';
-  const showS = view === 'both' || view === 'spend';
-  const actionsArea = showA ? `
-    <path d="${areaFor('actions')}" fill="url(#actionsGrad)" opacity="0.4" />
-    <path d="${pathFor('actions')}" fill="none" stroke="#3D6BFF" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round" />
-  ` : '';
-  const spendArea = showS ? `
-    <path d="${areaFor('spend')}" fill="url(#spendGrad)" opacity="0.2" />
-    <path d="${pathFor('spend')}" fill="none" stroke="#F5A623" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round" />
-  ` : '';
-  svg.innerHTML = `
-    <defs>
-      <linearGradient id="actionsGrad" x1="0" x2="0" y1="0" y2="1">
-        <stop offset="0%" stop-color="#3D6BFF" stop-opacity="0.4" />
-        <stop offset="100%" stop-color="#3D6BFF" stop-opacity="0" />
-      </linearGradient>
-      <linearGradient id="spendGrad" x1="0" x2="0" y1="0" y2="1">
-        <stop offset="0%" stop-color="#F5A623" stop-opacity="0.25" />
-        <stop offset="100%" stop-color="#F5A623" stop-opacity="0" />
-      </linearGradient>
-    </defs>
-    ${yGrid}
-    ${xLabels}
-    ${markers}
-    ${spendArea}
-    ${actionsArea}
-    <line id="hoverLine" x1="0" y1="${P.t}" x2="0" y2="${P.t + innerH}" stroke="#F5F5F7" stroke-width="1" opacity="0" />
-    <circle id="hoverDotA" cx="0" cy="0" r="5" fill="#3D6BFF" opacity="0" />
-    <circle id="hoverDotS" cx="0" cy="0" r="5" fill="#F5A623" opacity="0" />
-    <rect id="hitArea" x="${P.l}" y="${P.t}" width="${innerW}" height="${innerH}" fill="transparent" />
-  `;
-  const hitArea = svg.querySelector('#hitArea');
-  const hoverLine = svg.querySelector('#hoverLine');
-  const hoverDotA = svg.querySelector('#hoverDotA');
-  const hoverDotS = svg.querySelector('#hoverDotS');
-  const roPeriod = document.getElementById('ro-period');
-  const roA = document.getElementById('ro-actions');
-  const roS = document.getElementById('ro-spend');
-  hitArea.addEventListener('mousemove', e => {
-    const rect = svg.getBoundingClientRect();
-    const px = (e.clientX - rect.left) / rect.width * W;
-    const idx = Math.max(0, Math.min(xMax, Math.round((px - P.l) / innerW * xMax)));
-    const d = data[idx];
-    hoverLine.setAttribute('x1', x(idx));
-    hoverLine.setAttribute('x2', x(idx));
-    hoverLine.setAttribute('opacity', '0.4');
-    hoverDotA.setAttribute('cx', x(idx));
-    hoverDotA.setAttribute('cy', y(d.actions));
-    hoverDotA.setAttribute('opacity', showA ? '1' : '0');
-    hoverDotS.setAttribute('cx', x(idx));
-    hoverDotS.setAttribute('cy', y(d.spend));
-    hoverDotS.setAttribute('opacity', showS ? '1' : '0');
-    roPeriod.textContent = d.label;
-    roA.textContent = d.actions.toFixed(1);
-    roS.textContent = d.spend.toFixed(1);
+
+function render() {
+  let html = '';
+  html += `<rect x="0" y="0" width="${W}" height="${H}" fill="transparent"/>`;
+
+  // Y-axis grid (left, indexed to actions)
+  for (let i = 0; i <= 4; i++) {
+    const yv = actionsMin + ((actionsMax - actionsMin) * i / 4);
+    const yp = yA(yv);
+    html += `<line x1="${P.l}" x2="${W - P.r}" y1="${yp}" y2="${yp}" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>`;
+    html += `<text x="${P.l - 8}" y="${yp + 4}" text-anchor="end" font-family="Geist Mono" font-size="10" fill="#6E6E76">${Math.round(yv)}</text>`;
+  }
+
+  // X-axis labels
+  const tickEvery = 9;
+  for (let i = 0; i < data.length; i += tickEvery) {
+    html += `<text x="${x(i)}" y="${H - 14}" text-anchor="middle" font-family="Geist Mono" font-size="10" fill="#6E6E76">${data[i].label}</text>`;
+  }
+
+  // Intervention markers
+  [m1, m2].forEach((idx) => {
+    const xp = x(idx);
+    html += `<line x1="${xp}" x2="${xp}" y1="${P.t}" y2="${P.t + innerH}" stroke="#A8A8AD" stroke-width="1" stroke-dasharray="4 4" opacity="0.55"/>`;
+    const labelText = idx === m1 ? 'M-24-10 · Mar 2024' : 'M-24-18 · Sep 2024';
+    html += `<text x="${xp + 6}" y="${P.t + 14}" font-family="Geist Mono" font-size="10" fill="#A8A8AD">${labelText}</text>`;
   });
-  hitArea.addEventListener('mouseleave', () => {
-    hoverLine.setAttribute('opacity', '0');
-    hoverDotA.setAttribute('opacity', '0');
-    hoverDotS.setAttribute('opacity', '0');
-    roPeriod.textContent = 'Hover the chart';
-    roA.textContent = '—';
-    roS.textContent = '—';
+
+  // Post-period shading
+  html += `<rect x="${x(m1)}" y="${P.t}" width="${innerW - (x(m1) - P.l)}" height="${innerH}" fill="rgba(45,85,255,0.04)"/>`;
+
+  // Series
+  if (view === 'both' || view === 'actions') {
+    html += `<path d="${buildArea('actions', yA)}" fill="rgba(61,107,255,0.08)"/>`;
+    html += `<path d="${buildPath('actions', yA)}" stroke="#3D6BFF" stroke-width="2" fill="none" stroke-linejoin="round" stroke-linecap="round"/>`;
+  }
+  if (view === 'both' || view === 'spend') {
+    html += `<path d="${buildArea('spend', yS)}" fill="rgba(245,166,35,0.06)"/>`;
+    html += `<path d="${buildPath('spend', yS)}" stroke="#F5A623" stroke-width="2" fill="none" stroke-linejoin="round" stroke-linecap="round"/>`;
+  }
+
+  // Hover hit areas
+  data.forEach((d, i) => {
+    const xp = x(i);
+    html += `<rect class="hit" data-i="${i}" x="${xp - innerW / xMax / 2}" y="${P.t}" width="${innerW / xMax}" height="${innerH}" fill="transparent"/>`;
+  });
+
+  // Hover indicators (hidden by default)
+  html += `<g id="hover-marker" style="display: none;">
+    <line id="hover-line" x1="0" x2="0" y1="${P.t}" y2="${P.t + innerH}" stroke="#F5F5F7" stroke-width="1" opacity="0.3"/>
+    <circle id="hover-dot-actions" r="5" fill="#3D6BFF" stroke="#0F0F11" stroke-width="2"/>
+    <circle id="hover-dot-spend" r="5" fill="#F5A623" stroke="#0F0F11" stroke-width="2"/>
+  </g>`;
+
+  svg.innerHTML = html;
+
+  const marker = document.getElementById('hover-marker');
+  const hoverLine = document.getElementById('hover-line');
+  const hoverDotA = document.getElementById('hover-dot-actions');
+  const hoverDotS = document.getElementById('hover-dot-spend');
+
+  svg.querySelectorAll('.hit').forEach(rect => {
+    rect.addEventListener('mouseenter', () => {
+      const i = parseInt(rect.getAttribute('data-i'));
+      const d = data[i];
+      const xp = x(i);
+      hoverLine.setAttribute('x1', xp);
+      hoverLine.setAttribute('x2', xp);
+      hoverDotA.setAttribute('cx', xp);
+      hoverDotA.setAttribute('cy', yA(d.actions));
+      hoverDotS.setAttribute('cx', xp);
+      hoverDotS.setAttribute('cy', yS(d.spend));
+      hoverDotA.style.display = (view === 'spend') ? 'none' : '';
+      hoverDotS.style.display = (view === 'actions') ? 'none' : '';
+      marker.style.display = '';
+      document.getElementById('ro-period').textContent = d.label;
+      document.getElementById('ro-actions').textContent = d.actions;
+      document.getElementById('ro-spend').textContent = '$' + d.spend.toFixed(1) + 'M';
+    });
+  });
+  svg.addEventListener('mouseleave', () => {
+    marker.style.display = 'none';
+    document.getElementById('ro-period').textContent = 'Hover the chart';
+    document.getElementById('ro-actions').textContent = '—';
+    document.getElementById('ro-spend').textContent = '—';
   });
 }
-renderChart();
+
+render();
+
 document.querySelectorAll('.chart-toggle button').forEach(btn => {
   btn.addEventListener('click', () => {
     document.querySelectorAll('.chart-toggle button').forEach(b => b.classList.remove('on'));
     btn.classList.add('on');
-    view = btn.dataset.view;
-    renderChart();
+    view = btn.getAttribute('data-view');
+    render();
   });
 });
+
+// =====================================================================
+// TOP RECIPIENTS BAR LIST
+// =====================================================================
+(function renderRecipients() {
+  const list = document.getElementById('recipientsList');
+  const max = Math.max(...DATA.recipients.map(r => r.obligation_m));
+  list.innerHTML = DATA.recipients.map(r => `
+    <div class="recipient-row">
+      <div class="recipient-row-top">
+        <span class="recipient-name">${r.name}</span>
+        <span class="recipient-amount">$${r.obligation_m.toFixed(1)}M</span>
+      </div>
+      <div class="recipient-bar-track">
+        <div class="recipient-bar-fill" style="width: 0%;" data-target="${(r.obligation_m / max * 100).toFixed(1)}"></div>
+      </div>
+      <div class="recipient-meta">${r.actions} contract action${r.actions !== 1 ? 's' : ''}</div>
+    </div>
+  `).join('');
+
+  requestAnimationFrame(() => {
+    setTimeout(() => {
+      list.querySelectorAll('.recipient-bar-fill').forEach(el => {
+        el.style.width = el.getAttribute('data-target') + '%';
+      });
+    }, 100);
+  });
+})();
+
+// =====================================================================
+// AGENCY SHARE STACKED BAR
+// =====================================================================
+(function renderAgencies() {
+  const bar = document.getElementById('agencyBar');
+  const legend = document.getElementById('agencyLegend');
+  bar.innerHTML = DATA.agencies.map(a =>
+    `<div class="agency-bar-segment" style="width: ${a.pct}%; background: ${a.color};" title="${a.name}: ${a.pct}%"></div>`
+  ).join('');
+  legend.innerHTML = DATA.agencies.map(a => `
+    <div class="agency-legend-row">
+      <div class="agency-swatch" style="background: ${a.color};"></div>
+      <span class="agency-name">${a.name}</span>
+      <span class="agency-pct">${a.pct}%</span>
+      <span class="agency-count">${a.count} actions</span>
+    </div>
+  `).join('');
+})();
 </script>
 
 </body>
