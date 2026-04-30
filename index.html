@@ -775,17 +775,13 @@
     position: sticky;
     top: 100px;
   }
-  .about-portrait::before {
-    content: "[ ABOUT PHOTO — secondary candid or working portrait ]";
+  .about-portrait-img {
     position: absolute;
     inset: 0;
-    display: grid;
-    place-items: center;
-    font-family: var(--mono);
-    font-size: 11px;
-    color: var(--text-3);
-    text-align: center;
-    padding: 24px;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 25%;
   }
   .about-text p {
     font-size: 18px;
@@ -832,19 +828,15 @@
     flex-shrink: 0;
     transition: transform 0.3s ease;
   }
-  .photo-strip-item:hover { transform: translateY(-4px); border-color: var(--border-2); }
-  .photo-strip-item::before {
-    content: attr(data-label);
+  .photo-strip-img {
     position: absolute;
     inset: 0;
-    display: grid;
-    place-items: center;
-    font-family: var(--mono);
-    font-size: 11px;
-    color: var(--text-3);
-    text-align: center;
-    padding: 16px;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
   }
+  .photo-strip-item:hover { transform: translateY(-4px); border-color: var(--border-2); }
   .photo-strip-item .caption {
     position: absolute;
     bottom: 12px;
@@ -1649,7 +1641,9 @@
     </div>
 
     <div class="about-grid">
-      <div class="about-portrait"></div>
+      <div class="about-portrait">
+        <img src="images/suit_standing.JPG" alt="Grahm Gaydos" class="about-portrait-img" />
+      </div>
       <div class="about-text">
         <p>I work on AI policy at the level where it actually meets institutions — <span class="serif">the procurement criteria, governance frameworks, and evaluation procedures that decide what gets adopted, by whom, and at what cost.</span> Most consequential technology decisions sit there, not in the legislative chambers we usually point at.</p>
         <p>That focus runs through everything on this page: the AI tool evaluation work at <strong>Jefferson County</strong>, the published WFD report on AI and democracy support, the senior thesis on Healthcare.gov as a procurement failure, and the OMB thesis I'm finishing now at Oxford. <strong>Mixed methods, written for policy and practitioner audiences, technically grounded enough to defend.</strong></p>
@@ -1662,26 +1656,17 @@
       </div>
     </div>
 
-    <div class="photo-strip-wrap">
-      <div class="photo-strip">
-        <div class="photo-strip-item" data-label="[ Speaking · UN Geneva ]">
+    <div class="photo-strip-item">
+          <img src="images/un_speech.jpeg" alt="Speaking at the UN" class="photo-strip-img" />
           <div class="caption"><span>2023</span><span>NPT PrepCom</span></div>
         </div>
-        <div class="photo-strip-item" data-label="[ Working · Oxford ]">
+        <div class="photo-strip-item">
+          <img src="images/oxford.jpg" alt="Working at Oxford" class="photo-strip-img" />
           <div class="caption"><span>2026</span><span>OII</span></div>
         </div>
-        <div class="photo-strip-item" data-label="[ Race · Triathlon ]">
+        <div class="photo-strip-item">
+          <img src="images/triathlon.JPG" alt="Triathlon race" class="photo-strip-img" />
           <div class="caption"><span>2025</span><span>NDT</span></div>
-        </div>
-        <div class="photo-strip-item" data-label="[ JeffCo · Field ]">
-          <div class="caption"><span>2025</span><span>Colorado</span></div>
-        </div>
-        <div class="photo-strip-item" data-label="[ Williams · Senior thesis defence ]">
-          <div class="caption"><span>2025</span><span>Williams</span></div>
-        </div>
-        <div class="photo-strip-item" data-label="[ Conference · panel ]">
-          <div class="caption"><span>2026</span><span>—</span></div>
-        </div>
       </div>
     </div>
   </div>
