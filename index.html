@@ -1554,6 +1554,7 @@
           <div class="work-impact-row"><dt>Venue</dt><dd>UN floor</dd></div>
           <div class="work-impact-row"><dt>Selected by</dt><dd>Youth delegation</dd></div>
           <div class="work-impact-row"><dt>Hosted</dt><dd>NAPF · RTT</dd></div>
+          <div class="work-impact-row"><dt>Watch</dt><dd><a href="https://youtu.be/Iinr2R1cWSs?si=qGpaLV6DiO2gLEYy" target="_blank" rel="noopener">youtube.com ↗</a></dd></div>
         </div>
         <div class="work-tags">
           <span>Multilateral</span>
@@ -1835,7 +1836,7 @@ autoToggle.addEventListener('click', (e) => {
   }
 });
 
-// Manual filter clicks pause auto and let user control
+// Manual filter clicks turn off auto-cycle
 filterButtons.forEach(btn => {
   btn.addEventListener('click', () => {
     const filter = btn.dataset.filter;
@@ -1843,7 +1844,11 @@ filterButtons.forEach(btn => {
     const idx = cycleOrder.indexOf(filter);
     if (idx >= 0) currentIdx = idx;
     applyFilter(filter);
-    // Don't change auto state — user can keep cycle running or use the toggle
+    // Turn auto-cycle off
+    autoOn = false;
+    autoToggle.classList.remove('on');
+    autoToggleState.textContent = 'OFF';
+    stopCycle();
   });
 });
 
