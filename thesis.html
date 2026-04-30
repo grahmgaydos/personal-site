@@ -216,6 +216,10 @@
     background: rgba(168, 168, 173, 0.15);
     color: var(--text-2);
   }
+  .stat-delta.warn {
+    background: rgba(245, 166, 35, 0.15);
+    color: var(--warn);
+  }
 
   /* ============ CHART ============ */
   section { padding: 80px 32px; }
@@ -532,18 +536,18 @@
       what the <span class="accent">2024 OMB AI memos</span> moved.
     </h1>
     <p class="thesis-subtitle">
-      An interrupted time series analysis of federal AI contracting after the 2024 OMB AI procurement memoranda. Below: the headline finding and the underlying data, drawn directly from USAspending.gov contracting records, October 2019 – September 2025.
+      An interrupted time series analysis of civilian federal AI contracting, before and after the 2024 OMB AI procurement memoranda. Headline finding and underlying data drawn from USAspending.gov, October 2020 – September 2025.
     </p>
     <div class="thesis-hero-grid">
       <p class="thesis-claim">
-        After the OMB AI memos, federal agencies signed AI contracts <strong>more often</strong> — and, contrary to the simplest version of the procurement-as-signal story, <strong>at higher dollar values too.</strong> Both margins moved.
+        After the OMB memos, civilian agencies signed AI contracts <strong>far more often</strong> — roughly half again as many per month — but <strong>the dollars per contract fell.</strong> Activity expanded; ambition held steady.
       </p>
       <dl class="thesis-meta">
-        <dt>Method</dt><dd>Interrupted time series · agency-month panel · fixed effects</dd>
-        <dt>Source</dt><dd>USAspending.gov · Oct 2019 – Sept 2025</dd>
+        <dt>Method</dt><dd>Interrupted time series · Newey-West HAC · GLS AR(1) robustness</dd>
+        <dt>Source</dt><dd>USAspending.gov · Oct 2020 – Sept 2025 · 60 monthly observations</dd>
         <dt>Treatments</dt><dd>OMB M-24-10 (Mar 2024) · M-24-18 (Sept 2024)</dd>
-        <dt>n</dt><dd>4,403 contract actions · 33 agencies · 993 recipients</dd>
-        <dt>Tooling</dt><dd>R · Stata · fixest · ggplot2</dd>
+        <dt>n</dt><dd>18,725 civilian AI contract actions · 46 agencies · 1,641 recipients</dd>
+        <dt>Tooling</dt><dd>R · data.table · sandwich · ggplot2</dd>
       </dl>
     </div>
   </div>
@@ -554,23 +558,23 @@
   <div class="stats-band-inner">
     <div class="stat-block">
       <div class="stat-label">Actions / month</div>
-      <div class="stat-num">54.5 → 79.8</div>
-      <div class="stat-meta">Pre vs. post M-24-10 average <span class="stat-delta">+46.5%</span></div>
+      <div class="stat-num">263 → 404</div>
+      <div class="stat-meta">Pre vs. post M-24-10 average <span class="stat-delta">+53.3%</span></div>
     </div>
     <div class="stat-block warn">
       <div class="stat-label">Spend / month</div>
-      <div class="stat-num">$24.4M → $41.4M</div>
-      <div class="stat-meta">Pre vs. post M-24-10 average <span class="stat-delta">+70.1%</span></div>
+      <div class="stat-num">$57M → $65M</div>
+      <div class="stat-meta">Pre vs. post M-24-10 average <span class="stat-delta warn">+12.6%</span></div>
     </div>
     <div class="stat-block green">
-      <div class="stat-label">Total obligated</div>
-      <div class="stat-num"><span class="small">$</span>2.08B</div>
-      <div class="stat-meta">Across the full 6-year window</div>
+      <div class="stat-label">Civilian total obligated</div>
+      <div class="stat-num"><span class="small">$</span>3.64B</div>
+      <div class="stat-meta">Across the full 5-year window</div>
     </div>
     <div class="stat-block muted">
-      <div class="stat-label">Agencies tracked</div>
-      <div class="stat-num">33</div>
-      <div class="stat-meta">DoD largest by volume (~67% post)</div>
+      <div class="stat-label">Civilian agencies tracked</div>
+      <div class="stat-num">46</div>
+      <div class="stat-meta">GSA largest by volume (~72% post)</div>
     </div>
   </div>
 </section>
@@ -582,7 +586,7 @@
       <div class="chart-header">
         <div class="chart-title">
           <span class="prelim">PRELIMINARY</span>
-          Federal AI procurement: actions &amp; obligations, Oct 2019 – Sept 2025
+          Civilian federal AI procurement: actions &amp; obligations, Oct 2020 – Sept 2025
         </div>
         <div class="chart-toggle">
           <button class="on" data-view="both">Both</button>
@@ -615,7 +619,7 @@
       <div class="chart-takeaway">
         <div class="chart-takeaway-icon">FINDING</div>
         <p>
-          After the OMB memos, both <strong>action count</strong> and <strong>total obligation</strong> moved up — but spend grew <em>faster</em> than the simple count expansion would predict. <strong>+46.5% more contracts, +70.1% more dollars.</strong> The intensive margin (per-contract value) moved alongside the extensive margin (frequency), the opposite of what the simplest procurement-as-signalling story would predict. Significance testing and falsification design are reported in the thesis itself.
+          The two series tell different stories. After M-24-10, the <strong>action count</strong> shifted up sharply and stayed there — agencies are now writing AI contracts at roughly <strong>+50% the prior monthly cadence.</strong> The <strong>dollar series</strong> looks much closer to its pre-memo trend, with the familiar September fiscal-year-end spikes still doing most of the work. The OMB memos appear to have changed how often agencies procure AI, more than how much they spend each time they do. Significance testing, a Defense placebo, and falsification design are reported in the thesis itself.
         </p>
       </div>
     </div>
@@ -627,20 +631,20 @@
   <div class="supporting-inner">
     <div class="supporting-header">
       <div class="supporting-eyebrow">02 — Where the money goes</div>
-      <h2 class="supporting-title">Concentration: <span class="serif">a small number of recipients,<br/>and one agency.</span></h2>
+      <h2 class="supporting-title">Concentration: <span class="serif">a few familiar integrators,<br/>and one channel.</span></h2>
     </div>
 
     <div class="supporting-grid">
 
       <div class="panel">
-        <h3>Top 8 recipients by total obligation</h3>
-        <div class="panel-sub">Across the full sampling window. The first eight names account for over a quarter of all obligated dollars.</div>
+        <h3>Top 8 civilian recipients by total obligation</h3>
+        <div class="panel-sub">Across the full window. The names are familiar federal IT integrators — Cognosante, Booz Allen, CGI, Leidos, Accenture — not frontier AI labs. Civilian AI dollars flow predominantly through traditional systems-integrator channels.</div>
         <div class="recipients-list" id="recipientsList"></div>
       </div>
 
       <div class="panel">
-        <h3>Agency share, post-M-24-10</h3>
-        <div class="panel-sub">Federal AI contracting activity is concentrated in defence and a small handful of civilian agencies.</div>
+        <h3>Civilian agency share, post-M-24-10</h3>
+        <div class="panel-sub">By contract action count. GSA dominates the post-memo period — the GSA Schedule channel functions as the practical procurement vehicle most agencies use to acquire AI.</div>
         <div class="agency-bar-track" id="agencyBar"></div>
         <div class="agency-legend" id="agencyLegend"></div>
       </div>
@@ -655,9 +659,9 @@
     <div class="body-label">03 — Question</div>
     <div class="body-content">
       <h2>What does federal AI procurement guidance <span class="serif">actually do?</span></h2>
-      <p>The OMB memoranda M-24-10 (March 2024) and M-24-18 (September 2024) set out detailed expectations for how federal agencies were to acquire, manage, and govern AI systems. The framing is enabling: clarifying procurement pathways, removing friction, setting the bar for responsible adoption.</p>
-      <p>But <strong>what happens in the contract data?</strong> Do agencies sign more AI contracts, larger ones, or both? Or does administrative guidance produce <span class="serif">signalling without substance</span> — language that changes faster than the spending lines underneath it?</p>
-      <p>This thesis treats the OMB memos as a quasi-experimental intervention and tests their measurable effect on agency-level AI procurement behaviour, distinguishing between extensive and intensive margins.</p>
+      <p>The OMB memoranda M-24-10 (March 2024) and M-24-18 (September 2024) set out detailed expectations for how civilian federal agencies were to acquire, manage, and govern AI systems. The framing was enabling: clarifying procurement pathways, removing friction, raising the bar on responsible adoption.</p>
+      <p>But <strong>what happens in the contract data?</strong> Did agencies sign more AI contracts, larger ones, or both? Or does administrative guidance produce <span class="serif">signalling without substance</span> — language that changes faster than the spending lines underneath it?</p>
+      <p>This thesis treats the memos as a quasi-experimental intervention, runs an interrupted time series on the civilian contracting universe, and tests whether the effect appears at the extensive margin (frequency), the intensive margin (per-contract value), or both.</p>
     </div>
   </div>
 </section>
@@ -666,18 +670,18 @@
   <div class="body-grid">
     <div class="body-label">04 — Method</div>
     <div class="body-content">
-      <h2>Interrupted time series, <span class="serif">agency-month panel.</span></h2>
-      <p>The unit of analysis is the agency-month. AI-related contract actions are identified using a combination of NAICS code filtering, PSC code filtering, and keyword matching against the contract description field — calibrated against a hand-coded validation sample.</p>
+      <h2>Interrupted time series, <span class="serif">civilian universe.</span></h2>
+      <p>Monthly aggregation of all civilian AI-related contract actions, identified through a layered filter that combines NAICS coding, technical-vocabulary keywords, and supplementary capture for direct AI-lab recipients (Scale AI, Databricks Federal), named frontier products (ChatGPT, Microsoft Copilot, Azure OpenAI), and cloud-mediated AI services (IBM Watson, Google Dialogflow, AWS Polly, Vertex AI).</p>
       <dl class="method-table">
-        <div class="method-table-row"><dt>Specification</dt><dd>ITS with agency &amp; month-of-year fixed effects (fixest)</dd></div>
+        <div class="method-table-row"><dt>Specification</dt><dd>ITS · level &amp; slope shifts at each intervention</dd></div>
         <div class="method-table-row"><dt>Outcome 1</dt><dd>AI contract action count (extensive margin)</dd></div>
-        <div class="method-table-row"><dt>Outcome 2</dt><dd>AI obligation $ (intensive × extensive)</dd></div>
-        <div class="method-table-row"><dt>Treatment</dt><dd>Bundled OMB intervention indicator (M-24-10 + M-24-18)</dd></div>
-        <div class="method-table-row"><dt>Controls</dt><dd>log(total agency procurement); time-varying agency size</dd></div>
-        <div class="method-table-row"><dt>Falsification</dt><dd>Placebo timing tests at false intervention dates</dd></div>
-        <div class="method-table-row"><dt>Robustness</dt><dd>Alternative AI identifiers; alternative bandwidths</dd></div>
+        <div class="method-table-row"><dt>Outcome 2</dt><dd>AI obligation $M (intensive × extensive)</dd></div>
+        <div class="method-table-row"><dt>Treatments</dt><dd>M-24-10 (Mar 2024); M-24-18 (Sep 2024); ChatGPT release (Nov 2022) as pre-period control</dd></div>
+        <div class="method-table-row"><dt>Standard errors</dt><dd>Newey-West HAC · GLS AR(1) robustness</dd></div>
+        <div class="method-table-row"><dt>Placebo</dt><dd>Defense sector — outside OMB civilian scope</dd></div>
+        <div class="method-table-row"><dt>Seasonality</dt><dd>Sept fiscal-year-end &amp; Oct fiscal-year-start indicators</dd></div>
       </dl>
-      <p style="margin-top: 16px;">The headline chart visualises the level shifts above the descriptive series. Statistical tests for the joint significance of the treatment indicators, and the falsification design, are developed in the thesis itself.</p>
+      <p style="margin-top: 16px;">The chart above visualises the descriptive series with intervention markers; the thesis develops the formal estimation, falsification timing tests, and supplementary-capture validation in detail.</p>
     </div>
   </div>
 </section>
@@ -687,9 +691,9 @@
     <div class="body-label">05 — Implication</div>
     <div class="body-content">
       <h2>What this means for <span class="serif">how we read AI policy.</span></h2>
-      <p>If administrative AI guidance moves both action counts <em>and</em> per-action dollar values, the picture is more interesting than either of the simple stories. Procurement memos are not just coordination signals lowering friction at the margin; they appear to legitimise larger, more ambitious AI procurements that might not previously have cleared institutional review.</p>
-      <p>That has practical implications for anyone reading federal AI activity from the outside. <strong>A surge in AI activity after a guidance memo is not just paperwork — it is also a budget event.</strong> The two effects need to be measured together to be understood.</p>
-      <p>It also has implications for the broader argument that <span class="serif">procurement is where governance actually happens.</span> Procurement guidance moves the visible surface of AI activity quickly, and apparently moves real money behind it. Whether the activity is converting into deployed capacity — and whether the spend is concentrated in the right places — is a different question, and one this thesis treats as open.</p>
+      <p>The headline pattern — many more AI contracts, only modestly more AI dollars — is more revealing than a uniform surge would be. It suggests the memos lowered the procedural cost of <em>writing</em> an AI contract more than they unlocked larger procurements. Agencies appear to be experimenting at higher cadence, not committing larger budgets to flagship buys.</p>
+      <p>That has practical implications for anyone reading federal AI activity from the outside. <strong>A surge in AI contract counts after a guidance memo is not, in itself, evidence of a budget event.</strong> It is at least as plausibly evidence of bureaucratic permission — that agencies who were already capable of running AI procurements found the process less friction-laden after the memos arrived.</p>
+      <p>It also points to where to look next. If the action count is rising faster than the dollar volume, the interesting questions concern <span class="serif">what kinds of AI</span> federal agencies are actually buying — small per-seat licences for off-the-shelf tools (ChatGPT Enterprise, Microsoft Copilot, Google Dialogflow), rather than large bespoke development contracts. The supplementary-capture analysis above hints at this directly. The thesis develops it more carefully.</p>
     </div>
   </div>
 </section>
@@ -702,55 +706,52 @@
 
 <script>
 // =====================================================================
-// REAL DATA — extracted from USAspending.gov (Oct 2019 – Sept 2025)
-// 72 monthly observations of AI-related contract actions and obligations.
+// REAL DATA — extracted from USAspending.gov master-flagged dataset
+// 60 monthly observations of civilian AI contract actions and obligations
+// (Oct 2020 – Sept 2025).
 // =====================================================================
 const DATA = {
   monthly: [
-    ['2019-10','Oct 19',16,5.26], ['2019-11','Nov 19',23,2.67], ['2019-12','Dec 19',33,4.86],
-    ['2020-01','Jan 20',28,10.35], ['2020-02','Feb 20',35,11.98], ['2020-03','Mar 20',67,21.71],
-    ['2020-04','Apr 20',30,28.83], ['2020-05','May 20',43,10.66], ['2020-06','Jun 20',35,18.15],
-    ['2020-07','Jul 20',38,7.94], ['2020-08','Aug 20',48,29.45], ['2020-09','Sep 20',87,104.45],
-    ['2020-10','Oct 20',22,15.04], ['2020-11','Nov 20',30,9.55], ['2020-12','Dec 20',31,8.7],
-    ['2021-01','Jan 21',31,39.99], ['2021-02','Feb 21',63,16.17], ['2021-03','Mar 21',62,54.94],
-    ['2021-04','Apr 21',71,29.31], ['2021-05','May 21',49,22.77], ['2021-06','Jun 21',50,23.82],
-    ['2021-07','Jul 21',47,24.15], ['2021-08','Aug 21',59,33.11], ['2021-09','Sep 21',117,67.34],
-    ['2021-10','Oct 21',36,3.63], ['2021-11','Nov 21',70,6.57], ['2021-12','Dec 21',49,18.32],
-    ['2022-01','Jan 22',46,27.73], ['2022-02','Feb 22',49,23.42], ['2022-03','Mar 22',55,28.92],
-    ['2022-04','Apr 22',45,11.39], ['2022-05','May 22',79,21.01], ['2022-06','Jun 22',68,18.51],
-    ['2022-07','Jul 22',62,41.81], ['2022-08','Aug 22',84,21.71], ['2022-09','Sep 22',105,58.77],
-    ['2022-10','Oct 22',44,4.09], ['2022-11','Nov 22',72,4.8], ['2022-12','Dec 22',43,10.43],
-    ['2023-01','Jan 23',39,29.6], ['2023-02','Feb 23',45,12.06], ['2023-03','Mar 23',56,19.78],
-    ['2023-04','Apr 23',47,26.49], ['2023-05','May 23',75,22.14], ['2023-06','Jun 23',65,26.3],
-    ['2023-07','Jul 23',86,35.57], ['2023-08','Aug 23',71,38.63], ['2023-09','Sep 23',103,91.4],
-    ['2023-10','Oct 23',28,6.9], ['2023-11','Nov 23',53,19.08], ['2023-12','Dec 23',66,8.63],
-    ['2024-01','Jan 24',55,15.13], ['2024-02','Feb 24',76,36.77], ['2024-03','Mar 24',77,37.91],
-    ['2024-04','Apr 24',67,38.22], ['2024-05','May 24',100,26.68], ['2024-06','Jun 24',81,49.15],
-    ['2024-07','Jul 24',79,31.27], ['2024-08','Aug 24',82,45.05], ['2024-09','Sep 24',151,128.7],
-    ['2024-10','Oct 24',41,8.36], ['2024-11','Nov 24',43,18.07], ['2024-12','Dec 24',62,53.7],
-    ['2025-01','Jan 25',76,34.04], ['2025-02','Feb 25',53,29.09], ['2025-03','Mar 25',94,47.83],
-    ['2025-04','Apr 25',104,41.44], ['2025-05','May 25',95,53.69], ['2025-06','Jun 25',74,9.71],
-    ['2025-07','Jul 25',103,41.43], ['2025-08','Aug 25',75,43.37], ['2025-09','Sep 25',59,49.6]
+    ['2020-10','Oct 20',101,21.50],['2020-11','Nov 20',141,82.67],['2020-12','Dec 20',116,20.79],
+    ['2021-01','Jan 21',138,7.91],['2021-02','Feb 21',140,10.27],['2021-03','Mar 21',198,91.14],
+    ['2021-04','Apr 21',182,18.51],['2021-05','May 21',147,21.54],['2021-06','Jun 21',164,106.63],
+    ['2021-07','Jul 21',181,82.28],['2021-08','Aug 21',180,79.75],['2021-09','Sep 21',282,168.81],
+    ['2021-10','Oct 21',115,14.69],['2021-11','Nov 21',150,69.81],['2021-12','Dec 21',149,20.05],
+    ['2022-01','Jan 22',165,69.79],['2022-02','Feb 22',148,15.55],['2022-03','Mar 22',331,86.55],
+    ['2022-04','Apr 22',262,33.42],['2022-05','May 22',301,69.20],['2022-06','Jun 22',321,117.90],
+    ['2022-07','Jul 22',329,41.75],['2022-08','Aug 22',339,51.23],['2022-09','Sep 22',387,118.04],
+    ['2022-10','Oct 22',178,35.85],['2022-11','Nov 22',192,52.53],['2022-12','Dec 22',253,32.34],
+    ['2023-01','Jan 23',359,20.61],['2023-02','Feb 23',372,14.38],['2023-03','Mar 23',539,45.33],
+    ['2023-04','Apr 23',374,70.15],['2023-05','May 23',370,44.88],['2023-06','Jun 23',366,81.20],
+    ['2023-07','Jul 23',386,77.41],['2023-08','Aug 23',392,83.43],['2023-09','Sep 23',541,295.46],
+    ['2023-10','Oct 23',304,0.31],['2023-11','Nov 23',249,66.24],['2023-12','Dec 23',268,3.55],
+    ['2024-01','Jan 24',242,18.09],['2024-02','Feb 24',351,37.92],['2024-03','Mar 24',396,15.34],
+    ['2024-04','Apr 24',585,42.47],['2024-05','May 24',350,24.81],['2024-06','Jun 24',480,135.40],
+    ['2024-07','Jul 24',510,71.59],['2024-08','Aug 24',493,86.07],['2024-09','Sep 24',603,186.32],
+    ['2024-10','Oct 24',255,33.63],['2024-11','Nov 24',285,74.86],['2024-12','Dec 24',293,23.14],
+    ['2025-01','Jan 25',363,41.58],['2025-02','Feb 25',339,13.72],['2025-03','Mar 25',421,37.10],
+    ['2025-04','Apr 25',423,30.61],['2025-05','May 25',394,81.47],['2025-06','Jun 25',413,66.31],
+    ['2025-07','Jul 25',396,48.85],['2025-08','Aug 25',379,79.47],['2025-09','Sep 25',644,149.06]
   ],
-  m24_10_idx: 53,
-  m24_18_idx: 59,
+  m24_10_idx: 41,  // March 2024
+  m24_18_idx: 47,  // September 2024
   recipients: [
-    {name:'G2I JBI',                   obligation_m:99.6, actions:440},
-    {name:'ECS Federal',               obligation_m:88.5, actions:17},
-    {name:'Palantir USG',              obligation_m:81.5, actions:14},
-    {name:'Accenture Federal Services',obligation_m:79.7, actions:35},
-    {name:'Two Six Labs',              obligation_m:60.1, actions:18},
-    {name:'Scale AI',                  obligation_m:57.0, actions:10},
-    {name:'Swish Data',                obligation_m:49.2, actions:11},
-    {name:'MORSECORP',                 obligation_m:43.6, actions:24}
+    {name:'Cognosante MVH',                 obligation_m:258.0, actions:27},
+    {name:'Porter Novelli Public Services', obligation_m:225.9, actions:41},
+    {name:'CGI Federal',                    obligation_m:222.9, actions:81},
+    {name:'Booz Allen Hamilton',            obligation_m:146.6, actions:258},
+    {name:'Pluribus Digital',               obligation_m:124.9, actions:24},
+    {name:'Amentum Services',               obligation_m:110.4, actions:7},
+    {name:'Leidos',                         obligation_m:105.4, actions:53},
+    {name:'Accenture Federal Services',     obligation_m:92.6,  actions:48}
   ],
   agencies: [
-    {name:'Defense',     pct:67.6, count:980, color:'#2D55FF'},
-    {name:'HHS',         pct:4.8,  count:70,  color:'#3D6BFF'},
-    {name:'NASA',        pct:4.8,  count:70,  color:'#5B7FFF'},
-    {name:'Commerce',    pct:4.3,  count:62,  color:'#7896FF'},
-    {name:'DHS',         pct:3.4,  count:49,  color:'#A0B5FF'},
-    {name:'Other (28)',  pct:15.0, count:218, color:'#3A3A40'}
+    {name:'General Services Administration',      pct:71.7, count:5499, color:'#2D55FF'},
+    {name:'Health and Human Services',            pct:5.9,  count:453,  color:'#3D6BFF'},
+    {name:'Agriculture',                          pct:4.2,  count:323,  color:'#5B7FFF'},
+    {name:'Interior',                             pct:2.5,  count:188,  color:'#7896FF'},
+    {name:'Homeland Security',                    pct:2.5,  count:189,  color:'#8FA8FF'},
+    {name:'Other (41 agencies)',                  pct:13.2, count:1016, color:'#3A3A40'}
   ]
 };
 
@@ -921,7 +922,7 @@ document.querySelectorAll('.chart-toggle button').forEach(btn => {
       <div class="agency-swatch" style="background: ${a.color};"></div>
       <span class="agency-name">${a.name}</span>
       <span class="agency-pct">${a.pct}%</span>
-      <span class="agency-count">${a.count} actions</span>
+      <span class="agency-count">${a.count.toLocaleString()} actions</span>
     </div>
   `).join('');
 })();
