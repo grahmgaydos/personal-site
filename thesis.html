@@ -141,15 +141,23 @@
     margin-top: 48px;
   }
   .thesis-claim {
-    font-family: var(--serif);
-    font-style: italic;
-    font-size: clamp(22px, 2.6vw, 32px);
-    line-height: 1.3;
-    letter-spacing: -0.015em;
-    color: var(--text);
+    font-family: var(--sans);
+    font-size: clamp(15px, 1.45vw, 18px);
+    line-height: 1.6;
+    color: var(--text-2);
     font-weight: 400;
   }
-  .thesis-claim strong { font-style: normal; font-family: var(--sans); font-weight: 500; }
+  .thesis-claim p { margin-bottom: 14px; }
+  .thesis-claim strong { color: var(--text); font-weight: 600; }
+  .thesis-claim-kicker {
+    font-family: var(--sans);
+    font-size: clamp(18px, 2vw, 23px);
+    font-weight: 600;
+    color: var(--text);
+    line-height: 1.35;
+    letter-spacing: -0.015em;
+    margin-bottom: 0 !important;
+  }
   .thesis-meta { font-family: var(--mono); font-size: 12px; color: var(--text-2); line-height: 1.7; }
   .thesis-meta dt { color: var(--text-3); text-transform: uppercase; font-size: 10px; letter-spacing: 0.08em; margin-top: 14px; }
   .thesis-meta dt:first-child { margin-top: 0; }
@@ -533,15 +541,16 @@
     </div>
     <h1 class="thesis-title">
       Procurement and <span class="serif">Process:</span><br/>
-      what <span class="accent">AI governance</span> moved — and what it can't see.
+      what <span class="accent">AI rules</span> did — and what scrapping them didn't.
     </h1>
     <p class="thesis-subtitle">
-      An interrupted time series analysis of civilian federal AI contracting around the 2024–2025 OMB AI memoranda and their repeal. Data from USAspending.gov, October 2021 – September 2025 (extended to January 2026 for the repeal test).
+      How a pair of 2024 White House memos — and their 2025 repeal — changed how federal agencies buy artificial intelligence, traced through the public contract record.
     </p>
     <div class="thesis-hero-grid">
-      <p class="thesis-claim">
-        When the 2024 requirements actually <strong>took force</strong> — the 1 December 2024 deadline — civilian AI contracting accelerated, and the rise was <strong>specific to AI.</strong> A later deregulatory replacement produced <strong>no comparable AI-specific break.</strong> And the most aggressive access vehicle, OneGov, barely registers in the contract record at all.
-      </p>
+      <div class="thesis-claim">
+        <p>Even though the Biden-era AI rules set strict new requirements for how the public sector could use AI, federal agencies began signing AI contracts markedly faster once they took effect. When the Trump administration repealed those rules months later, AI contracting didn't suddenly expand — it showed no difference from federal tech contracting overall.</p>
+        <p class="thesis-claim-kicker">Putting rules in place moved the needle — scrapping them didn't move it back.</p>
+      </div>
       <dl class="thesis-meta">
         <dt>Method</dt><dd>Interrupted time series · OLS, Newey-West HAC &amp; GLS AR(1) at equal standing</dd>
         <dt>Source</dt><dd>USAspending.gov · Oct 2021 – Sept 2025 · 48 monthly obs (extended to Jan 2026 for the repeal test)</dd>
@@ -553,28 +562,40 @@
   </div>
 </header>
 
+<!-- ============ BODY: QUESTION (lead) ============ -->
+<section class="body-section" style="border-top: 0;">
+  <div class="body-grid">
+    <div class="body-label">01 — The question</div>
+    <div class="body-content">
+      <h2>Did AI guidance actually change <span class="serif">what government buys?</span></h2>
+      <p>In 2024, the White House told federal agencies how to buy and govern AI in two OMB memos — M-24-10 and M-24-18 — that set rules for acquiring it responsibly. In 2025, a new administration scrapped them and replaced them with lighter-touch guidance. This project asks a blunt question: did any of it change what agencies actually buy?</p>
+      <p>Three things, in plain terms. <strong>One —</strong> when the rules took effect, did agencies buy more AI, and was that rise really about AI rather than a general bump in tech spending? <strong>Two —</strong> when the rules were repealed, did AI buying rise relative to the rest of federal tech? <strong>Three —</strong> does the government's new near-free AI access program, OneGov, show up in the spending data at all? The answers, in order: yes, no, and barely.</p>
+    </div>
+  </div>
+</section>
+
 <!-- ============ HEADLINE STATS BAND ============ -->
 <section class="stats-band">
   <div class="stats-band-inner">
     <div class="stat-block green">
-      <div class="stat-label">AI actions / month after 1 Dec 2024</div>
-      <div class="stat-num">+5.9</div>
-      <div class="stat-meta">Slope change at the compliance deadline <span class="stat-delta">robust · p=.0004</span></div>
+      <div class="stat-label">AI contracts per month, after the rules</div>
+      <div class="stat-num">+5.9<span class="small"> /mo</span></div>
+      <div class="stat-meta">the monthly pace kept climbing once the rules took effect <span class="stat-delta">p = .0004</span></div>
     </div>
     <div class="stat-block">
-      <div class="stat-label">AI share of civilian IT / month</div>
-      <div class="stat-num">+1.8<span class="small"> pts</span></div>
-      <div class="stat-meta">AI-specific — survives month fixed effects <span class="stat-delta">p=.007</span></div>
+      <div class="stat-label">Total civilian AI contracting, 2021–25</div>
+      <div class="stat-num"><span class="small">$</span>2.9B</div>
+      <div class="stat-meta">across 4,616 contracts and 41 federal agencies</div>
     </div>
     <div class="stat-block muted">
-      <div class="stat-label">Civilian AI obligated · 48 months</div>
-      <div class="stat-num"><span class="small">$</span>2.90B</div>
-      <div class="stat-meta">4,616 actions · 41 agencies · 788 recipients</div>
+      <div class="stat-label">Won by Palantir alone</div>
+      <div class="stat-num"><span class="small">$</span>0.9B</div>
+      <div class="stat-meta">the top AI vendor by far — ahead of Anduril and Booz Allen</div>
     </div>
     <div class="stat-block warn">
-      <div class="stat-label">AI-specific shift after Apr 2025 repeal</div>
-      <div class="stat-num">≈ 0</div>
-      <div class="stat-meta">AI −7%/mo, but civilian IT fell the same <span class="stat-delta flat">share flat · p=.49</span></div>
+      <div class="stat-label">AI contracting after the 2025 repeal</div>
+      <div class="stat-num">−7<span class="small">%/mo</span></div>
+      <div class="stat-meta">the same rate as federal tech overall — no AI-specific drop <span class="stat-delta flat">p = .49</span></div>
     </div>
   </div>
 </section>
@@ -586,7 +607,7 @@
       <div class="chart-header">
         <div class="chart-title">
           <span class="prelim">PRELIMINARY</span>
-          Civilian federal AI procurement: actions &amp; obligations, Oct 2021 – Jan 2026
+          Federal civilian AI contracts and dollars, by month · Oct 2021 – Jan 2026
         </div>
         <div class="chart-toggle">
           <button class="on" data-view="both">Both</button>
@@ -613,17 +634,17 @@
         </div>
         <div class="chart-legend-item">
           <div class="chart-legend-swatch" style="background: var(--accent); height: 3px;"></div>
-          1 Dec 2024 enforcement (solid)
+          Rules take effect (solid)
         </div>
         <div class="chart-legend-item">
           <div class="chart-legend-swatch" style="background: var(--text-3); height: 1px; border-top: 1px dashed var(--text-3);"></div>
-          Other policy events (dashed)
+          Other policy dates (dashed)
         </div>
       </div>
       <div class="chart-takeaway">
         <div class="chart-takeaway-icon">FINDING</div>
         <p>
-          The decisive break is <strong>enforcement, not announcement.</strong> At the 1 December 2024 compliance deadline — when the memos' contract requirements for high-risk AI took force — civilian AI actions accelerated by <strong>~5.9 a month</strong>, significant across OLS, Newey-West and GLS, and the rise holds as a share of civilian IT even after absorbing seasonality. The separate release-date breaks (M-24-10, M-24-18) are weaker and method-dependent. After the April 2025 repeal, raw actions fell ~7%/month — but civilian IT fell at the same rate and the AI share of IT did not move, so the decline rode a <strong>broad contraction</strong>, not a deregulation-specific reversal.
+          <strong>The rules left a mark; the repeal didn't.</strong> Once the Biden-era requirements took effect, agencies signed AI contracts faster — gaining roughly six more a month, a result that holds across all three statistical models. And the increase looks specific to AI, not just part of the wider rise in government tech buying: AI's share of federal tech contracting climbed at the same moment (significant under the most conservative test). The memos' earlier announcement dates show weaker, less consistent effects. After the 2025 repeal, AI contracting fell about 7% a month — but federal tech contracting overall fell just as fast, so the drop was a <strong>government-wide pullback</strong>, not a reversal aimed at AI.
         </p>
       </div>
     </div>
@@ -635,20 +656,20 @@
   <div class="supporting-inner">
     <div class="supporting-header">
       <div class="supporting-eyebrow">02 — Where the money goes</div>
-      <h2 class="supporting-title">Concentration: <span class="serif">specialist primes, integrators,<br/>and a reseller channel.</span></h2>
+      <h2 class="supporting-title">Who gets the money, <span class="serif">and who's buying.</span></h2>
     </div>
 
     <div class="supporting-grid">
 
       <div class="panel">
-        <h3>Top 10 civilian recipients by total obligation</h3>
-        <div class="panel-sub">Full window, by total obligation. Under the tighter AI universe the dollars are led not by traditional integrators but by AI-specialist primes — Palantir (two entities, ~$0.9B combined) and Anduril — alongside integrators (Booz Allen, Accenture, MITRE) and high-volume GSA-Schedule resellers (Four Points, ThunderCat, Tuknik).</div>
+        <h3>Top 10 vendors by total AI dollars</h3>
+        <div class="panel-sub">The biggest civilian AI contracts go less to traditional IT integrators than to AI-focused firms. Palantir leads by far (about $0.9B across two business units), with Anduril close behind — ahead of integrators like Booz Allen and Accenture, and a set of high-volume resellers (Four Points, ThunderCat) that handle many smaller buys.</div>
         <div class="recipients-list" id="recipientsList"></div>
       </div>
 
       <div class="panel">
-        <h3>Civilian agency share, since the 1 Dec 2024 deadline</h3>
-        <div class="panel-sub">By contract action count. GSA is the largest single channel — but at ~22%, not dominance. Post-deadline AI contracting is spread across HHS, DHS, Treasury, NASA and a long civilian tail of 35 further agencies.</div>
+        <h3>Which agencies are buying (since the rules took effect)</h3>
+        <div class="panel-sub">By number of contracts. The General Services Administration is the single biggest buyer — but only about a fifth of contracts run through it. AI purchasing is spread widely across Health &amp; Human Services, Homeland Security, Treasury, NASA and dozens more.</div>
         <div class="agency-bar-track" id="agencyBar"></div>
         <div class="agency-legend" id="agencyLegend"></div>
       </div>
@@ -663,9 +684,9 @@
     <div class="body-label">03 — The repeal</div>
     <div class="body-content">
       <h2>Repeal without <span class="serif">reversal.</span></h2>
-      <p>On 3 April 2025 the Biden memoranda were rescinded and replaced (M-25-21/22), shifting the posture from risk-management requirements toward accelerated adoption and streamlined acquisition. Extending the series to January 2026 gives a second break to test — and it comes back a clean negative.</p>
-      <p>Raw civilian AI actions did fall after the repeal, by about 7% a month. But this was <strong>not an AI-specific reversal.</strong> Civilian IT contracting overall fell at essentially the same rate (~7%/month), while total civilian contracting fell more slowly (~3%/month) — and the AI <span class="serif">share</span> of civilian IT showed no significant change (p = 0.49). AI rode a broad 2025 contraction in civilian contracting rather than responding to the repeal. A re-channelling check rules out the alternative that AI simply migrated onto reseller or OneGov vehicles: reseller-named AI fell alongside directly-named AI rather than rising to absorb it.</p>
-      <p><strong>This points to an asymmetry.</strong> An operational deadline that made AI contractable left a clear, AI-specific trace in the record; a later replacement that relaxed and redirected those rules did not produce a comparable break. The contrast is not a clean test of regulation versus deregulation — the episodes differ in mechanism, timing, and surrounding conditions — but it suggests procurement governance can be adoption-enabling precisely when it turns a risky technology into something agencies can review, justify, and contract for.</p>
+      <p>In April 2025 the Trump administration rescinded the Biden memos and replaced them with lighter-touch guidance, trading risk-management requirements for faster adoption and streamlined buying. That second turning point can be tested the same way — and it comes back empty.</p>
+      <p>AI contracting fell after the repeal by about 7% a month, but that was not an AI reversal. Federal tech contracting as a whole fell at the same rate — and AI's share of those contracts didn't budge. The buying didn't move elsewhere, either: AI bought through resellers fell too, rather than rising to soak up the lost contracts.</p>
+      <p><strong>That asymmetry is the real finding.</strong> Rules that made AI easy to buy left a clear, AI-specific mark on the record; taking those rules away did not erase it. The most natural reading is that the rules built procurement capacity — agencies learned how to buy AI, set up the vendors and the paperwork — and that capacity didn't vanish when the rules did. Once AI became something agencies knew how to contract for, it stayed that way, whether or not the rules requiring it were still on the books. Regulation and deregulation aren't mirror images: it is easier to set federal buying in motion than to wind it back.</p>
     </div>
   </div>
 </section>
@@ -675,23 +696,10 @@
   <div class="body-grid">
     <div class="body-label">04 — The blind spot</div>
     <div class="body-content">
-      <h2>The lever you <span class="serif">can't see.</span></h2>
-      <p>The most aggressive recent intervention is the one the contract record is least able to register. GSA's <strong>OneGov</strong> arrangement (live from spring 2025) negotiates near-free, enterprise-wide access to commercial AI tools — ChatGPT, Claude, Gemini — by treating the government as a single customer. By GSA's own account it has reached on the order of 3.4 million users and avoided roughly $1.15 billion in cost. In the federal contract record analysed here it is effectively invisible: it surfaces only as a handful of nominal-value line items — reseller subscriptions recorded at <strong>$1</strong> — and license quantities appear in under 1% of AI rows. It cannot be tested as an interruption at all.</p>
-      <p>Two further blind spots reinforce the point. <strong>Declared-but-text-silent AI:</strong> 4,518 contract transactions across 342 awards that agencies declared as AI but that keyword identification misses, only 853 of which carry a usable date. <strong>Sub-prime AI:</strong> at least $112M — up to ~$164M — of AI work (Palantir, C3.AI, Databricks, Clearview) sits in subawards beneath 121 prime contracts that do not read as AI at all.</p>
-      <p>The instrument that records what government buys is a <span class="serif">poor lens</span> on how AI actually enters government — and that visibility gap is not a footnote to the analysis but part of its argument. The price-and-access lever moves real adoption while staying almost entirely outside the contract record.</p>
-    </div>
-  </div>
-</section>
-
-<!-- ============ BODY: QUESTION ============ -->
-<section class="body-section">
-  <div class="body-grid">
-    <div class="body-label">05 — Question</div>
-    <div class="body-content">
-      <h2>What does federal AI procurement guidance <span class="serif">actually do?</span></h2>
-      <p>The OMB memoranda M-24-10 (March 2024) and M-24-18 (September 2024) set out detailed expectations for how civilian federal agencies were to acquire, manage, and govern AI systems. The framing was enabling: clarifying procurement pathways, removing friction, raising the bar on responsible adoption. Their 2025 replacements (M-25-21/22) and the OneGov vehicle then pulled in a different direction.</p>
-      <p>But <strong>what happens in the contract data?</strong> Did agencies sign more AI contracts, larger ones, or both? Does administrative guidance produce <span class="serif">signalling without substance</span> — language that changes faster than the spending lines underneath it? And does relaxing the rules move procurement the way imposing them did?</p>
-      <p>This thesis treats the memos and their repeal as quasi-experimental interventions, runs an interrupted time series on the civilian contracting universe, and tests whether the effect appears at the extensive margin (frequency), the intensive margin (per-contract value), or — in OneGov's case — outside the contract record entirely.</p>
+      <h2>The biggest move <span class="serif">barely shows up.</span></h2>
+      <p>One big piece of the story never reaches the data at all. GSA's <strong>OneGov</strong> arrangement, live from spring 2025, negotiates near-free, government-wide access to commercial AI tools like ChatGPT, Claude and Gemini by treating Washington as a single customer. By GSA's own count it has reached around 3.4 million users and avoided roughly $1.15 billion in cost. Yet in the contract record it is almost invisible: it shows up only as a handful of <strong>$1</strong> subscription line items. The single largest expansion of federal AI access leaves almost no trace in the data meant to track federal buying.</p>
+      <p>It isn't the only blind spot. Thousands of contracts that agencies themselves flag as AI never say so in their text, so keyword searches miss them. And real AI work — from the likes of Palantir, Databricks and Clearview — often sits hidden as subcontracts beneath prime contracts that don't look like AI at all: at least $112 million of it.</p>
+      <p>The point is simple: what shows up in the contract record isn't the same as what the government actually buys. AI can enter an agency through a $1 subscription, a buried subcontract, or a contract description no keyword catches — and none of it looks like a big AI purchase. The record is a useful lens on federal AI, but a partial one.</p>
     </div>
   </div>
 </section>
@@ -699,7 +707,7 @@
 <!-- ============ BODY: METHOD ============ -->
 <section class="body-section">
   <div class="body-grid">
-    <div class="body-label">06 — Method</div>
+    <div class="body-label">05 — Method</div>
     <div class="body-content">
       <h2>Interrupted time series, <span class="serif">civilian universe.</span></h2>
       <p>Monthly aggregation of civilian AI-related contract actions, identified through a layered filter combining NAICS coding and technical-vocabulary keywords, with supplementary capture for named AI vendors and products and a cross-walk to the OMB AI use-case inventory. Defense and intelligence agencies are excluded throughout — the memoranda govern civilian agencies, and defense contracting is a structurally distinct procurement regime, so it is dropped rather than used as a placebo.</p>
@@ -720,13 +728,13 @@
 <!-- ============ BODY: IMPLICATION ============ -->
 <section class="body-section">
   <div class="body-grid">
-    <div class="body-label">07 — Implication</div>
+    <div class="body-label">06 — Implication</div>
     <div class="body-content">
       <h2>What this means for <span class="serif">how we read AI policy.</span></h2>
-      <p>The headline pattern — AI contracting accelerating in frequency once the requirements took force, with dollars-per-buy holding closer to trend — suggests the memos lowered the procedural cost of <em>writing</em> an AI contract more than they unlocked larger procurements. Agencies appear to be experimenting at higher cadence, not committing larger budgets to flagship buys.</p>
-      <p>That has practical implications for anyone reading federal AI activity from the outside. <strong>A surge in AI contract counts after a guidance memo is not, in itself, evidence of a budget event.</strong> It is at least as plausibly evidence of bureaucratic permission — that agencies already capable of running AI procurements found the process less friction-laden after the memos arrived.</p>
-      <p>The repeal makes the same point in reverse. Removing or replacing the rules did not produce a symmetric procurement response — governance left a stronger institutional trace than its rollback did. And OneGov shows the limits of reading AI policy from contract data at all: the most aggressive access intervention moves enormous adoption while remaining almost invisible in the record.</p>
-      <p>It also points to where to look next. Where the action count rises faster than the dollar volume, the interesting questions concern <span class="serif">what kinds of AI</span> federal agencies are actually buying — small per-seat licences for off-the-shelf tools rather than large bespoke development contracts. The measurement-visibility analysis develops this directly; the thesis takes it further.</p>
+      <p>The pattern is telling. Once the rules took effect, agencies bought AI more <em>often</em> without spending much more per contract — which suggests the memos mainly lowered the paperwork cost of buying AI rather than unlocking bigger purchases. Agencies started experimenting at a higher tempo, not betting larger budgets on flagship systems.</p>
+      <p>That matters for anyone trying to read federal AI activity from the outside. <strong>A jump in AI contract counts after a policy memo is not, by itself, evidence of a spending surge.</strong> It is just as plausibly evidence of permission — agencies that could already run AI procurements finding the process less of a slog once the rules arrived.</p>
+      <p>The repeal makes the same point in reverse. Taking the rules away did not produce an equal and opposite effect — the rules left a deeper institutional mark than their removal did. And OneGov is the reminder that contract data has limits as a window onto AI policy: the biggest access push of all moves enormous adoption while barely showing up in the record.</p>
+      <p>It also points to where to look next. Where the number of contracts rises faster than the dollars, the interesting question is <span class="serif">what kind of AI</span> government is actually buying — cheap per-seat licences for off-the-shelf tools like ChatGPT or Copilot, rather than big custom builds. That's the thread the thesis picks up from here.</p>
     </div>
   </div>
 </section>
@@ -767,10 +775,10 @@ const DATA = {
   ],
   // marker indices into monthly[] (Oct 2021 = 0)
   markers: [
-    { i: 29, label: 'M-24-10 · Mar 24', kind: 'dash',  yOff: 14 },
-    { i: 35, label: 'M-24-18 · Sep 24', kind: 'dash',  yOff: 32 },
-    { i: 38, label: '1 Dec 24 · enforcement', kind: 'solid', yOff: 14 },
-    { i: 42, label: 'Repeal · Apr 25', kind: 'warn',  yOff: 32 }
+    { i: 29, label: 'Memo M-24-10 · Mar 24', kind: 'dash',  yOff: 14 },
+    { i: 35, label: 'Memo M-24-18 · Sep 24', kind: 'dash',  yOff: 32 },
+    { i: 38, label: 'Rules take effect · Dec 24', kind: 'solid', yOff: 14 },
+    { i: 42, label: 'Rules repealed · Apr 25', kind: 'warn',  yOff: 32 }
   ],
   cleanEnd: 47,   // last index of the clean 48-month window (Sep 2025)
   recipients: [
@@ -859,10 +867,6 @@ function render() {
       html += `<text x="${xp + 6}" y="${P.t + m.yOff}" font-family="Geist Mono" font-size="10" fill="#A8A8AD">${m.label}</text>`;
     }
   });
-
-  // Clean-window boundary tick (Sep 2025)
-  const cb = x(DATA.cleanEnd);
-  html += `<text x="${cb}" y="${P.t + innerH + 30}" text-anchor="middle" font-family="Geist Mono" font-size="9" fill="#3A3A40">clean window ends ▸ Sep 25</text>`;
 
   // Series
   if (view === 'both' || view === 'actions') {
