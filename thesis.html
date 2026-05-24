@@ -533,21 +533,21 @@
     </div>
     <h1 class="thesis-title">
       Procurement and <span class="serif">Process:</span><br/>
-      what the <span class="accent">2024 OMB AI memos</span> moved.
+      what <span class="accent">AI governance</span> moved — and what it can't see.
     </h1>
     <p class="thesis-subtitle">
-      An interrupted time series analysis of civilian federal AI contracting, before and after the 2024 OMB AI procurement memoranda. Headline finding and underlying data drawn from USAspending.gov, October 2020 – September 2025.
+      An interrupted time series analysis of civilian federal AI contracting around the 2024–2025 OMB AI memoranda and their repeal. Data from USAspending.gov, October 2021 – September 2025 (extended to January 2026 for the repeal test).
     </p>
     <div class="thesis-hero-grid">
       <p class="thesis-claim">
-        After the OMB memos, civilian agencies signed AI contracts <strong>far more often</strong> — roughly half again as many per month — but <strong>the dollars per contract fell.</strong> Activity expanded; ambition held steady.
+        When the 2024 requirements actually <strong>took force</strong> — the 1 December 2024 deadline — civilian AI contracting accelerated, and the rise was <strong>specific to AI.</strong> A later deregulatory replacement produced <strong>no comparable AI-specific break.</strong> And the most aggressive access vehicle, OneGov, barely registers in the contract record at all.
       </p>
       <dl class="thesis-meta">
-        <dt>Method</dt><dd>Interrupted time series · Newey-West HAC · GLS AR(1) robustness</dd>
-        <dt>Source</dt><dd>USAspending.gov · Oct 2020 – Sept 2025 · 60 monthly observations</dd>
-        <dt>Treatments</dt><dd>OMB M-24-10 (Mar 2024) · M-24-18 (Sept 2024)</dd>
-        <dt>n</dt><dd>18,725 civilian AI contract actions · 46 agencies · 1,641 recipients</dd>
-        <dt>Tooling</dt><dd>R · data.table · sandwich · ggplot2</dd>
+        <dt>Method</dt><dd>Interrupted time series · OLS, Newey-West HAC &amp; GLS AR(1) at equal standing</dd>
+        <dt>Source</dt><dd>USAspending.gov · Oct 2021 – Sept 2025 · 48 monthly obs (extended to Jan 2026 for the repeal test)</dd>
+        <dt>Treatments</dt><dd>M-24-10 (Mar 2024) · M-24-18 (Sept 2024) · 1 Dec 2024 deadline · M-25-21/22 repeal (Apr 2025)</dd>
+        <dt>n</dt><dd>4,616 civilian AI contract actions · 41 agencies · 788 recipients</dd>
+        <dt>Tooling</dt><dd>R · data.table · sandwich · nlme · ggplot2</dd>
       </dl>
     </div>
   </div>
@@ -556,25 +556,25 @@
 <!-- ============ HEADLINE STATS BAND ============ -->
 <section class="stats-band">
   <div class="stats-band-inner">
-    <div class="stat-block">
-      <div class="stat-label">Actions / month</div>
-      <div class="stat-num">263 → 404</div>
-      <div class="stat-meta">Pre vs. post M-24-10 average <span class="stat-delta">+53.3%</span></div>
-    </div>
-    <div class="stat-block warn">
-      <div class="stat-label">Spend / month</div>
-      <div class="stat-num">$57M → $65M</div>
-      <div class="stat-meta">Pre vs. post M-24-10 average <span class="stat-delta warn">+12.6%</span></div>
-    </div>
     <div class="stat-block green">
-      <div class="stat-label">Civilian total obligated</div>
-      <div class="stat-num"><span class="small">$</span>3.64B</div>
-      <div class="stat-meta">Across the full 5-year window</div>
+      <div class="stat-label">AI actions / month after 1 Dec 2024</div>
+      <div class="stat-num">+5.9</div>
+      <div class="stat-meta">Slope change at the compliance deadline <span class="stat-delta">robust · p=.0004</span></div>
+    </div>
+    <div class="stat-block">
+      <div class="stat-label">AI share of civilian IT / month</div>
+      <div class="stat-num">+1.8<span class="small"> pts</span></div>
+      <div class="stat-meta">AI-specific — survives month fixed effects <span class="stat-delta">p=.007</span></div>
     </div>
     <div class="stat-block muted">
-      <div class="stat-label">Civilian agencies tracked</div>
-      <div class="stat-num">46</div>
-      <div class="stat-meta">GSA largest by volume (~72% post)</div>
+      <div class="stat-label">Civilian AI obligated · 48 months</div>
+      <div class="stat-num"><span class="small">$</span>2.90B</div>
+      <div class="stat-meta">4,616 actions · 41 agencies · 788 recipients</div>
+    </div>
+    <div class="stat-block warn">
+      <div class="stat-label">AI-specific shift after Apr 2025 repeal</div>
+      <div class="stat-num">≈ 0</div>
+      <div class="stat-meta">AI −7%/mo, but civilian IT fell the same <span class="stat-delta flat">share flat · p=.49</span></div>
     </div>
   </div>
 </section>
@@ -586,7 +586,7 @@
       <div class="chart-header">
         <div class="chart-title">
           <span class="prelim">PRELIMINARY</span>
-          Civilian federal AI procurement: actions &amp; obligations, Oct 2020 – Sept 2025
+          Civilian federal AI procurement: actions &amp; obligations, Oct 2021 – Jan 2026
         </div>
         <div class="chart-toggle">
           <button class="on" data-view="both">Both</button>
@@ -612,14 +612,18 @@
           AI obligations ($M)
         </div>
         <div class="chart-legend-item">
+          <div class="chart-legend-swatch" style="background: var(--accent); height: 3px;"></div>
+          1 Dec 2024 enforcement (solid)
+        </div>
+        <div class="chart-legend-item">
           <div class="chart-legend-swatch" style="background: var(--text-3); height: 1px; border-top: 1px dashed var(--text-3);"></div>
-          OMB intervention dates
+          Other policy events (dashed)
         </div>
       </div>
       <div class="chart-takeaway">
         <div class="chart-takeaway-icon">FINDING</div>
         <p>
-          The two series tell different stories. After M-24-10, the <strong>action count</strong> shifted up sharply and stayed there — agencies are now writing AI contracts at roughly <strong>+50% the prior monthly cadence.</strong> The <strong>dollar series</strong> looks much closer to its pre-memo trend, with the familiar September fiscal-year-end spikes still doing most of the work. The OMB memos appear to have changed how often agencies procure AI, more than how much they spend each time they do. Significance testing, a Defense placebo, and falsification design are reported in the thesis itself.
+          The decisive break is <strong>enforcement, not announcement.</strong> At the 1 December 2024 compliance deadline — when the memos' contract requirements for high-risk AI took force — civilian AI actions accelerated by <strong>~5.9 a month</strong>, significant across OLS, Newey-West and GLS, and the rise holds as a share of civilian IT even after absorbing seasonality. The separate release-date breaks (M-24-10, M-24-18) are weaker and method-dependent. After the April 2025 repeal, raw actions fell ~7%/month — but civilian IT fell at the same rate and the AI share of IT did not move, so the decline rode a <strong>broad contraction</strong>, not a deregulation-specific reversal.
         </p>
       </div>
     </div>
@@ -631,20 +635,20 @@
   <div class="supporting-inner">
     <div class="supporting-header">
       <div class="supporting-eyebrow">02 — Where the money goes</div>
-      <h2 class="supporting-title">Concentration: <span class="serif">a few familiar integrators,<br/>and one channel.</span></h2>
+      <h2 class="supporting-title">Concentration: <span class="serif">specialist primes, integrators,<br/>and a reseller channel.</span></h2>
     </div>
 
     <div class="supporting-grid">
 
       <div class="panel">
-        <h3>Top 8 civilian recipients by total obligation</h3>
-        <div class="panel-sub">Across the full window. The names are familiar federal IT integrators — Cognosante, Booz Allen, CGI, Leidos, Accenture — not frontier AI labs. Civilian AI dollars flow predominantly through traditional systems-integrator channels.</div>
+        <h3>Top 10 civilian recipients by total obligation</h3>
+        <div class="panel-sub">Full window, by total obligation. Under the tighter AI universe the dollars are led not by traditional integrators but by AI-specialist primes — Palantir (two entities, ~$0.9B combined) and Anduril — alongside integrators (Booz Allen, Accenture, MITRE) and high-volume GSA-Schedule resellers (Four Points, ThunderCat, Tuknik).</div>
         <div class="recipients-list" id="recipientsList"></div>
       </div>
 
       <div class="panel">
-        <h3>Civilian agency share, post-M-24-10</h3>
-        <div class="panel-sub">By contract action count. GSA dominates the post-memo period — the GSA Schedule channel functions as the practical procurement vehicle most agencies use to acquire AI.</div>
+        <h3>Civilian agency share, since the 1 Dec 2024 deadline</h3>
+        <div class="panel-sub">By contract action count. GSA is the largest single channel — but at ~22%, not dominance. Post-deadline AI contracting is spread across HHS, DHS, Treasury, NASA and a long civilian tail of 35 further agencies.</div>
         <div class="agency-bar-track" id="agencyBar"></div>
         <div class="agency-legend" id="agencyLegend"></div>
       </div>
@@ -653,105 +657,142 @@
   </div>
 </section>
 
-<!-- ============ BODY ============ -->
+<!-- ============ BODY: REPEAL ============ -->
 <section class="body-section">
   <div class="body-grid">
-    <div class="body-label">03 — Question</div>
+    <div class="body-label">03 — The repeal</div>
+    <div class="body-content">
+      <h2>Repeal without <span class="serif">reversal.</span></h2>
+      <p>On 3 April 2025 the Biden memoranda were rescinded and replaced (M-25-21/22), shifting the posture from risk-management requirements toward accelerated adoption and streamlined acquisition. Extending the series to January 2026 gives a second break to test — and it comes back a clean negative.</p>
+      <p>Raw civilian AI actions did fall after the repeal, by about 7% a month. But this was <strong>not an AI-specific reversal.</strong> Civilian IT contracting overall fell at essentially the same rate (~7%/month), while total civilian contracting fell more slowly (~3%/month) — and the AI <span class="serif">share</span> of civilian IT showed no significant change (p = 0.49). AI rode a broad 2025 contraction in civilian contracting rather than responding to the repeal. A re-channelling check rules out the alternative that AI simply migrated onto reseller or OneGov vehicles: reseller-named AI fell alongside directly-named AI rather than rising to absorb it.</p>
+      <p><strong>This points to an asymmetry.</strong> An operational deadline that made AI contractable left a clear, AI-specific trace in the record; a later replacement that relaxed and redirected those rules did not produce a comparable break. The contrast is not a clean test of regulation versus deregulation — the episodes differ in mechanism, timing, and surrounding conditions — but it suggests procurement governance can be adoption-enabling precisely when it turns a risky technology into something agencies can review, justify, and contract for.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ BODY: ONEGOV / VISIBILITY ============ -->
+<section class="body-section">
+  <div class="body-grid">
+    <div class="body-label">04 — The blind spot</div>
+    <div class="body-content">
+      <h2>The lever you <span class="serif">can't see.</span></h2>
+      <p>The most aggressive recent intervention is the one the contract record is least able to register. GSA's <strong>OneGov</strong> arrangement (live from spring 2025) negotiates near-free, enterprise-wide access to commercial AI tools — ChatGPT, Claude, Gemini — by treating the government as a single customer. By GSA's own account it has reached on the order of 3.4 million users and avoided roughly $1.15 billion in cost. In the federal contract record analysed here it is effectively invisible: it surfaces only as a handful of nominal-value line items — reseller subscriptions recorded at <strong>$1</strong> — and license quantities appear in under 1% of AI rows. It cannot be tested as an interruption at all.</p>
+      <p>Two further blind spots reinforce the point. <strong>Declared-but-text-silent AI:</strong> 4,518 contract transactions across 342 awards that agencies declared as AI but that keyword identification misses, only 853 of which carry a usable date. <strong>Sub-prime AI:</strong> at least $112M — up to ~$164M — of AI work (Palantir, C3.AI, Databricks, Clearview) sits in subawards beneath 121 prime contracts that do not read as AI at all.</p>
+      <p>The instrument that records what government buys is a <span class="serif">poor lens</span> on how AI actually enters government — and that visibility gap is not a footnote to the analysis but part of its argument. The price-and-access lever moves real adoption while staying almost entirely outside the contract record.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ BODY: QUESTION ============ -->
+<section class="body-section">
+  <div class="body-grid">
+    <div class="body-label">05 — Question</div>
     <div class="body-content">
       <h2>What does federal AI procurement guidance <span class="serif">actually do?</span></h2>
-      <p>The OMB memoranda M-24-10 (March 2024) and M-24-18 (September 2024) set out detailed expectations for how civilian federal agencies were to acquire, manage, and govern AI systems. The framing was enabling: clarifying procurement pathways, removing friction, raising the bar on responsible adoption.</p>
-      <p>But <strong>what happens in the contract data?</strong> Did agencies sign more AI contracts, larger ones, or both? Or does administrative guidance produce <span class="serif">signalling without substance</span> — language that changes faster than the spending lines underneath it?</p>
-      <p>This thesis treats the memos as a quasi-experimental intervention, runs an interrupted time series on the civilian contracting universe, and tests whether the effect appears at the extensive margin (frequency), the intensive margin (per-contract value), or both.</p>
+      <p>The OMB memoranda M-24-10 (March 2024) and M-24-18 (September 2024) set out detailed expectations for how civilian federal agencies were to acquire, manage, and govern AI systems. The framing was enabling: clarifying procurement pathways, removing friction, raising the bar on responsible adoption. Their 2025 replacements (M-25-21/22) and the OneGov vehicle then pulled in a different direction.</p>
+      <p>But <strong>what happens in the contract data?</strong> Did agencies sign more AI contracts, larger ones, or both? Does administrative guidance produce <span class="serif">signalling without substance</span> — language that changes faster than the spending lines underneath it? And does relaxing the rules move procurement the way imposing them did?</p>
+      <p>This thesis treats the memos and their repeal as quasi-experimental interventions, runs an interrupted time series on the civilian contracting universe, and tests whether the effect appears at the extensive margin (frequency), the intensive margin (per-contract value), or — in OneGov's case — outside the contract record entirely.</p>
     </div>
   </div>
 </section>
 
+<!-- ============ BODY: METHOD ============ -->
 <section class="body-section">
   <div class="body-grid">
-    <div class="body-label">04 — Method</div>
+    <div class="body-label">06 — Method</div>
     <div class="body-content">
       <h2>Interrupted time series, <span class="serif">civilian universe.</span></h2>
-      <p>Monthly aggregation of all civilian AI-related contract actions, identified through a layered filter that combines NAICS coding, technical-vocabulary keywords, and supplementary capture for direct AI-lab recipients (Scale AI, Databricks Federal), named frontier products (ChatGPT, Microsoft Copilot, Azure OpenAI), and cloud-mediated AI services (IBM Watson, Google Dialogflow, AWS Polly, Vertex AI).</p>
+      <p>Monthly aggregation of civilian AI-related contract actions, identified through a layered filter combining NAICS coding and technical-vocabulary keywords, with supplementary capture for named AI vendors and products and a cross-walk to the OMB AI use-case inventory. Defense and intelligence agencies are excluded throughout — the memoranda govern civilian agencies, and defense contracting is a structurally distinct procurement regime, so it is dropped rather than used as a placebo.</p>
       <dl class="method-table">
         <div class="method-table-row"><dt>Specification</dt><dd>ITS · level &amp; slope shifts at each intervention</dd></div>
-        <div class="method-table-row"><dt>Outcome 1</dt><dd>AI contract action count (extensive margin)</dd></div>
-        <div class="method-table-row"><dt>Outcome 2</dt><dd>AI obligation $M (intensive × extensive)</dd></div>
-        <div class="method-table-row"><dt>Treatments</dt><dd>M-24-10 (Mar 2024); M-24-18 (Sep 2024); ChatGPT release (Nov 2022) as pre-period control</dd></div>
-        <div class="method-table-row"><dt>Standard errors</dt><dd>Newey-West HAC · GLS AR(1) robustness</dd></div>
-        <div class="method-table-row"><dt>Placebo</dt><dd>Defense sector — outside OMB civilian scope</dd></div>
-        <div class="method-table-row"><dt>Seasonality</dt><dd>Sept fiscal-year-end &amp; Oct fiscal-year-start indicators</dd></div>
+        <div class="method-table-row"><dt>Outcome 1</dt><dd>AI contract action count — primary</dd></div>
+        <div class="method-table-row"><dt>Outcome 2</dt><dd>AI obligation $M — secondary corroboration (counts ↔ dollars r = 0.86)</dd></div>
+        <div class="method-table-row"><dt>Treatments</dt><dd>M-24-10 (Mar 2024); M-24-18 (Sep 2024); 1 Dec 2024 compliance deadline (headline break); M-25-21/22 repeal (Apr 2025)</dd></div>
+        <div class="method-table-row"><dt>Inference</dt><dd>OLS, Newey-West HAC &amp; GLS AR(1) at equal standing; one-method-only significance reported as suggestive</dd></div>
+        <div class="method-table-row"><dt>Internal control</dt><dd>AI share of civilian IT (within-civilian normalisation)</dd></div>
+        <div class="method-table-row"><dt>Seasonality</dt><dd>Sept fiscal-year-end &amp; Oct fiscal-year-start indicators; full month fixed effects as robustness</dd></div>
       </dl>
-      <p style="margin-top: 16px;">The chart above visualises the descriptive series with intervention markers; the thesis develops the formal estimation, falsification timing tests, and supplementary-capture validation in detail.</p>
+      <p style="margin-top: 16px;">The chart above visualises the descriptive series with intervention markers; the thesis develops the formal estimation, the announcement-versus-enforcement timing tests, and the measurement-visibility analysis in detail.</p>
     </div>
   </div>
 </section>
 
+<!-- ============ BODY: IMPLICATION ============ -->
 <section class="body-section">
   <div class="body-grid">
-    <div class="body-label">05 — Implication</div>
+    <div class="body-label">07 — Implication</div>
     <div class="body-content">
       <h2>What this means for <span class="serif">how we read AI policy.</span></h2>
-      <p>The headline pattern — many more AI contracts, only modestly more AI dollars — is more revealing than a uniform surge would be. It suggests the memos lowered the procedural cost of <em>writing</em> an AI contract more than they unlocked larger procurements. Agencies appear to be experimenting at higher cadence, not committing larger budgets to flagship buys.</p>
-      <p>That has practical implications for anyone reading federal AI activity from the outside. <strong>A surge in AI contract counts after a guidance memo is not, in itself, evidence of a budget event.</strong> It is at least as plausibly evidence of bureaucratic permission — that agencies who were already capable of running AI procurements found the process less friction-laden after the memos arrived.</p>
-      <p>It also points to where to look next. If the action count is rising faster than the dollar volume, the interesting questions concern <span class="serif">what kinds of AI</span> federal agencies are actually buying — small per-seat licences for off-the-shelf tools (ChatGPT Enterprise, Microsoft Copilot, Google Dialogflow), rather than large bespoke development contracts. The supplementary-capture analysis above hints at this directly. The thesis develops it more carefully.</p>
+      <p>The headline pattern — AI contracting accelerating in frequency once the requirements took force, with dollars-per-buy holding closer to trend — suggests the memos lowered the procedural cost of <em>writing</em> an AI contract more than they unlocked larger procurements. Agencies appear to be experimenting at higher cadence, not committing larger budgets to flagship buys.</p>
+      <p>That has practical implications for anyone reading federal AI activity from the outside. <strong>A surge in AI contract counts after a guidance memo is not, in itself, evidence of a budget event.</strong> It is at least as plausibly evidence of bureaucratic permission — that agencies already capable of running AI procurements found the process less friction-laden after the memos arrived.</p>
+      <p>The repeal makes the same point in reverse. Removing or replacing the rules did not produce a symmetric procurement response — governance left a stronger institutional trace than its rollback did. And OneGov shows the limits of reading AI policy from contract data at all: the most aggressive access intervention moves enormous adoption while remaining almost invisible in the record.</p>
+      <p>It also points to where to look next. Where the action count rises faster than the dollar volume, the interesting questions concern <span class="serif">what kinds of AI</span> federal agencies are actually buying — small per-seat licences for off-the-shelf tools rather than large bespoke development contracts. The measurement-visibility analysis develops this directly; the thesis takes it further.</p>
     </div>
   </div>
 </section>
 
 <footer>
   <div>© 2026 Grahm Gaydos · Thesis page</div>
-  <div>Charts use real USAspending.gov data; preliminary analysis subject to revision before submission</div>
+  <div>Charts use real USAspending.gov data (Oct 2021 – Jan 2026); preliminary analysis subject to revision before submission</div>
   <div><a href="index.html" style="color: var(--text-2); border-bottom: 1px solid var(--border);">← Home</a></div>
 </footer>
 
 <script>
 // =====================================================================
-// REAL DATA — extracted from USAspending.gov master-flagged dataset
-// 60 monthly observations of civilian AI contract actions and obligations
-// (Oct 2020 – Sept 2025).
+// REAL DATA — civilian AI contract actions & obligations from USAspending.gov
+// 52 monthly observations, Oct 2021 – Jan 2026. The clean ITS window is the
+// first 48 months (to Sep 2025); the final four months extend the series for
+// the M-25-21/22 repeal test only.
 // =====================================================================
 const DATA = {
   monthly: [
-    ['2020-10','Oct 20',101,21.50],['2020-11','Nov 20',141,82.67],['2020-12','Dec 20',116,20.79],
-    ['2021-01','Jan 21',138,7.91],['2021-02','Feb 21',140,10.27],['2021-03','Mar 21',198,91.14],
-    ['2021-04','Apr 21',182,18.51],['2021-05','May 21',147,21.54],['2021-06','Jun 21',164,106.63],
-    ['2021-07','Jul 21',181,82.28],['2021-08','Aug 21',180,79.75],['2021-09','Sep 21',282,168.81],
-    ['2021-10','Oct 21',115,14.69],['2021-11','Nov 21',150,69.81],['2021-12','Dec 21',149,20.05],
-    ['2022-01','Jan 22',165,69.79],['2022-02','Feb 22',148,15.55],['2022-03','Mar 22',331,86.55],
-    ['2022-04','Apr 22',262,33.42],['2022-05','May 22',301,69.20],['2022-06','Jun 22',321,117.90],
-    ['2022-07','Jul 22',329,41.75],['2022-08','Aug 22',339,51.23],['2022-09','Sep 22',387,118.04],
-    ['2022-10','Oct 22',178,35.85],['2022-11','Nov 22',192,52.53],['2022-12','Dec 22',253,32.34],
-    ['2023-01','Jan 23',359,20.61],['2023-02','Feb 23',372,14.38],['2023-03','Mar 23',539,45.33],
-    ['2023-04','Apr 23',374,70.15],['2023-05','May 23',370,44.88],['2023-06','Jun 23',366,81.20],
-    ['2023-07','Jul 23',386,77.41],['2023-08','Aug 23',392,83.43],['2023-09','Sep 23',541,295.46],
-    ['2023-10','Oct 23',304,0.31],['2023-11','Nov 23',249,66.24],['2023-12','Dec 23',268,3.55],
-    ['2024-01','Jan 24',242,18.09],['2024-02','Feb 24',351,37.92],['2024-03','Mar 24',396,15.34],
-    ['2024-04','Apr 24',585,42.47],['2024-05','May 24',350,24.81],['2024-06','Jun 24',480,135.40],
-    ['2024-07','Jul 24',510,71.59],['2024-08','Aug 24',493,86.07],['2024-09','Sep 24',603,186.32],
-    ['2024-10','Oct 24',255,33.63],['2024-11','Nov 24',285,74.86],['2024-12','Dec 24',293,23.14],
-    ['2025-01','Jan 25',363,41.58],['2025-02','Feb 25',339,13.72],['2025-03','Mar 25',421,37.10],
-    ['2025-04','Apr 25',423,30.61],['2025-05','May 25',394,81.47],['2025-06','Jun 25',413,66.31],
-    ['2025-07','Jul 25',396,48.85],['2025-08','Aug 25',379,79.47],['2025-09','Sep 25',644,149.06]
+    ['2021-10','Oct 21',70,0.25],['2021-11','Nov 21',83,26.13],['2021-12','Dec 21',59,-2.65],
+    ['2022-01','Jan 22',59,39.93],['2022-02','Feb 22',59,21.11],['2022-03','Mar 22',72,21.79],
+    ['2022-04','Apr 22',72,25.28],['2022-05','May 22',74,55.82],['2022-06','Jun 22',86,106.38],
+    ['2022-07','Jul 22',92,28.80],['2022-08','Aug 22',139,94.65],['2022-09','Sep 22',146,192.81],
+    ['2022-10','Oct 22',39,19.76],['2022-11','Nov 22',46,15.21],['2022-12','Dec 22',88,29.40],
+    ['2023-01','Jan 23',78,-147.59],['2023-02','Feb 23',86,17.89],['2023-03','Mar 23',84,47.05],
+    ['2023-04','Apr 23',66,50.86],['2023-05','May 23',94,25.85],['2023-06','Jun 23',91,137.99],
+    ['2023-07','Jul 23',77,66.93],['2023-08','Aug 23',117,55.59],['2023-09','Sep 23',177,267.55],
+    ['2023-10','Oct 23',51,11.62],['2023-11','Nov 23',75,23.36],['2023-12','Dec 23',54,17.06],
+    ['2024-01','Jan 24',77,21.69],['2024-02','Feb 24',79,24.74],['2024-03','Mar 24',107,33.09],
+    ['2024-04','Apr 24',89,27.18],['2024-05','May 24',91,48.29],['2024-06','Jun 24',128,111.76],
+    ['2024-07','Jul 24',91,67.42],['2024-08','Aug 24',131,74.97],['2024-09','Sep 24',218,310.42],
+    ['2024-10','Oct 24',70,7.86],['2024-11','Nov 24',66,1.58],['2024-12','Dec 24',76,25.42],
+    ['2025-01','Jan 25',97,50.31],['2025-02','Feb 25',90,27.28],['2025-03','Mar 25',120,14.81],
+    ['2025-04','Apr 25',122,46.58],['2025-05','May 25',113,76.19],['2025-06','Jun 25',108,97.13],
+    ['2025-07','Jul 25',117,23.42],['2025-08','Aug 25',114,130.37],['2025-09','Sep 25',278,429.71],
+    ['2025-10','Oct 25',31,3.19],['2025-11','Nov 25',55,26.16],['2025-12','Dec 25',76,376.90],
+    ['2026-01','Jan 26',96,47.57]
   ],
-  m24_10_idx: 41,  // March 2024
-  m24_18_idx: 47,  // September 2024
+  // marker indices into monthly[] (Oct 2021 = 0)
+  markers: [
+    { i: 29, label: 'M-24-10 · Mar 24', kind: 'dash',  yOff: 14 },
+    { i: 35, label: 'M-24-18 · Sep 24', kind: 'dash',  yOff: 32 },
+    { i: 38, label: '1 Dec 24 · enforcement', kind: 'solid', yOff: 14 },
+    { i: 42, label: 'Repeal · Apr 25', kind: 'warn',  yOff: 32 }
+  ],
+  cleanEnd: 47,   // last index of the clean 48-month window (Sep 2025)
   recipients: [
-    {name:'Cognosante MVH',                 obligation_m:258.0, actions:27},
-    {name:'Porter Novelli Public Services', obligation_m:225.9, actions:41},
-    {name:'CGI Federal',                    obligation_m:222.9, actions:81},
-    {name:'Booz Allen Hamilton',            obligation_m:146.6, actions:258},
-    {name:'Pluribus Digital',               obligation_m:124.9, actions:24},
-    {name:'Amentum Services',               obligation_m:110.4, actions:7},
-    {name:'Leidos',                         obligation_m:105.4, actions:53},
-    {name:'Accenture Federal Services',     obligation_m:92.6,  actions:48}
+    {name:'Palantir Technologies',        obligation_m:803.5, actions:399},
+    {name:'Booz Allen Hamilton',          obligation_m:417.4, actions:78},
+    {name:'Anduril Industries',           obligation_m:398.8, actions:47},
+    {name:'Palantir USG',                 obligation_m:109.0, actions:40},
+    {name:'Tuknik Government Services',   obligation_m:82.3,  actions:33},
+    {name:'Accenture Federal Services',   obligation_m:79.1,  actions:36},
+    {name:'Four Points Technology',       obligation_m:71.3,  actions:167},
+    {name:'GE Medical Systems IT',        obligation_m:64.0,  actions:6},
+    {name:'ThunderCat Technology',        obligation_m:48.2,  actions:89},
+    {name:'MITRE Corporation',            obligation_m:44.1,  actions:63}
   ],
   agencies: [
-    {name:'General Services Administration',      pct:71.7, count:5499, color:'#2D55FF'},
-    {name:'Health and Human Services',            pct:5.9,  count:453,  color:'#3D6BFF'},
-    {name:'Agriculture',                          pct:4.2,  count:323,  color:'#5B7FFF'},
-    {name:'Interior',                             pct:2.5,  count:188,  color:'#7896FF'},
-    {name:'Homeland Security',                    pct:2.5,  count:189,  color:'#8FA8FF'},
-    {name:'Other (41 agencies)',                  pct:13.2, count:1016, color:'#3A3A40'}
+    {name:'General Services Administration', pct:22.5, count:278, color:'#2D55FF'},
+    {name:'Health & Human Services',         pct:11.0, count:136, color:'#3D6BFF'},
+    {name:'Homeland Security',               pct:9.1,  count:112, color:'#5B7FFF'},
+    {name:'Treasury',                        pct:8.8,  count:109, color:'#7896FF'},
+    {name:'NASA',                            pct:8.3,  count:103, color:'#8FA8FF'},
+    {name:'Commerce',                        pct:6.5,  count:80,  color:'#A8B6FF'},
+    {name:'Other (35 agencies)',             pct:33.8, count:417, color:'#3A3A40'}
   ]
 };
 
@@ -759,8 +800,6 @@ const DATA = {
 // MAIN CHART
 // =====================================================================
 const data = DATA.monthly.map(r => ({ ym: r[0], label: r[1], actions: r[2], spend: r[3] }));
-const m1 = DATA.m24_10_idx;
-const m2 = DATA.m24_18_idx;
 
 const svg = document.getElementById('chart');
 const W = 1200, H = 460, P = { l: 56, r: 24, t: 32, b: 44 };
@@ -768,7 +807,7 @@ const innerW = W - P.l - P.r, innerH = H - P.t - P.b;
 const xMax = data.length - 1;
 
 const actionsMin = 0, actionsMax = Math.max(...data.map(d => d.actions)) * 1.1;
-const spendMin = 0,   spendMax   = Math.max(...data.map(d => d.spend))   * 1.1;
+const spendMin = Math.min(0, ...data.map(d => d.spend)), spendMax = Math.max(...data.map(d => d.spend)) * 1.1;
 const x = i => P.l + (i / xMax) * innerW;
 const yA = v => P.t + innerH - ((v - actionsMin) / (actionsMax - actionsMin)) * innerH;
 const yS = v => P.t + innerH - ((v - spendMin)   / (spendMax   - spendMin))   * innerH;
@@ -801,16 +840,29 @@ function render() {
     html += `<text x="${x(i)}" y="${H - 14}" text-anchor="middle" font-family="Geist Mono" font-size="10" fill="#6E6E76">${data[i].label}</text>`;
   }
 
+  // Regime shading: enforcement window (Dec 2024 → repeal) and post-repeal
+  const enfStart = DATA.markers[2].i, repIdx = DATA.markers[3].i;
+  html += `<rect x="${x(enfStart)}" y="${P.t}" width="${x(repIdx) - x(enfStart)}" height="${innerH}" fill="rgba(45,85,255,0.07)"/>`;
+  html += `<rect x="${x(repIdx)}" y="${P.t}" width="${(P.l + innerW) - x(repIdx)}" height="${innerH}" fill="rgba(245,166,35,0.06)"/>`;
+
   // Intervention markers
-  [m1, m2].forEach((idx) => {
-    const xp = x(idx);
-    html += `<line x1="${xp}" x2="${xp}" y1="${P.t}" y2="${P.t + innerH}" stroke="#A8A8AD" stroke-width="1" stroke-dasharray="4 4" opacity="0.55"/>`;
-    const labelText = idx === m1 ? 'M-24-10 · Mar 2024' : 'M-24-18 · Sep 2024';
-    html += `<text x="${xp + 6}" y="${P.t + 14}" font-family="Geist Mono" font-size="10" fill="#A8A8AD">${labelText}</text>`;
+  DATA.markers.forEach(m => {
+    const xp = x(m.i);
+    if (m.kind === 'solid') {
+      html += `<line x1="${xp}" x2="${xp}" y1="${P.t}" y2="${P.t + innerH}" stroke="#3D6BFF" stroke-width="1.5" opacity="0.9"/>`;
+      html += `<text x="${xp + 6}" y="${P.t + m.yOff}" font-family="Geist Mono" font-size="10" fill="#3D6BFF">${m.label}</text>`;
+    } else if (m.kind === 'warn') {
+      html += `<line x1="${xp}" x2="${xp}" y1="${P.t}" y2="${P.t + innerH}" stroke="#F5A623" stroke-width="1" stroke-dasharray="4 4" opacity="0.7"/>`;
+      html += `<text x="${xp + 6}" y="${P.t + m.yOff}" font-family="Geist Mono" font-size="10" fill="#F5A623">${m.label}</text>`;
+    } else {
+      html += `<line x1="${xp}" x2="${xp}" y1="${P.t}" y2="${P.t + innerH}" stroke="#A8A8AD" stroke-width="1" stroke-dasharray="4 4" opacity="0.5"/>`;
+      html += `<text x="${xp + 6}" y="${P.t + m.yOff}" font-family="Geist Mono" font-size="10" fill="#A8A8AD">${m.label}</text>`;
+    }
   });
 
-  // Post-period shading
-  html += `<rect x="${x(m1)}" y="${P.t}" width="${innerW - (x(m1) - P.l)}" height="${innerH}" fill="rgba(45,85,255,0.04)"/>`;
+  // Clean-window boundary tick (Sep 2025)
+  const cb = x(DATA.cleanEnd);
+  html += `<text x="${cb}" y="${P.t + innerH + 30}" text-anchor="middle" font-family="Geist Mono" font-size="9" fill="#3A3A40">clean window ends ▸ Sep 25</text>`;
 
   // Series
   if (view === 'both' || view === 'actions') {
