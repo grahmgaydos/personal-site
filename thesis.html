@@ -3,25 +3,28 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Grahm Gaydos — AI policy, procurement, digital state capacity</title>
+<title>Thesis · Procurement and Process — Grahm Gaydos</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #FFFFFF;
-    --bg-2: #F7F7F5;
-    --bg-3: #EFEFED;
-    --border: rgba(0, 0, 0, 0.09);
-    --border-2: rgba(0, 0, 0, 0.16);
-    --text: #1A1A1C;
-    --text-2: #45454C;
-    --text-3: #85858D;
-    --accent: #1B3358;
-    --accent-bright: #27476F;
-    --accent-tint: rgba(27, 51, 88, 0.07);
-    --accent-line: rgba(27, 51, 88, 0.3);
+    --bg: #0A0A0B;
+    --bg-2: #0F0F11;
+    --bg-3: #16161A;
+    --border: rgba(255, 255, 255, 0.08);
+    --border-2: rgba(255, 255, 255, 0.14);
+    --text: #F5F5F7;
+    --text-2: #A8A8AD;
+    --text-3: #6E6E76;
+    --accent: #2D55FF;
+    --accent-bright: #3D6BFF;
+    --accent-dim: #1E3FFF;
+    --warn: #F5A623;
+    --green: #5BD68F;
     --sans: "Geist", -apple-system, BlinkMacSystemFont, sans-serif;
+    --serif: "Instrument Serif", Georgia, serif;
+    --mono: "Geist Mono", ui-monospace, monospace;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
@@ -34,1168 +37,951 @@
     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
   }
-  ::selection { background: var(--accent); color: #fff; }
+  ::selection { background: var(--accent); color: var(--text); }
   a { color: inherit; text-decoration: none; }
   button { font: inherit; background: none; border: 0; color: inherit; cursor: pointer; }
 
-  /* ============ FEATURED (top banner) ============ */
-  .featured {
-    background: var(--bg-2);
-    padding: 20px 32px;
+  /* ============ NAV ============ */
+  .nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 16px 32px;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 32px;
+    background: rgba(10, 10, 11, 0.85);
+    backdrop-filter: blur(16px);
     border-bottom: 1px solid var(--border);
   }
-  .featured-inner {
-    display: flex;
-    align-items: baseline;
-    gap: 24px;
-  }
-  .featured-label {
+  .nav-back {
+    font-family: var(--mono);
     font-size: 12px;
-    font-weight: 600;
-    color: var(--text-3);
+    color: var(--text-2);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 12px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    transition: all 0.2s ease;
+  }
+  .nav-back:hover { color: var(--text); border-color: var(--border-2); transform: translateX(-2px); }
+  .nav-page-title {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--text-2);
+    text-align: center;
+    letter-spacing: 0.04em;
+  }
+  .nav-page-title strong { color: var(--text); font-weight: 500; }
+  .nav-prelim {
+    display: inline-block;
+    background: rgba(50, 184, 114, 0.12);
+    color: var(--green);
+    padding: 2px 8px;
+    border: 1px solid rgba(50, 184, 114, 0.35);
+    border-radius: 100px;
+    font-size: 10px;
+    margin-left: 6px;
     letter-spacing: 0.06em;
     text-transform: uppercase;
-    flex-shrink: 0;
-  }
-  .featured-marquee {
-    flex: 1;
-    overflow: hidden;
-    -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 4%, #000 96%, transparent 100%);
-    mask-image: linear-gradient(90deg, transparent 0%, #000 4%, #000 96%, transparent 100%);
-  }
-  .featured-track {
-    display: flex;
-    align-items: baseline;
-    width: max-content;
-    font-size: 15px;
-    letter-spacing: -0.01em;
-    line-height: 1.4;
-    animation: featuredScroll 40s linear infinite;
-    will-change: transform;
-  }
-  .featured-marquee:hover .featured-track { animation-play-state: paused; }
-  .featured-group {
-    display: inline-flex;
-    align-items: baseline;
-    white-space: nowrap;
-  }
-  @keyframes featuredScroll {
-    from { transform: translateX(0); }
-    to { transform: translateX(-50%); }
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .featured-track { animation: none; }
-  }
-  .featured-link-inline {
-    color: var(--text);
-    font-weight: 500;
-    display: inline-flex;
-    align-items: baseline;
-    gap: 6px;
-    padding: 4px 0;
-    border-bottom: 1px solid transparent;
-    transition: color 0.2s ease, border-bottom-color 0.2s ease;
-  }
-  .featured-link-inline:hover {
-    color: var(--accent);
-    border-bottom-color: var(--accent);
-  }
-  .featured-link-inline .meta {
-    font-size: 12px;
-    color: var(--text-3);
-    font-weight: 400;
-  }
-  .featured-link-inline:hover .meta { color: var(--accent); }
-  .featured-divider {
-    color: var(--text-3);
-    margin: 0 14px;
-    user-select: none;
   }
 
   /* ============ HERO ============ */
-  .hero {
-    position: relative;
-    min-height: calc(100vh - 60px);
-    overflow: hidden;
-  }
-  .hero-photo {
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 56%;
-    height: 100%;
-    background: var(--bg-3);
-    overflow: hidden;
-  }
-  .hero-photo-img {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center 30%;
-  }
-  .hero-photo::after {
-    content: "";
-    position: absolute;
-    inset: 0;
+  .thesis-hero {
+    padding: 140px 32px 80px;
+    border-bottom: 1px solid var(--border);
     background:
-      linear-gradient(90deg, var(--bg) 0%, rgba(255,255,255,0.95) 20%, rgba(255,255,255,0.55) 35%, transparent 50%),
-      linear-gradient(180deg, transparent 0%, transparent 60%, rgba(255,255,255,0.9) 100%);
+      radial-gradient(ellipse at top, rgba(45,85,255,0.08), transparent 60%),
+      var(--bg);
   }
-  .hero-content {
-    position: relative;
-    z-index: 5;
-    max-width: 1280px;
-    margin: 0 auto;
-    padding: 80px 32px 60px;
-    min-height: calc(100vh - 60px);
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
+  .thesis-hero-inner { max-width: 1200px; margin: 0 auto; }
+  .thesis-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text-2);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 24px;
   }
-  .hero-title {
-    font-weight: 600;
-    font-size: clamp(42px, 6.5vw, 92px);
-    line-height: 1.0;
+  .thesis-eyebrow-dot {
+    width: 6px; height: 6px;
+    background: var(--accent-bright);
+    border-radius: 50%;
+    box-shadow: 0 0 8px var(--accent-bright);
+  }
+  .thesis-title {
+    font-family: var(--sans);
+    font-weight: 500;
+    font-size: clamp(40px, 6vw, 84px);
+    line-height: 1;
     letter-spacing: -0.035em;
     margin-bottom: 32px;
     max-width: 1100px;
   }
-  .hero-title .accent { color: var(--accent); }
-  .hero-bio {
-    max-width: 500px;
-    font-size: 17px;
-    line-height: 1.55;
+  .thesis-title .serif { font-family: var(--serif); font-weight: 400; font-style: italic; letter-spacing: -0.02em; }
+  .thesis-title .accent { color: var(--accent-bright); }
+  .thesis-subtitle {
+    font-family: var(--sans);
+    font-size: clamp(15px, 1.4vw, 18px);
+    line-height: 1.45;
     color: var(--text-2);
-    margin-bottom: 36px;
+    max-width: 760px;
+    margin-bottom: 32px;
   }
-  .hero-bio strong { color: var(--text); font-weight: 600; }
-
-  .hero-cta-row {
-    display: flex;
-    gap: 12px;
-    flex-wrap: wrap;
-    margin-bottom: 48px;
+  .thesis-hero-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 64px;
+    margin-top: 48px;
   }
-  .btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 13px 22px;
-    border-radius: 10px;
-    font-size: 14px;
-    font-weight: 500;
-    transition: all 0.2s ease;
-    border: 1px solid transparent;
+  .thesis-claim {
+    font-family: var(--sans);
+    font-size: clamp(15px, 1.45vw, 18px);
+    line-height: 1.6;
+    color: var(--text-2);
+    font-weight: 400;
   }
-  .btn-primary {
-    background: var(--accent);
-    color: #fff;
-  }
-  .btn-primary:hover {
-    background: var(--accent-bright);
-    transform: translateY(-2px);
-  }
-  .btn-secondary {
-    background: var(--bg);
+  .thesis-claim p { margin-bottom: 14px; }
+  .thesis-claim strong { color: var(--text); font-weight: 600; }
+  .thesis-claim-kicker {
+    font-family: var(--sans);
+    font-size: clamp(18px, 2vw, 23px);
+    font-weight: 600;
     color: var(--text);
-    border-color: var(--border-2);
+    line-height: 1.35;
+    letter-spacing: -0.015em;
+    margin-bottom: 0 !important;
   }
-  .btn-secondary:hover {
-    background: var(--bg-2);
-    transform: translateY(-2px);
-  }
-  .btn .arrow { transition: transform 0.2s ease; }
-  .btn:hover .arrow { transform: translateX(3px); }
+  .thesis-meta { font-family: var(--mono); font-size: 12px; color: var(--text-2); line-height: 1.7; }
+  .thesis-meta dt { color: var(--text-3); text-transform: uppercase; font-size: 10px; letter-spacing: 0.08em; margin-top: 14px; }
+  .thesis-meta dt:first-child { margin-top: 0; }
+  .thesis-meta dd { color: var(--text); margin-bottom: 4px; font-weight: 500; }
 
-  .hero-meta-strip {
+  /* ============ HEADLINE STATS BAND ============ */
+  .stats-band {
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    background: var(--bg-2);
+    padding: 36px 32px;
+  }
+  .stats-band-inner {
+    max-width: 1200px;
+    margin: 0 auto;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 32px;
-    padding-top: 28px;
-    border-top: 1px solid var(--border);
-    max-width: 880px;
   }
-  .hero-stat-num {
-    font-size: 28px;
-    font-weight: 600;
+  .stat-block {
+    border-left: 2px solid var(--accent);
+    padding-left: 18px;
+  }
+  .stat-block.green { border-left-color: var(--green); }
+  .stat-block.warn { border-left-color: var(--warn); }
+  .stat-block.muted { border-left-color: var(--text-3); }
+  .stat-num {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 36px;
+    font-weight: 400;
     color: var(--text);
     letter-spacing: -0.02em;
     line-height: 1;
+    margin-bottom: 8px;
+  }
+  .stat-num .small { font-size: 22px; opacity: 0.8; }
+  .stat-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--text-3);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    line-height: 1.5;
     margin-bottom: 6px;
   }
-  .hero-stat-label {
+  .stat-meta {
+    font-family: var(--mono);
     font-size: 11px;
-    color: var(--text-3);
-    letter-spacing: 0.02em;
+    color: var(--text-2);
     line-height: 1.4;
   }
-
-  /* ============ REVEAL ============ */
-  .reveal { opacity: 0; transform: translateY(20px); animation: reveal 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) forwards; }
-  .r1 { animation-delay: 0.05s; }
-  .r2 { animation-delay: 0.18s; }
-  .r3 { animation-delay: 0.32s; }
-  .r4 { animation-delay: 0.46s; }
-  @keyframes reveal { to { opacity: 1; transform: translateY(0); } }
-  @media (prefers-reduced-motion: reduce) {
-    .reveal { animation: none; opacity: 1; transform: none; }
-    html { scroll-behavior: auto; }
+  .stat-delta {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 10px;
+    background: rgba(91, 214, 143, 0.15);
+    color: var(--green);
+    padding: 2px 6px;
+    border-radius: 3px;
+    margin-left: 6px;
   }
-
-  /* ============ SECTION ============ */
-  section { padding: 110px 32px; position: relative; }
-  .container { max-width: 1280px; margin: 0 auto; }
-  .section-header {
-    display: flex;
-    align-items: end;
-    justify-content: space-between;
-    margin-bottom: 48px;
-    gap: 32px;
-    flex-wrap: wrap;
-  }
-  .section-title {
-    font-weight: 600;
-    font-size: clamp(30px, 3.6vw, 48px);
-    letter-spacing: -0.03em;
-    line-height: 1.05;
-    max-width: 800px;
-  }
-  .section-action {
-    font-size: 13px;
+  .stat-delta.flat {
+    background: rgba(168, 168, 173, 0.15);
     color: var(--text-2);
-    border: 1px solid var(--border-2);
-    padding: 10px 16px;
-    border-radius: 100px;
-    transition: all 0.2s ease;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
   }
-  .section-action:hover {
-    color: var(--text);
-    border-color: var(--accent);
-    background: var(--accent-tint);
+  .stat-delta.warn {
+    background: rgba(245, 166, 35, 0.15);
+    color: var(--warn);
   }
 
-  /* ============ WORK ============ */
-  .work {
-    background: var(--bg);
-    border-top: 1px solid var(--border);
-    padding-top: 90px;
-  }
-  .work-filter-wrap {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    margin-bottom: 24px;
-    flex-wrap: wrap;
-  }
-  .work-filter {
-    display: flex;
-    gap: 4px;
-    padding: 4px;
+  /* ============ CHART ============ */
+  section { padding: 80px 32px; }
+  .container { max-width: 1200px; margin: 0 auto; }
+  .chart-section { padding-top: 60px; }
+  .chart-wrap {
     background: var(--bg-2);
     border: 1px solid var(--border);
-    border-radius: 100px;
-    font-size: 13px;
+    border-radius: 16px;
+    padding: 32px;
     position: relative;
   }
-  .work-filter button {
-    padding: 8px 18px;
-    border-radius: 100px;
-    color: var(--text-3);
-    transition: all 0.3s ease;
-    position: relative;
-    z-index: 2;
-    white-space: nowrap;
-  }
-  .work-filter button.active { color: #fff; }
-  .work-filter button:hover:not(.active) { color: var(--text); }
-  .work-filter-pill {
-    position: absolute;
-    top: 4px;
-    bottom: 4px;
+  .chart-header { display: flex; justify-content: space-between; align-items: start; margin-bottom: 24px; flex-wrap: wrap; gap: 16px; }
+  .chart-title { font-family: var(--mono); font-size: 12px; color: var(--text); letter-spacing: 0.04em; }
+  .chart-title .live {
+    display: inline-block;
     background: var(--accent);
-    border-radius: 100px;
-    transition: all 0.4s cubic-bezier(0.65, 0, 0.35, 1);
-    z-index: 1;
-  }
-
-  .work-list {
-    border-top: 1px solid var(--border);
-    overflow-anchor: none;
-  }
-  .work-item {
-    border-bottom: 1px solid var(--border);
-    transition: background 0.3s ease;
-    cursor: pointer;
-    overflow: hidden;
-  }
-  .work-item:hover { background: var(--bg-2); }
-  .work-item.open { background: var(--bg-2); }
-  .work-item.hidden { display: none; }
-  .work-row {
-    display: grid;
-    grid-template-columns: 90px 1fr 240px 110px 36px;
-    gap: 24px;
-    padding: 22px 16px;
-    align-items: center;
-  }
-  .work-year {
-    font-size: 13px;
     color: var(--text);
+    padding: 2px 6px;
+    border-radius: 3px;
+    margin-right: 8px;
+    font-size: 10px;
     font-weight: 600;
   }
-  .work-title {
-    font-size: 18px;
-    font-weight: 500;
-    letter-spacing: -0.015em;
-    line-height: 1.3;
-    transition: color 0.2s ease;
+  .chart-title .prelim {
+    display: inline-block;
+    background: rgba(50, 184, 114, 0.12);
+    color: var(--green);
+    padding: 2px 6px;
+    border: 1px solid rgba(50, 184, 114, 0.35);
+    border-radius: 3px;
+    margin-right: 8px;
+    font-size: 10px;
+    font-weight: 600;
   }
-  .work-item:hover .work-title { color: var(--accent); }
-  .work-venue {
-    font-size: 12px;
+  .chart-toggle { display: flex; gap: 8px; font-family: var(--mono); font-size: 11px; }
+  .chart-toggle button {
+    padding: 6px 12px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
     color: var(--text-3);
+    transition: all 0.2s ease;
   }
-  .work-cat {
+  .chart-toggle button.on { background: var(--accent); color: var(--text); border-color: var(--accent); }
+  .chart-toggle button:hover:not(.on) { color: var(--text); border-color: var(--border-2); }
+
+  .chart-svg-wrap { position: relative; width: 100%; }
+  .chart-svg { width: 100%; height: 460px; display: block; }
+  .chart-readout {
+    position: absolute;
+    top: 12px; right: 12px;
+    font-family: var(--mono);
     font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    padding: 4px 10px;
-    border-radius: 100px;
-    text-align: center;
-    justify-self: start;
-    white-space: nowrap;
-  }
-  .work-cat.applied { background: var(--accent-tint); color: var(--accent); border: 1px solid var(--accent-line); }
-  .work-cat.published { background: rgba(140, 106, 40, 0.08); color: #7A5A1E; border: 1px solid rgba(140, 106, 40, 0.3); }
-  .work-cat.research { background: var(--bg-3); color: var(--text-2); border: 1px solid var(--border); }
-  .work-cat.in-progress { background: rgba(23, 105, 68, 0.08); color: #166341; border: 1px solid rgba(23, 105, 68, 0.3); }
-  .work-toggle {
-    width: 30px; height: 30px;
-    border-radius: 50%;
-    border: 1px solid var(--border-2);
-    display: grid;
-    place-items: center;
     color: var(--text-2);
-    transition: all 0.4s cubic-bezier(0.65, 0, 0.35, 1);
-    justify-self: end;
-  }
-  .work-item.open .work-toggle {
-    transform: rotate(45deg);
-    background: var(--accent);
-    color: #fff;
-    border-color: var(--accent);
-  }
-  .work-item.flash { animation: flashHighlight 1.2s ease-out; }
-  @keyframes flashHighlight {
-    0% { background: rgba(27, 51, 88, 0.1); }
-    100% { background: var(--bg-2); }
-  }
-  .work-detail {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.6s cubic-bezier(0.65, 0, 0.35, 1);
-  }
-  .work-item.open .work-detail { max-height: 900px; }
-  .work-detail-inner {
-    display: grid;
-    grid-template-columns: 90px 1fr 240px 110px 36px;
-    gap: 24px;
-    padding: 0 16px 32px;
-  }
-  .work-detail-body {
-    grid-column: 2 / 3;
-    font-size: 15px;
-    line-height: 1.6;
-    color: var(--text-2);
-  }
-  .work-detail-body p + p { margin-top: 12px; }
-  .work-detail-body strong { color: var(--text); font-weight: 600; }
-  .work-detail-body a { color: var(--accent); border-bottom: 1px solid var(--accent-line); padding-bottom: 1px; }
-  .work-impact {
-    grid-column: 3 / 5;
     background: var(--bg);
     border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 18px;
-    align-self: start;
+    border-radius: 8px;
+    padding: 12px 14px;
+    min-width: 220px;
+    pointer-events: none;
   }
-  .work-impact-row {
+  .chart-readout-row { display: flex; justify-content: space-between; gap: 16px; padding: 3px 0; }
+  .chart-readout-row dt { color: var(--text-3); }
+  .chart-readout-row dd { color: var(--text); font-weight: 500; }
+  .chart-readout-row.dot-actions dt::before {
+    content: ""; display: inline-block; width: 8px; height: 8px;
+    border-radius: 50%; background: var(--accent-bright);
+    margin-right: 6px; vertical-align: middle;
+  }
+  .chart-readout-row.dot-spend dt::before {
+    content: ""; display: inline-block; width: 8px; height: 8px;
+    border-radius: 50%; background: var(--warn);
+    margin-right: 6px; vertical-align: middle;
+  }
+  .chart-legend { display: flex; gap: 24px; margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border); font-family: var(--mono); font-size: 11px; color: var(--text-2); flex-wrap: wrap; }
+  .chart-legend-item { display: flex; align-items: center; gap: 8px; }
+  .chart-legend-swatch { width: 14px; height: 3px; border-radius: 2px; }
+  .chart-takeaway {
+    margin-top: 24px;
+    padding: 22px 26px;
+    background: rgba(45, 85, 255, 0.06);
+    border: 1px solid rgba(45, 85, 255, 0.25);
+    border-radius: 12px;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 18px;
+    align-items: start;
+  }
+  .chart-takeaway-icon {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--accent-bright);
+    border: 1px solid rgba(45, 85, 255, 0.3);
+    padding: 4px 8px;
+    border-radius: 4px;
+    letter-spacing: 0.08em;
+  }
+  .chart-takeaway p { font-size: 15px; color: var(--text); line-height: 1.55; }
+  .chart-takeaway strong { color: var(--accent-bright); font-weight: 500; }
+
+  /* ============ SUPPORTING VISUALS GRID ============ */
+  .supporting {
+    padding: 60px 32px;
+    border-top: 1px solid var(--border);
+    background: var(--bg);
+  }
+  .supporting-inner { max-width: 1200px; margin: 0 auto; }
+  .supporting-header { margin-bottom: 32px; }
+  .supporting-eyebrow {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text-3);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .supporting-eyebrow::before {
+    content: "";
+    width: 24px;
+    height: 1px;
+    background: var(--accent-bright);
+  }
+  .supporting-title {
+    font-family: var(--sans);
+    font-weight: 500;
+    font-size: clamp(28px, 3.4vw, 44px);
+    line-height: 1.1;
+    letter-spacing: -0.025em;
+    max-width: 800px;
+  }
+  .supporting-title .serif { font-family: var(--serif); font-weight: 400; font-style: italic; }
+  .supporting-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 24px;
+  }
+  .panel {
+    background: var(--bg-2);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 26px;
+  }
+  .panel h3 {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .panel-sub {
+    font-family: var(--sans);
+    font-size: 13px;
+    color: var(--text-3);
+    margin-bottom: 22px;
+  }
+
+  /* Top recipients horizontal bars */
+  .recipients-list { display: flex; flex-direction: column; gap: 12px; }
+  .recipient-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+  .recipient-row-top {
     display: flex;
     justify-content: space-between;
     align-items: baseline;
-    padding: 6px 0;
-    font-size: 13px;
-    gap: 12px;
+    font-family: var(--sans);
+    font-size: 14px;
   }
-  .work-impact-row dt { color: var(--text-3); flex-shrink: 0; }
-  .work-impact-row dd { color: var(--text); font-weight: 500; text-align: right; }
-  .work-impact-row dd a { color: var(--accent); border-bottom: 1px solid var(--accent-line); padding-bottom: 1px; }
-
-  /* ============ ABOUT ============ */
-  .about {
-    background: var(--bg);
-    border-top: 1px solid var(--border);
-  }
-  .about-grid {
-    display: grid;
-    grid-template-columns: 1fr 1.4fr;
-    gap: 64px;
-    align-items: start;
-  }
-  .about-portrait {
-    aspect-ratio: 4 / 5;
-    border-radius: 12px;
-    background: var(--bg-3);
-    border: 1px solid var(--border);
-    overflow: hidden;
-    position: sticky;
-    top: 24px;
-  }
-  .about-portrait-img {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center 25%;
-  }
-  .about-text p {
-    font-size: 18px;
-    line-height: 1.65;
-    color: var(--text-2);
-    margin-bottom: 18px;
-  }
-  .about-text p strong { color: var(--text); font-weight: 600; }
-  .about-cta-row {
-    margin-top: 24px;
-    display: flex;
-    gap: 12px;
-    flex-wrap: wrap;
-  }
-
-  .photo-strip-wrap {
-    margin-top: 64px;
-    overflow-x: auto;
-    overflow-y: hidden;
-    scrollbar-width: none;
-    padding-bottom: 8px;
-  }
-  .photo-strip-wrap::-webkit-scrollbar { display: none; }
-  .photo-strip {
-    display: flex;
-    gap: 16px;
-    width: max-content;
-    padding-right: 32px;
-  }
-  .photo-strip-item {
-    width: 280px;
-    aspect-ratio: 4 / 5;
-    background: var(--bg-3);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    position: relative;
-    overflow: hidden;
-    flex-shrink: 0;
-    transition: transform 0.3s ease;
-  }
-  .photo-strip-img {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-  }
-  .photo-strip-item:hover { transform: translateY(-4px); border-color: var(--border-2); }
-  .photo-strip-item .caption {
-    position: absolute;
-    bottom: 12px;
-    left: 12px;
-    right: 12px;
-    font-size: 11px;
-    color: #fff;
-    text-shadow: 0 1px 4px rgba(0,0,0,0.5);
-    padding-top: 10px;
-    border-top: 1px solid rgba(255,255,255,0.35);
-    z-index: 2;
-    display: flex;
-    justify-content: space-between;
-  }
-
-  /* ============ CONTACT ============ */
-  .contact { padding: 130px 32px 80px; background: var(--bg-2); border-top: 1px solid var(--border); }
-  .contact-inner {
-    max-width: 1280px;
-    margin: 0 auto;
-  }
-  .contact-title {
-    font-weight: 600;
-    font-size: clamp(48px, 8vw, 120px);
-    line-height: 0.95;
-    letter-spacing: -0.04em;
-    margin-bottom: 32px;
-  }
-  .contact-meta {
-    font-size: 18px;
-    line-height: 1.5;
-    color: var(--text-2);
-    max-width: 720px;
-    margin-bottom: 48px;
-  }
-  .contact-links {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 12px;
-    border-top: 1px solid var(--border);
-    padding-top: 24px;
-  }
-  .contact-link {
-    display: block;
-    padding: 22px;
-    background: var(--bg);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    transition: all 0.3s ease;
-  }
-  .contact-link:hover {
-    border-color: var(--accent);
-    transform: translateY(-2px);
-  }
-  .contact-link dt {
-    font-size: 11px;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: var(--text-3);
-    margin-bottom: 8px;
-  }
-  .contact-link dd {
-    font-size: 16px;
+  .recipient-name {
     color: var(--text);
     font-weight: 500;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    letter-spacing: -0.012em;
   }
-  .contact-link dd::after {
-    content: "→";
+  .recipient-amount {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--accent-bright);
+    font-weight: 500;
+  }
+  .recipient-bar-track {
+    height: 6px;
+    background: var(--bg-3);
+    border-radius: 100px;
+    overflow: hidden;
+  }
+  .recipient-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent), var(--accent-bright));
+    border-radius: 100px;
+    transition: width 1.2s cubic-bezier(0.65, 0, 0.35, 1);
+  }
+  .recipient-meta {
+    font-family: var(--mono);
+    font-size: 10px;
     color: var(--text-3);
-    transition: all 0.2s ease;
+    margin-top: 2px;
   }
-  .contact-link:hover dd::after { color: var(--accent); transform: translateX(4px); }
 
+  /* Agency share stacked horizontal bar */
+  .agency-bar-track {
+    width: 100%;
+    height: 28px;
+    background: var(--bg-3);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+    display: flex;
+    margin-bottom: 22px;
+  }
+  .agency-bar-segment {
+    height: 100%;
+    transition: opacity 0.2s ease;
+    cursor: default;
+  }
+  .agency-bar-segment:hover { opacity: 0.85; }
+  .agency-legend {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .agency-legend-row {
+    display: grid;
+    grid-template-columns: 14px 1fr auto auto;
+    gap: 12px;
+    font-family: var(--mono);
+    font-size: 11px;
+    align-items: center;
+    padding: 4px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .agency-legend-row:last-child { border-bottom: 0; }
+  .agency-swatch {
+    width: 12px;
+    height: 12px;
+    border-radius: 3px;
+  }
+  .agency-name { color: var(--text); }
+  .agency-pct { color: var(--accent-bright); font-weight: 500; }
+  .agency-count { color: var(--text-3); }
+
+  /* ============ BODY SECTIONS ============ */
+  .body-section { padding: 60px 32px; border-top: 1px solid var(--border); }
+  .body-grid { display: grid; grid-template-columns: 220px 1fr; gap: 48px; max-width: 1200px; margin: 0 auto; align-items: start; }
+  .body-label { font-family: var(--mono); font-size: 11px; color: var(--text-3); letter-spacing: 0.1em; text-transform: uppercase; position: sticky; top: 100px; }
+  .body-label::before { content: ""; display: block; width: 32px; height: 1px; background: var(--accent-bright); margin-bottom: 12px; }
+  .body-content { max-width: 720px; }
+  .body-content h2 { font-family: var(--sans); font-weight: 500; font-size: 32px; letter-spacing: -0.02em; margin-bottom: 20px; line-height: 1.15; }
+  .body-content h2 .serif { font-family: var(--serif); font-style: italic; font-weight: 400; }
+  .body-content p { font-size: 17px; line-height: 1.65; color: var(--text-2); margin-bottom: 16px; }
+  .body-content p strong { color: var(--text); font-weight: 500; }
+  .body-content p .serif { font-family: var(--serif); font-style: italic; color: var(--text); }
+
+  .method-table { width: 100%; margin-top: 16px; border: 1px solid var(--border); border-radius: 10px; overflow: hidden; background: var(--bg-2); }
+  .method-table-row { display: grid; grid-template-columns: 200px 1fr; gap: 16px; padding: 14px 18px; border-bottom: 1px solid var(--border); font-family: var(--mono); font-size: 12px; }
+  .method-table-row:last-child { border-bottom: 0; }
+  .method-table-row dt { color: var(--text-3); text-transform: uppercase; font-size: 10px; letter-spacing: 0.08em; padding-top: 2px; }
+  .method-table-row dd { color: var(--text); }
+
+  /* ============ FOOTER ============ */
   footer {
     padding: 32px;
     border-top: 1px solid var(--border);
-    text-align: center;
-    font-size: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: var(--mono);
+    font-size: 11px;
     color: var(--text-3);
-    background: var(--bg-2);
+    flex-wrap: wrap;
+    gap: 16px;
   }
 
   /* ============ MOBILE ============ */
   @media (max-width: 900px) {
-    section, .contact, footer, .featured { padding-left: 20px; padding-right: 20px; }
-    .featured { padding-top: 16px; padding-bottom: 16px; }
-    .featured-track { font-size: 14px; }
-    .featured-divider { margin: 0 8px; }
-    .featured-inner { gap: 14px; }
-    .hero { min-height: auto; padding-bottom: 0; }
-    .hero-photo { position: relative; width: 100%; height: 50vh; }
-    .hero-photo::after {
-      background: linear-gradient(180deg, transparent 0%, transparent 50%, var(--bg) 100%);
-    }
-    .hero-content { padding: 40px 20px; min-height: auto; }
-    .hero-title { font-size: 40px; }
-    .hero-meta-strip { grid-template-columns: 1fr 1fr; gap: 20px; }
-    .hero-stat-num { font-size: 24px; }
-    .section-header { flex-direction: column; align-items: stretch; }
-    .work-row, .work-detail-inner {
-      grid-template-columns: 1fr;
-      gap: 6px;
-      padding: 16px;
-    }
-    .work-toggle { display: none; }
-    .work-row .work-toggle, .work-row .work-cat { display: grid; }
-    .work-row .work-cat { justify-self: start; margin-top: 6px; }
-    .work-row .work-toggle { justify-self: end; margin-top: 8px; display: grid; }
-    .work-detail-body, .work-impact { grid-column: 1; }
-    .work-impact { margin-top: 16px; }
-    .about-grid { grid-template-columns: 1fr; gap: 32px; }
-    .about-portrait { position: static; max-width: 320px; }
-    .photo-strip-item { width: 220px; }
-    .contact-title { font-size: 48px; }
-    .contact-links { grid-template-columns: 1fr 1fr; }
+    .nav { padding: 12px 16px; gap: 12px; }
+    .nav-page-title { display: none; }
+    .thesis-hero { padding: 100px 20px 60px; }
+    .thesis-title { font-size: 36px; }
+    .thesis-hero-grid { grid-template-columns: 1fr; gap: 32px; }
+    section, .body-section, .supporting, .stats-band { padding-left: 20px; padding-right: 20px; }
+    .stats-band-inner { grid-template-columns: 1fr 1fr; gap: 20px; }
+    .chart-wrap { padding: 16px; }
+    .chart-svg { height: 320px; }
+    .chart-readout { position: static; margin-bottom: 16px; }
+    .supporting-grid { grid-template-columns: 1fr; }
+    .body-grid { grid-template-columns: 1fr; gap: 24px; }
+    .body-label { position: static; }
+    .method-table-row { grid-template-columns: 1fr; gap: 4px; }
   }
 </style>
 </head>
 <body>
 
-<!-- ============ FEATURED (top banner) ============ -->
-<section id="featured" class="featured">
-  <div class="featured-inner">
-    <span class="featured-label">Featured</span>
-    <div class="featured-marquee">
-      <div class="featured-track" id="featuredTrack">
-        <!-- half 1 (populated by script into two identical halves) -->
-        <span class="featured-group">
-          <a href="#work-ai4pm" class="featured-link-inline" data-target="work-ai4pm">
-            From Pilot to Policy <span class="meta">Oxford · 2026</span>
-          </a>
-          <span class="featured-divider">·</span>
-          <a href="#work-aisi" class="featured-link-inline" data-target="work-aisi">
-            Governed Opacity <span class="meta">Oxford · 2025</span>
-          </a>
-          <span class="featured-divider">·</span>
-          <a href="#work-digital-innovation" class="featured-link-inline" data-target="work-digital-innovation">
-            Digital Innovation &amp; Governance <span class="meta">Oxford · 2024</span>
-          </a>
-          <span class="featured-divider">·</span>
-        </span>
-      </div>
-    </div>
-  </div>
-</section>
+<nav class="nav">
+  <a class="nav-back" href="index.html"><span>←</span> Back</a>
+  <div class="nav-page-title"><strong>Thesis</strong> · Procurement and Process <span class="nav-prelim">Preliminary</span></div>
+  <a class="nav-back" href="#download">Download PDF <span>↓</span></a>
+</nav>
 
-<!-- ============ HERO ============ -->
-<header class="hero">
-  <div class="hero-photo">
-    <img src="images/standing_casual.JPG" alt="Grahm Gaydos" class="hero-photo-img" />
-  </div>
-  <div class="hero-content">
-    <h1 class="hero-title reveal r1">
-      I work on AI policy<br/>
-      at the layer where<br/>
-      <span class="accent">promises get tested.</span>
-    </h1>
-    <p class="hero-bio reveal r2">
-      <strong>I'm Grahm Gaydos</strong>, an AI policy researcher at the Oxford Internet Institute. My work concerns the institutional layer through which technology policy is actually delivered—the procurement criteria, assessment frameworks, and stakeholder negotiations that determine what governments acquire, who builds it, and whether it performs. I have led frontier-AI tool evaluation and governance design for Jefferson County, Colorado; published policy research with the Westminster Foundation for Democracy; addressed the United Nations; and am completing an MSc examining how federal procurement memoranda shape AI adoption.
-    </p>
-    <div class="hero-cta-row reveal r3">
-      <a class="btn btn-primary" href="#work">Selected work <span class="arrow">→</span></a>
-      <a class="btn btn-secondary" href="#about">About <span class="arrow">→</span></a>
-      <a class="btn btn-secondary" href="#contact">Contact <span class="arrow">→</span></a>
+<header class="thesis-hero">
+  <div class="thesis-hero-inner">
+    <div class="thesis-eyebrow">
+      <span class="thesis-eyebrow-dot"></span>
+      MSc Thesis · Oxford Internet Institute · In progress · Submission Jun 2026
     </div>
-    <div class="hero-meta-strip reveal r4">
-      <div>
-        <div class="hero-stat-num">500K+</div>
-        <div class="hero-stat-label">Residents Served · JeffCo Emerging Technologies Team</div>
+    <h1 class="thesis-title">
+      Procurement and <span class="serif">Process:</span><br/>
+      what <span class="accent">AI rules</span> did — and what scrapping them didn't.
+    </h1>
+    <p class="thesis-subtitle">
+      How a pair of 2024 White House memos — and their 2025 repeal — changed how federal agencies buy artificial intelligence, traced through the public contract record.
+    </p>
+    <div class="thesis-hero-grid">
+      <div class="thesis-claim">
+        <p>Even though the Biden-era AI rules set strict new requirements for how the public sector could use AI, federal agencies began signing AI contracts markedly faster once they took effect. When the Trump administration repealed those rules months later, AI contracting didn't suddenly expand — it showed no difference from federal tech contracting overall.</p>
+        <p class="thesis-claim-kicker">Putting rules in place moved the needle — scrapping them didn't move it back.</p>
       </div>
-      <div>
-        <div class="hero-stat-num">3</div>
-        <div class="hero-stat-label">Published Works</div>
-      </div>
-      <div>
-        <div class="hero-stat-num">1</div>
-        <div class="hero-stat-label">UN Floor Address · ICT Working Group</div>
-      </div>
-      <div>
-        <div class="hero-stat-num">2028</div>
-        <div class="hero-stat-label">USA Triathlon Olympic Track</div>
-      </div>
+      <dl class="thesis-meta">
+        <dt>Method</dt><dd>Interrupted time series · OLS, Newey-West HAC &amp; GLS AR(1) at equal standing</dd>
+        <dt>Source</dt><dd>USAspending.gov · Oct 2021 – Sept 2025 · 48 monthly obs (extended to Jan 2026 for the repeal test)</dd>
+        <dt>Treatments</dt><dd>M-24-10 (Mar 2024) · M-24-18 (Sept 2024) · 1 Dec 2024 deadline · M-25-21/22 repeal (Apr 2025)</dd>
+        <dt>n</dt><dd>4,616 civilian AI contract actions · 41 agencies · 788 recipients</dd>
+        <dt>Tooling</dt><dd>R · data.table · sandwich · nlme · ggplot2</dd>
+      </dl>
     </div>
   </div>
 </header>
 
-<!-- ============ WORK ============ -->
-<section id="work" class="work">
-  <div class="container">
-    <div class="section-header">
-      <h2 class="section-title">Selected work</h2>
-      <a class="section-action" href="files/GaydosResume2026Updated.pdf" target="_blank" rel="noopener">Download CV <span>↓</span></a>
-    </div>
-
-    <div class="work-filter-wrap">
-      <div class="work-filter" id="workFilter">
-        <div class="work-filter-pill" id="filterPill"></div>
-        <button class="active" data-filter="all">All</button>
-        <button data-filter="applied">Applied</button>
-        <button data-filter="published">Published</button>
-        <button data-filter="research">Research</button>
-      </div>
-    </div>
-
-    <div class="work-list" id="workList">
-
-  <!-- 2026 — MSc thesis (in progress) -->
-  <article class="work-item" data-cat="published" id="work-thesis">
-    <div class="work-row">
-      <div class="work-year">2026</div>
-      <h4 class="work-title">Procurement and Process: an interrupted time series analysis of federal AI contracting after the 2024 OMB AI procurement memoranda</h4>
-      <div class="work-venue">Oxford Internet Institute · MSc thesis</div>
-      <div class="work-cat in-progress">In Progress</div>
-      <div class="work-toggle">+</div>
-    </div>
-    <div class="work-detail">
-      <div class="work-detail-inner">
-        <div class="work-detail-body">
-          <p>An interrupted time series analysis of US federal contracting data examining whether the 2024 Office of Management and Budget (OMB) AI procurement memoranda measurably shifted agency-level AI adoption.</p>
-          <p>Identifies AI-related contract actions across roughly 7,200 agency-months and tests for level shifts at the M-24-10 (March 2024) and M-24-18 (September 2024) intervention points. <strong>Distinguishes between extensive-margin (frequency) and intensive-margin (volume) responses</strong> — a distinction with direct implications for how administrative AI policy is read as a regulatory instrument. <a href="thesis.html">Full chart and methodology →</a></p>
-        </div>
-        <div class="work-impact">
-          <div class="work-impact-row"><dt>For</dt><dd>MSc thesis · OII</dd></div>
-          <div class="work-impact-row"><dt>Tools</dt><dd>R · Stata · fixest</dd></div>
-          <div class="work-impact-row"><dt>Read</dt><dd><a href="files/gaydos-procurement-and-process-thesis-2026.pdf" target="_blank" rel="noopener">Download (PDF) ↓</a></dd></div>
-        </div>
-      </div>
-    </div>
-  </article>
-
-  <!-- 2026 — AI4PM pilot scalability paper -->
-  <article class="work-item" data-cat="research" id="work-ai4pm">
-    <div class="work-row">
-      <div class="work-year">2026</div>
-      <h4 class="work-title">From Pilot to Policy: why government AI pilots stagnate, and what that tells us about institutional capacity</h4>
-      <div class="work-venue">AI for Policymaking · Essay</div>
-      <div class="work-cat research">Research</div>
-      <div class="work-toggle">+</div>
-    </div>
-    <div class="work-detail">
-      <div class="work-detail-inner">
-        <div class="work-detail-body">
-          <p>An argument that the persistent failure of public-sector AI pilots to scale into deployment is not a technology problem or a funding problem — it is a structural feature of how the pilot apparatus itself is institutionally built. <strong>Pilots succeed because they are exempted from the procurement, governance, and accountability structures that deployment would have to operate within.</strong></p>
-          <p>The same exemptions that make pilots succeed are the conditions that prevent them from progressing. Stagnation is the system working precisely as the institutional environment has forced it to.</p>
-        </div>
-        <div class="work-impact">
-          <div class="work-impact-row"><dt>For</dt><dd>AI for Policymaking · coursework</dd></div>
-          <div class="work-impact-row"><dt>Read</dt><dd><a href="files/gaydos-from-pilot-to-policy-ai4pm-2026.pdf" target="_blank" rel="noopener">Download (PDF) ↓</a></dd></div>
-        </div>
-      </div>
-    </div>
-  </article>
-
-  <!-- 2026 — Governed Opacity -->
-  <article class="work-item" data-cat="research" id="work-aisi">
-    <div class="work-row">
-      <div class="work-year">2026</div>
-      <h4 class="work-title">Governed Opacity: the EU AI Act's unresolved tension between prohibiting and institutionalising information asymmetry</h4>
-      <div class="work-venue">Law and the Internet · Coursework</div>
-      <div class="work-cat research">Research</div>
-      <div class="work-toggle">+</div>
-    </div>
-    <div class="work-detail">
-      <div class="work-detail-inner">
-        <div class="work-detail-body">
-          <p>Argues that the EU AI Act draws no coherent conceptual line between harmful and productive information asymmetry — Article 5 prohibits certain forms of opacity outright, while Articles 57–63 institutionalise opacity as a precondition for innovation.</p>
-          <p>The Act's boundary between the two is not principled but procedural and distributive: <strong>it calibrates who benefits from informational asymmetry and on what terms</strong>, rather than resolving the underlying tension.</p>
-        </div>
-        <div class="work-impact">
-          <div class="work-impact-row"><dt>For</dt><dd>Law and the Internet · coursework</dd></div>
-          <div class="work-impact-row"><dt>Read</dt><dd><a href="files/gaydos-governed-opacity-2026.pdf" target="_blank" rel="noopener">Download (PDF) ↓</a></dd></div>
-        </div>
-      </div>
-    </div>
-  </article>
-
-  <!-- 2025 — JeffCo governance framework -->
-  <article class="work-item" data-cat="applied" id="work-jeffco">
-    <div class="work-row">
-      <div class="work-year">2025</div>
-      <h4 class="work-title">Jefferson County's first frontier-AI governance framework</h4>
-      <div class="work-venue">Jefferson Co. · Colorado</div>
-      <div class="work-cat applied">Applied</div>
-      <div class="work-toggle">+</div>
-    </div>
-    <div class="work-detail">
-      <div class="work-detail-inner">
-        <div class="work-detail-body">
-          <p>Contributed to the design and adoption of the County's <strong>first governance framework for frontier AI models</strong>, establishing institutional procedures for evaluating, piloting, and scaling emerging technologies across departments serving over 500,000 residents.</p>
-          <p>Led qualitative stakeholder interviews with department leads across government divisions and synthesised findings to shape the framework's evaluation, pilot, and scale-up procedures.</p>
-        </div>
-        <div class="work-impact">
-          <div class="work-impact-row"><dt>For</dt><dd>Jefferson County · adopted</dd></div>
-        </div>
-      </div>
-    </div>
-  </article>
-
-  <!-- 2025 — JeffCo 8-criterion assessment framework -->
-  <article class="work-item" data-cat="applied" id="work-jeffco-assessment">
-    <div class="work-row">
-      <div class="work-year">2025</div>
-      <h4 class="work-title">An 8-criterion structured assessment framework for AI tool procurement</h4>
-      <div class="work-venue">Jefferson Co. · Colorado</div>
-      <div class="work-cat applied">Applied</div>
-      <div class="work-toggle">+</div>
-    </div>
-    <div class="work-detail">
-      <div class="work-detail-inner">
-        <div class="work-detail-body">
-          <p>Co-designed an <strong>8-criterion structured assessment framework</strong> for evaluating frontier AI tools against procurement requirements, workflow constraints, governance risk, and political context. Combined qualitative evaluation with light quantitative scoring to reduce evaluator bias and produce a consistent evidence base for procurement decisions.</p>
-          <p>Used to assess frontier AI tools for County adoption; outputs informed leadership's technology decisions and were incorporated into the broader governance framework.</p>
-        </div>
-        <div class="work-impact">
-          <div class="work-impact-row"><dt>For</dt><dd>Jefferson County tool evaluation</dd></div>
-        </div>
-      </div>
-    </div>
-  </article>
-
-  <!-- 2025 — JeffCo pilot proposals -->
-  <article class="work-item" data-cat="applied" id="work-jeffco-pilots">
-    <div class="work-row">
-      <div class="work-year">2025</div>
-      <h4 class="work-title">Five pilot proposals for departmental AI adoption</h4>
-      <div class="work-venue">Jefferson Co. · Colorado</div>
-      <div class="work-cat applied">Applied</div>
-      <div class="work-toggle">+</div>
-    </div>
-    <div class="work-detail">
-      <div class="work-detail-inner">
-        <div class="work-detail-body">
-          <p>Authored <strong>five pilot proposals</strong> for the project management team evaluating frontier AI tools for departmental adoption. Each proposal assessed implementation feasibility, governance risk, and operational impact — translating abstract technology guidance into concrete pilot designs that the County could actually run.</p>
-        </div>
-        <div class="work-impact">
-          <div class="work-impact-row"><dt>For</dt><dd>Jefferson County project management</dd></div>
-        </div>
-      </div>
-    </div>
-  </article>
-
-  <!-- 2025 — Healthcare.gov senior thesis -->
-  <article class="work-item" data-cat="published" id="work-healthcare">
-    <div class="work-row">
-      <div class="work-year">2025</div>
-      <h4 class="work-title">The 2013 Healthcare.gov Launch &amp; State Capacity in the Digital Age</h4>
-      <div class="work-venue">Williams College · Senior thesis</div>
-      <div class="work-cat published">Published</div>
-      <div class="work-toggle">+</div>
-    </div>
-    <div class="work-detail">
-      <div class="work-detail-inner">
-        <div class="work-detail-body">
-          <p>Mixed-methods study using qualitative and archival analysis of procurement documentation, government reports, and organisational case studies to trace how <strong>procurement failures upstream of the 2013 Healthcare.gov rollout determined delivery outcomes.</strong></p>
-          <p>The argument: the launch crisis was a procurement crisis before it was a software crisis. Sets up the procurement-as-governance frame extended in the MSc thesis.</p>
-        </div>
-        <div class="work-impact">
-          <div class="work-impact-row"><dt>For</dt><dd>Senior thesis · Political Science</dd></div>
-          <div class="work-impact-row"><dt>Read</dt><dd><a href="files/gaydos-healthcare-state-capacity-2025.pdf" target="_blank" rel="noopener">Download (PDF) ↓</a></dd></div>
-        </div>
-      </div>
-    </div>
-  </article>
-
-  <!-- 2024 — WFD report -->
-  <article class="work-item" data-cat="published" id="work-wfd">
-    <div class="work-row">
-      <div class="work-year">2024</div>
-      <h4 class="work-title">AI &amp; Democracy: Landscape, Risks &amp; Opportunities for the Democracy Support Sector</h4>
-      <div class="work-venue">Westminster Foundation for Democracy</div>
-      <div class="work-cat published">Published</div>
-      <div class="work-toggle">+</div>
-    </div>
-    <div class="work-detail">
-      <div class="work-detail-inner">
-        <div class="work-detail-body">
-          <p>Managed a 3-month research project from scoping through publication, delivering a <strong>15,000-word policy report</strong> on AI and democracy promotion. Incorporated a literature review of <strong>50+ sources</strong>, stakeholder insights, and a policy memo with recommendations now used to inform organisational strategy.</p>
-          <p>Developed a working definition of AI for the democracy support sector and translated it into a briefing deck presented to WFD staff and external partners, packaging complex policy research for varied audiences.</p>
-        </div>
-        <div class="work-impact">
-          <div class="work-impact-row"><dt>For</dt><dd>Westminster Foundation for Democracy</dd></div>
-          <div class="work-impact-row"><dt>Length</dt><dd>15,000 words</dd></div>
-          <div class="work-impact-row"><dt>Read</dt><dd><a href="https://www.wfd.org/what-we-do/resources/artificial-intelligence-ai-action-preliminary-review-ai-use-democracy-support" target="_blank" rel="noopener">wfd.org ↗</a></dd></div>
-        </div>
-      </div>
-    </div>
-  </article>
-
-  <!-- 2024 — AI & Electoral Integrity -->
-  <article class="work-item" data-cat="published" id="work-elections">
-    <div class="work-row">
-      <div class="work-year">2024</div>
-      <h4 class="work-title">AI &amp; Electoral Integrity</h4>
-      <div class="work-venue">Williams Class of 1945 World Fellowship</div>
-      <div class="work-cat published">Published</div>
-      <div class="work-toggle">+</div>
-    </div>
-    <div class="work-detail">
-      <div class="work-detail-inner">
-        <div class="work-detail-body">
-          <p>Eight-week fellowship project on AI's impact on democratic practices and elections — synthesising primary sourcing, case studies, stakeholder interviews, and quantitative data collection. <strong>The report deliberately resists the genre's pull toward speculation</strong>; the goal was a usable baseline rather than scenario-building.</p>
-        </div>
-        <div class="work-impact">
-          <div class="work-impact-row"><dt>For</dt><dd>Class of 1945 Fellowship</dd></div>
-          <div class="work-impact-row"><dt>Read</dt><dd><a href="files/gaydos-ai-electoral-integrity-2024.pdf" target="_blank" rel="noopener">Download (PDF) ↓</a></dd></div>
-        </div>
-      </div>
-    </div>
-  </article>
-
-  <!-- 2024 — Digital Innovation & Governance -->
-  <article class="work-item" data-cat="research" id="work-digital-innovation">
-    <div class="work-row">
-      <div class="work-year">2024</div>
-      <h4 class="work-title">Digital Innovation and Governance: how states should respond to authority challenges from digital platforms</h4>
-      <div class="work-venue">Oxford · Coursework</div>
-      <div class="work-cat research">Research</div>
-      <div class="work-toggle">+</div>
-    </div>
-    <div class="work-detail">
-      <div class="work-detail-inner">
-        <div class="work-detail-body">
-          <p>A 5,000-word essay produced under tutorial supervision at Oxford, examining how states — particularly those with limited means or resources — should respond to challenges to their authority from digital platforms. <strong>Treats sovereignty as a multidimensional resource rather than a binary status</strong>, and traces what kinds of state responses are actually viable across legal, physical, and political dimensions.</p>
-        </div>
-        <div class="work-impact">
-          <div class="work-impact-row"><dt>For</dt><dd>Williams-Exeter Programme (WEPO)</dd></div>
-          <div class="work-impact-row"><dt>Length</dt><dd>~5,000 words</dd></div>
-          <div class="work-impact-row"><dt>Read</dt><dd><a href="files/gaydos-digital-innovation-governance-2024.pdf" target="_blank" rel="noopener">Download (PDF) ↓</a></dd></div>
-        </div>
-      </div>
-    </div>
-  </article>
-
-  <!-- 2023 — UN floor address -->
-  <article class="work-item" data-cat="applied" id="work-un">
-    <div class="work-row">
-      <div class="work-year">2023</div>
-      <h4 class="work-title">UN floor address &amp; youth statement on ICTs</h4>
-      <div class="work-venue">2023 NPT PrepCom · NAPF</div>
-      <div class="work-cat applied">Applied</div>
-      <div class="work-toggle">+</div>
-    </div>
-    <div class="work-detail">
-      <div class="work-detail-inner">
-        <div class="work-detail-body">
-          <p>Selected by peers to <strong>draft the youth statement</strong> for the 2023 Nuclear Non-Proliferation Treaty Preparatory Committee, and delivered the address on the role of information and communications technologies in security policy. Briefed parliamentarians and members of Congress on the AI–nuclear nexus throughout 2023.</p>
-          <p>Prepared speech materials for civil society partners and UN representatives, helping communicate policy positions on AI governance, emerging technologies, and international security in clear, public-facing language.</p>
-        </div>
-        <div class="work-impact">
-          <div class="work-impact-row"><dt>For</dt><dd>2023 NPT PrepCom · UN floor</dd></div>
-          <div class="work-impact-row"><dt>Watch</dt><dd><a href="https://youtu.be/Iinr2R1cWSs?si=qGpaLV6DiO2gLEYy" target="_blank" rel="noopener">youtube.com ↗</a></dd></div>
-        </div>
-      </div>
-    </div>
-  </article>
-
-  <!-- 2023 — NAPF AI use policy guidance -->
-  <article class="work-item" data-cat="applied" id="work-napf-ai-policy">
-    <div class="work-row">
-      <div class="work-year">2023</div>
-      <h4 class="work-title">Generative-AI use policy guidance for the Nuclear Age Peace Foundation</h4>
-      <div class="work-venue">NAPF · Reverse the Trend</div>
-      <div class="work-cat applied">Applied</div>
-      <div class="work-toggle">+</div>
-    </div>
-    <div class="work-detail">
-      <div class="work-detail-inner">
-        <div class="work-detail-body">
-          <p>Researched the AI–nuclear nexus and produced <strong>internal-use policy guidance</strong> on organisational use of generative AI for the Nuclear Age Peace Foundation. The guidance covered acceptable use cases, governance considerations, and the boundary between research and operational deployment in a small-organisation context.</p>
-          <p>Spearheaded internal discussions with NAPF staff about implementing the guidance in day-to-day work.</p>
-        </div>
-        <div class="work-impact">
-          <div class="work-impact-row"><dt>For</dt><dd>NAPF · internal use</dd></div>
-        </div>
-      </div>
-    </div>
-  </article>
-
-  <!-- 2022 — Colorado Governor's Office -->
-  <article class="work-item" data-cat="applied" id="work-gov">
-    <div class="work-row">
-      <div class="work-year">2022</div>
-      <h4 class="work-title">Executive appointment orders &amp; board pipeline</h4>
-      <div class="work-venue">Office of the Governor · Colorado</div>
-      <div class="work-cat applied">Applied</div>
-      <div class="work-toggle">+</div>
-    </div>
-    <div class="work-detail">
-      <div class="work-detail-inner">
-        <div class="work-detail-body">
-          <p>Drafted executive appointment orders and governmental memos at the Office of Boards and Commissions; managed candidate pipeline across <strong>12 active board vacancies</strong>, coordinating with appointees and agency staff on state-level operations.</p>
-        </div>
-        <div class="work-impact">
-          <div class="work-impact-row"><dt>For</dt><dd>Office of Boards &amp; Commissions</dd></div>
-        </div>
-      </div>
-    </div>
-  </article>
-
+<!-- ============ BODY: QUESTION (lead) ============ -->
+<section class="body-section" style="border-top: 0;">
+  <div class="body-grid">
+    <div class="body-label">01 — The question</div>
+    <div class="body-content">
+      <h2>Did AI guidance actually change <span class="serif">what government buys?</span></h2>
+      <p>In 2024, the White House told federal agencies how to buy and govern AI in two OMB memos — M-24-10 and M-24-18 — that set rules for acquiring it responsibly. In 2025, a new administration scrapped them and replaced them with lighter-touch guidance. This project asks a blunt question: did any of it change what agencies actually buy?</p>
+      <p>Three things, in plain terms. <strong>One —</strong> when the rules took effect, did agencies buy more AI, and was that rise really about AI rather than a general bump in tech spending? <strong>Two —</strong> when the rules were repealed, did AI buying rise relative to the rest of federal tech? <strong>Three —</strong> does the government's new near-free AI access program, OneGov, show up in the spending data at all? The answers, in order: yes, no, and barely.</p>
     </div>
   </div>
 </section>
 
-<!-- ============ ABOUT ============ -->
-<section id="about" class="about">
+<!-- ============ HEADLINE STATS BAND ============ -->
+<section class="stats-band">
+  <div class="stats-band-inner">
+    <div class="stat-block green">
+      <div class="stat-label">AI contracts per month, after the rules</div>
+      <div class="stat-num">+5.9<span class="small"> /mo</span></div>
+      <div class="stat-meta">the monthly pace kept climbing once the rules took effect <span class="stat-delta">p = .0004</span></div>
+    </div>
+    <div class="stat-block">
+      <div class="stat-label">Total civilian AI contracting, 2021–25</div>
+      <div class="stat-num"><span class="small">$</span>2.9B</div>
+      <div class="stat-meta">across 4,616 contracts and 41 federal agencies</div>
+    </div>
+    <div class="stat-block muted">
+      <div class="stat-label">Won by Palantir alone</div>
+      <div class="stat-num"><span class="small">$</span>0.9B</div>
+      <div class="stat-meta">the top AI vendor by far — ahead of Anduril and Booz Allen</div>
+    </div>
+    <div class="stat-block warn">
+      <div class="stat-label">AI contracting after the 2025 repeal</div>
+      <div class="stat-num">−7<span class="small">%/mo</span></div>
+      <div class="stat-meta">the same rate as federal tech overall — no AI-specific drop <span class="stat-delta flat">p = .49</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MAIN CHART ============ -->
+<section class="chart-section">
   <div class="container">
-    <div class="section-header">
-      <h2 class="section-title">About</h2>
-    </div>
-
-    <div class="about-grid">
-      <div class="about-portrait">
-        <img src="images/suit_standing.JPG" alt="Grahm Gaydos" class="about-portrait-img" />
-      </div>
-      <div class="about-text">
-        <p>I grew up in Colorado and studied Political Science at <strong>Williams College</strong>, where I also competed in NCAA Cross Country and Track. I was drawn to policy work by a recurring observation: the distance between what governments say about technology and what they deliver is usually determined by the institutional infrastructure underneath—who translates regulation into implementation, who shapes requirements before decisions are formalised, and who holds the standing to see a recommendation through. I have spent the past several years working precisely where those gaps close: in <strong>Jefferson County</strong>, at the <strong>Westminster Foundation for Democracy</strong>, at the <strong>United Nations</strong>, and now at the <strong>Oxford Internet Institute</strong>.</p>
-        <p>I am equally at home in a policy review, a stakeholder negotiation, or a research seminar, and I translate readily among the three. I write quickly and precisely—<strong>I would rather deliver a five-page brief that moves a decision than a fifty-page report that goes unread</strong>—and I am candid about whether a recommendation will survive contact with the institution it must operate within, and prepared to redraft it until it will. Beyond my research, I compete on the <strong>USA Triathlon National Development Team</strong>, with the aim of qualifying for the 2028 Olympic Games.</p>
-        <p><strong>I am open to fellowships, research roles, and policy positions</strong>—particularly with teams working on the institutional conditions of AI deployment.</p>
-
-        <div class="about-cta-row">
-          <a class="btn btn-primary" href="#contact">Get in touch <span class="arrow">→</span></a>
-          <a class="btn btn-secondary" href="/files/GaydosResume2026Updated.pdf" target="_blank" rel="noopener">Download CV (PDF) <span class="arrow">↓</span></a>
+    <div class="chart-wrap">
+      <div class="chart-header">
+        <div class="chart-title">
+          <span class="prelim">PRELIMINARY</span>
+          Federal civilian AI contracts and dollars, by month · Oct 2021 – Jan 2026
+        </div>
+        <div class="chart-toggle">
+          <button class="on" data-view="both">Both</button>
+          <button data-view="actions">Actions</button>
+          <button data-view="spend">Spend</button>
         </div>
       </div>
-    </div>
-
-    <div class="photo-strip-wrap">
-      <div class="photo-strip">
-        <div class="photo-strip-item">
-          <img src="images/un_speech.jpeg" alt="Speaking at the UN" class="photo-strip-img" />
-          <div class="caption"><span>2023</span><span>NPT PrepCom</span></div>
+      <div class="chart-svg-wrap">
+        <svg class="chart-svg" id="chart" viewBox="0 0 1200 460" preserveAspectRatio="none"></svg>
+        <div class="chart-readout" id="readout">
+          <div class="chart-readout-row"><dt>Period</dt><dd id="ro-period">Hover the chart</dd></div>
+          <div class="chart-readout-row dot-actions"><dt>AI contract actions</dt><dd id="ro-actions">—</dd></div>
+          <div class="chart-readout-row dot-spend"><dt>AI obligations ($M)</dt><dd id="ro-spend">—</dd></div>
         </div>
-        <div class="photo-strip-item">
-          <img src="images/oxford.jpg" alt="Working at Oxford" class="photo-strip-img" />
-          <div class="caption"><span>2026</span><span>OII</span></div>
+      </div>
+      <div class="chart-legend">
+        <div class="chart-legend-item">
+          <div class="chart-legend-swatch" style="background: var(--accent-bright);"></div>
+          AI contract actions (count)
         </div>
-        <div class="photo-strip-item">
-          <img src="images/triathlon.jpg" alt="Triathlon race" class="photo-strip-img" />
-          <div class="caption"><span>2025</span><span>NDT</span></div>
+        <div class="chart-legend-item">
+          <div class="chart-legend-swatch" style="background: var(--warn);"></div>
+          AI obligations ($M)
         </div>
-        <div class="photo-strip-item">
-          <img src="images/graduation.jpeg" alt="Williams graduation" class="photo-strip-img" />
-          <div class="caption"><span>2025</span><span>Williams</span></div>
+        <div class="chart-legend-item">
+          <div class="chart-legend-swatch" style="background: var(--accent); height: 3px;"></div>
+          Rules take effect (solid)
         </div>
-        <div class="photo-strip-item">
-          <img src="images/thinking.JPG" alt="At work" class="photo-strip-img" />
-          <div class="caption"><span>2025</span><span>Oxford</span></div>
+        <div class="chart-legend-item">
+          <div class="chart-legend-swatch" style="background: var(--text-3); height: 1px; border-top: 1px dashed var(--text-3);"></div>
+          Other policy dates (dashed)
         </div>
-        <div class="photo-strip-item">
-          <img src="images/co_capital.jpeg" alt="At the Colorado Capitol" class="photo-strip-img" />
-          <div class="caption"><span>2022</span><span>Colorado Capitol</span></div>
-        </div>
+      </div>
+      <div class="chart-takeaway">
+        <div class="chart-takeaway-icon">FINDING</div>
+        <p>
+          <strong>The rules left a mark; the repeal didn't.</strong> Once the Biden-era requirements took effect, agencies signed AI contracts faster — gaining roughly six more a month, a result that holds across all three statistical models. And the increase looks specific to AI, not just part of the wider rise in government tech buying: AI's share of federal tech contracting climbed at the same moment (significant under the most conservative test). The memos' earlier announcement dates show weaker, less consistent effects. After the 2025 repeal, AI contracting fell about 7% a month — but federal tech contracting overall fell just as fast, so the drop was a <strong>government-wide pullback</strong>, not a reversal aimed at AI.
+        </p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ============ CONTACT ============ -->
-<section id="contact" class="contact">
-  <div class="contact-inner">
-    <h2 class="contact-title">Let's talk.</h2>
-    <p class="contact-meta">
-      Open to fellowships, research roles, and policy positions in 2026—particularly with teams working on AI procurement, governance, or the institutional conditions of frontier AI deployment. Reasonably fast on email.
-    </p>
-    <div class="contact-links">
-      <a class="contact-link" href="mailto:grahm.gaydos@oii.ox.ac.uk">
-        <dt>Email</dt><dd>grahm.gaydos@oii.ox.ac.uk</dd>
-      </a>
-      <a class="contact-link" href="https://www.linkedin.com/in/grahmtuohygaydos/" target="_blank" rel="noopener">
-        <dt>LinkedIn</dt><dd>/in/grahmtuohygaydos</dd>
-      </a>
-      <a class="contact-link" href="https://www.instagram.com/grahm.tuohygaydos/" target="_blank" rel="noopener">
-        <dt>Instagram</dt><dd>@grahm.tuohygaydos</dd>
-      </a>
-      <a class="contact-link" href="/files/GaydosResume2026Updated.pdf" target="_blank" rel="noopener">
-        <dt>CV</dt><dd>Download (PDF)</dd>
-      </a>
+<!-- ============ SUPPORTING VISUALS ============ -->
+<section class="supporting">
+  <div class="supporting-inner">
+    <div class="supporting-header">
+      <div class="supporting-eyebrow">02 — Where the money goes</div>
+      <h2 class="supporting-title">Who gets the money, <span class="serif">and who's buying.</span></h2>
+    </div>
+
+    <div class="supporting-grid">
+
+      <div class="panel">
+        <h3>Top 10 vendors by total AI dollars</h3>
+        <div class="panel-sub">The biggest civilian AI contracts go less to traditional IT integrators than to AI-focused firms. Palantir leads by far (about $0.9B across two business units), with Anduril close behind — ahead of integrators like Booz Allen and Accenture, and a set of high-volume resellers (Four Points, ThunderCat) that handle many smaller buys.</div>
+        <div class="recipients-list" id="recipientsList"></div>
+      </div>
+
+      <div class="panel">
+        <h3>Which agencies are buying (since the rules took effect)</h3>
+        <div class="panel-sub">By number of contracts. The General Services Administration is the single biggest buyer — but only about a fifth of contracts run through it. AI purchasing is spread widely across Health &amp; Human Services, Homeland Security, Treasury, NASA and dozens more.</div>
+        <div class="agency-bar-track" id="agencyBar"></div>
+        <div class="agency-legend" id="agencyLegend"></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ BODY: REPEAL ============ -->
+<section class="body-section">
+  <div class="body-grid">
+    <div class="body-label">03 — The repeal</div>
+    <div class="body-content">
+      <h2>Repeal without <span class="serif">reversal.</span></h2>
+      <p>In April 2025 the Trump administration rescinded the Biden memos and replaced them with lighter-touch guidance, trading risk-management requirements for faster adoption and streamlined buying. That second turning point can be tested the same way — and it comes back empty.</p>
+      <p>AI contracting fell after the repeal by about 7% a month, but that was not an AI reversal. Federal tech contracting as a whole fell at the same rate — and AI's share of those contracts didn't budge. The buying didn't move elsewhere, either: AI bought through resellers fell too, rather than rising to soak up the lost contracts.</p>
+      <p><strong>That asymmetry is the real finding.</strong> Rules that made AI easy to buy left a clear, AI-specific mark on the record; taking those rules away did not erase it. The most natural reading is that the rules built procurement capacity — agencies learned how to buy AI, set up the vendors and the paperwork — and that capacity didn't vanish when the rules did. Once AI became something agencies knew how to contract for, it stayed that way, whether or not the rules requiring it were still on the books. Regulation and deregulation aren't mirror images: it is easier to set federal buying in motion than to wind it back.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ BODY: ONEGOV / VISIBILITY ============ -->
+<section class="body-section">
+  <div class="body-grid">
+    <div class="body-label">04 — The blind spot</div>
+    <div class="body-content">
+      <h2>The biggest move <span class="serif">barely shows up.</span></h2>
+      <p>One big piece of the story never reaches the data at all. GSA's <strong>OneGov</strong> arrangement, live from spring 2025, negotiates near-free, government-wide access to commercial AI tools like ChatGPT, Claude and Gemini by treating Washington as a single customer. By GSA's own count it has reached around 3.4 million users and avoided roughly $1.15 billion in cost. Yet in the contract record it is almost invisible: it shows up only as a handful of <strong>$1</strong> subscription line items. The single largest expansion of federal AI access leaves almost no trace in the data meant to track federal buying.</p>
+      <p>It isn't the only blind spot. Thousands of contracts that agencies themselves flag as AI never say so in their text, so keyword searches miss them. And real AI work — from the likes of Palantir, Databricks and Clearview — often sits hidden as subcontracts beneath prime contracts that don't look like AI at all: at least $112 million of it.</p>
+      <p>The point is simple: what shows up in the contract record isn't the same as what the government actually buys. AI can enter an agency through a $1 subscription, a buried subcontract, or a contract description no keyword catches — and none of it looks like a big AI purchase. The record is a useful lens on federal AI, but a partial one.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ BODY: METHOD ============ -->
+<section class="body-section">
+  <div class="body-grid">
+    <div class="body-label">05 — Method</div>
+    <div class="body-content">
+      <h2>Interrupted time series, <span class="serif">civilian universe.</span></h2>
+      <p>Monthly aggregation of civilian AI-related contract actions, identified through a layered filter combining NAICS coding and technical-vocabulary keywords, with supplementary capture for named AI vendors and products and a cross-walk to the OMB AI use-case inventory. Defense and intelligence agencies are excluded throughout — the memoranda govern civilian agencies, and defense contracting is a structurally distinct procurement regime, so it is dropped rather than used as a placebo.</p>
+      <dl class="method-table">
+        <div class="method-table-row"><dt>Specification</dt><dd>ITS · level &amp; slope shifts at each intervention</dd></div>
+        <div class="method-table-row"><dt>Outcome 1</dt><dd>AI contract action count — primary</dd></div>
+        <div class="method-table-row"><dt>Outcome 2</dt><dd>AI obligation $M — secondary corroboration (counts ↔ dollars r = 0.86)</dd></div>
+        <div class="method-table-row"><dt>Treatments</dt><dd>M-24-10 (Mar 2024); M-24-18 (Sep 2024); 1 Dec 2024 compliance deadline (headline break); M-25-21/22 repeal (Apr 2025)</dd></div>
+        <div class="method-table-row"><dt>Inference</dt><dd>OLS, Newey-West HAC &amp; GLS AR(1) at equal standing; one-method-only significance reported as suggestive</dd></div>
+        <div class="method-table-row"><dt>Internal control</dt><dd>AI share of civilian IT (within-civilian normalisation)</dd></div>
+        <div class="method-table-row"><dt>Seasonality</dt><dd>Sept fiscal-year-end &amp; Oct fiscal-year-start indicators; full month fixed effects as robustness</dd></div>
+      </dl>
+      <p style="margin-top: 16px;">The chart above visualises the descriptive series with intervention markers; the thesis develops the formal estimation, the announcement-versus-enforcement timing tests, and the measurement-visibility analysis in detail.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ BODY: IMPLICATION ============ -->
+<section class="body-section">
+  <div class="body-grid">
+    <div class="body-label">06 — Implication</div>
+    <div class="body-content">
+      <h2>What this means for <span class="serif">how we read AI policy.</span></h2>
+      <p>The pattern is telling. Once the rules took effect, agencies bought AI more <em>often</em> without spending much more per contract — which suggests the memos mainly lowered the paperwork cost of buying AI rather than unlocking bigger purchases. Agencies started experimenting at a higher tempo, not betting larger budgets on flagship systems.</p>
+      <p>That matters for anyone trying to read federal AI activity from the outside. <strong>A jump in AI contract counts after a policy memo is not, by itself, evidence of a spending surge.</strong> It is just as plausibly evidence of permission — agencies that could already run AI procurements finding the process less of a slog once the rules arrived.</p>
+      <p>The repeal makes the same point in reverse. Taking the rules away did not produce an equal and opposite effect — the rules left a deeper institutional mark than their removal did. And OneGov is the reminder that contract data has limits as a window onto AI policy: the biggest access push of all moves enormous adoption while barely showing up in the record.</p>
+      <p>It also points to where to look next. Where the number of contracts rises faster than the dollars, the interesting question is <span class="serif">what kind of AI</span> government is actually buying — cheap per-seat licences for off-the-shelf tools like ChatGPT or Copilot, rather than big custom builds. That's the thread the thesis picks up from here.</p>
     </div>
   </div>
 </section>
 
 <footer>
-  © 2026 Grahm Gaydos
+  <div>© 2026 Grahm Gaydos · Thesis page</div>
+  <div>Charts use real USAspending.gov data (Oct 2021 – Jan 2026); preliminary analysis subject to revision before submission</div>
+  <div><a href="index.html" style="color: var(--text-2); border-bottom: 1px solid var(--border);">← Home</a></div>
 </footer>
 
 <script>
-// ============ Work item expand ============
-document.querySelectorAll('.work-item').forEach(item => {
-  item.addEventListener('click', (e) => {
-    if (e.target.tagName === 'A') return;
-    const wasOpen = item.classList.contains('open');
-    document.querySelectorAll('.work-item').forEach(i => i.classList.remove('open'));
-    if (!wasOpen) item.classList.add('open');
-  });
-});
+// =====================================================================
+// REAL DATA — civilian AI contract actions & obligations from USAspending.gov
+// 52 monthly observations, Oct 2021 – Jan 2026. The clean ITS window is the
+// first 48 months (to Sep 2025); the final four months extend the series for
+// the M-25-21/22 repeal test only.
+// =====================================================================
+const DATA = {
+  monthly: [
+    ['2021-10','Oct 21',70,0.25],['2021-11','Nov 21',83,26.13],['2021-12','Dec 21',59,-2.65],
+    ['2022-01','Jan 22',59,39.93],['2022-02','Feb 22',59,21.11],['2022-03','Mar 22',72,21.79],
+    ['2022-04','Apr 22',72,25.28],['2022-05','May 22',74,55.82],['2022-06','Jun 22',86,106.38],
+    ['2022-07','Jul 22',92,28.80],['2022-08','Aug 22',139,94.65],['2022-09','Sep 22',146,192.81],
+    ['2022-10','Oct 22',39,19.76],['2022-11','Nov 22',46,15.21],['2022-12','Dec 22',88,29.40],
+    ['2023-01','Jan 23',78,-147.59],['2023-02','Feb 23',86,17.89],['2023-03','Mar 23',84,47.05],
+    ['2023-04','Apr 23',66,50.86],['2023-05','May 23',94,25.85],['2023-06','Jun 23',91,137.99],
+    ['2023-07','Jul 23',77,66.93],['2023-08','Aug 23',117,55.59],['2023-09','Sep 23',177,267.55],
+    ['2023-10','Oct 23',51,11.62],['2023-11','Nov 23',75,23.36],['2023-12','Dec 23',54,17.06],
+    ['2024-01','Jan 24',77,21.69],['2024-02','Feb 24',79,24.74],['2024-03','Mar 24',107,33.09],
+    ['2024-04','Apr 24',89,27.18],['2024-05','May 24',91,48.29],['2024-06','Jun 24',128,111.76],
+    ['2024-07','Jul 24',91,67.42],['2024-08','Aug 24',131,74.97],['2024-09','Sep 24',218,310.42],
+    ['2024-10','Oct 24',70,7.86],['2024-11','Nov 24',66,1.58],['2024-12','Dec 24',76,25.42],
+    ['2025-01','Jan 25',97,50.31],['2025-02','Feb 25',90,27.28],['2025-03','Mar 25',120,14.81],
+    ['2025-04','Apr 25',122,46.58],['2025-05','May 25',113,76.19],['2025-06','Jun 25',108,97.13],
+    ['2025-07','Jul 25',117,23.42],['2025-08','Aug 25',114,130.37],['2025-09','Sep 25',278,429.71],
+    ['2025-10','Oct 25',31,3.19],['2025-11','Nov 25',55,26.16],['2025-12','Dec 25',76,376.90],
+    ['2026-01','Jan 26',96,47.57]
+  ],
+  // marker indices into monthly[] (Oct 2021 = 0)
+  markers: [
+    { i: 29, label: 'Memo M-24-10 · Mar 24', kind: 'dash',  yOff: 14 },
+    { i: 35, label: 'Memo M-24-18 · Sep 24', kind: 'dash',  yOff: 32 },
+    { i: 38, label: 'Rules take effect · Dec 24', kind: 'solid', yOff: 14 },
+    { i: 42, label: 'Rules repealed · Apr 25', kind: 'warn',  yOff: 32 }
+  ],
+  cleanEnd: 47,   // last index of the clean 48-month window (Sep 2025)
+  recipients: [
+    {name:'Palantir Technologies',        obligation_m:803.5, actions:399},
+    {name:'Booz Allen Hamilton',          obligation_m:417.4, actions:78},
+    {name:'Anduril Industries',           obligation_m:398.8, actions:47},
+    {name:'Palantir USG',                 obligation_m:109.0, actions:40},
+    {name:'Tuknik Government Services',   obligation_m:82.3,  actions:33},
+    {name:'Accenture Federal Services',   obligation_m:79.1,  actions:36},
+    {name:'Four Points Technology',       obligation_m:71.3,  actions:167},
+    {name:'GE Medical Systems IT',        obligation_m:64.0,  actions:6},
+    {name:'ThunderCat Technology',        obligation_m:48.2,  actions:89},
+    {name:'MITRE Corporation',            obligation_m:44.1,  actions:63}
+  ],
+  agencies: [
+    {name:'General Services Administration', pct:22.5, count:278, color:'#2D55FF'},
+    {name:'Health & Human Services',         pct:11.0, count:136, color:'#3D6BFF'},
+    {name:'Homeland Security',               pct:9.1,  count:112, color:'#5B7FFF'},
+    {name:'Treasury',                        pct:8.8,  count:109, color:'#7896FF'},
+    {name:'NASA',                            pct:8.3,  count:103, color:'#8FA8FF'},
+    {name:'Commerce',                        pct:6.5,  count:80,  color:'#A8B6FF'},
+    {name:'Other (35 agencies)',             pct:33.8, count:417, color:'#3A3A40'}
+  ]
+};
 
-// ============ Work filter (manual) ============
-const filterButtons = document.querySelectorAll('#workFilter button');
-const filterPill = document.getElementById('filterPill');
-const filterWrap = document.getElementById('workFilter');
+// =====================================================================
+// MAIN CHART
+// =====================================================================
+const data = DATA.monthly.map(r => ({ ym: r[0], label: r[1], actions: r[2], spend: r[3] }));
 
-function applyFilter(filter) {
-  filterButtons.forEach(b => {
-    b.classList.toggle('active', b.dataset.filter === filter);
-  });
-  const activeBtn = Array.from(filterButtons).find(b => b.dataset.filter === filter);
-  if (activeBtn) {
-    const wrapRect = filterWrap.getBoundingClientRect();
-    const btnRect = activeBtn.getBoundingClientRect();
-    filterPill.style.left = (btnRect.left - wrapRect.left) + 'px';
-    filterPill.style.width = btnRect.width + 'px';
+const svg = document.getElementById('chart');
+const W = 1200, H = 460, P = { l: 56, r: 24, t: 32, b: 44 };
+const innerW = W - P.l - P.r, innerH = H - P.t - P.b;
+const xMax = data.length - 1;
+
+const actionsMin = 0, actionsMax = Math.max(...data.map(d => d.actions)) * 1.1;
+const spendMin = Math.min(0, ...data.map(d => d.spend)), spendMax = Math.max(...data.map(d => d.spend)) * 1.1;
+const x = i => P.l + (i / xMax) * innerW;
+const yA = v => P.t + innerH - ((v - actionsMin) / (actionsMax - actionsMin)) * innerH;
+const yS = v => P.t + innerH - ((v - spendMin)   / (spendMax   - spendMin))   * innerH;
+
+let view = 'both';
+
+function buildPath(series, scale) {
+  return data.map((d, i) => `${i === 0 ? 'M' : 'L'} ${x(i)} ${scale(d[series])}`).join(' ');
+}
+function buildArea(series, scale) {
+  const top = data.map((d, i) => `${i === 0 ? 'M' : 'L'} ${x(i)} ${scale(d[series])}`).join(' ');
+  return `${top} L ${x(xMax)} ${P.t + innerH} L ${x(0)} ${P.t + innerH} Z`;
+}
+
+function render() {
+  let html = '';
+  html += `<rect x="0" y="0" width="${W}" height="${H}" fill="transparent"/>`;
+
+  // Y-axis grid (left, indexed to actions)
+  for (let i = 0; i <= 4; i++) {
+    const yv = actionsMin + ((actionsMax - actionsMin) * i / 4);
+    const yp = yA(yv);
+    html += `<line x1="${P.l}" x2="${W - P.r}" y1="${yp}" y2="${yp}" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>`;
+    html += `<text x="${P.l - 8}" y="${yp + 4}" text-anchor="end" font-family="Geist Mono" font-size="10" fill="#6E6E76">${Math.round(yv)}</text>`;
   }
-  document.querySelectorAll('.work-item').forEach(item => {
-    if (filter === 'all' || item.dataset.cat === filter) {
-      item.classList.remove('hidden');
+
+  // X-axis labels
+  const tickEvery = 9;
+  for (let i = 0; i < data.length; i += tickEvery) {
+    html += `<text x="${x(i)}" y="${H - 14}" text-anchor="middle" font-family="Geist Mono" font-size="10" fill="#6E6E76">${data[i].label}</text>`;
+  }
+
+  // Regime shading: enforcement window (Dec 2024 → repeal) and post-repeal
+  const enfStart = DATA.markers[2].i, repIdx = DATA.markers[3].i;
+  html += `<rect x="${x(enfStart)}" y="${P.t}" width="${x(repIdx) - x(enfStart)}" height="${innerH}" fill="rgba(45,85,255,0.07)"/>`;
+  html += `<rect x="${x(repIdx)}" y="${P.t}" width="${(P.l + innerW) - x(repIdx)}" height="${innerH}" fill="rgba(245,166,35,0.06)"/>`;
+
+  // Intervention markers
+  DATA.markers.forEach(m => {
+    const xp = x(m.i);
+    if (m.kind === 'solid') {
+      html += `<line x1="${xp}" x2="${xp}" y1="${P.t}" y2="${P.t + innerH}" stroke="#3D6BFF" stroke-width="1.5" opacity="0.9"/>`;
+      html += `<text x="${xp + 6}" y="${P.t + m.yOff}" font-family="Geist Mono" font-size="10" fill="#3D6BFF">${m.label}</text>`;
+    } else if (m.kind === 'warn') {
+      html += `<line x1="${xp}" x2="${xp}" y1="${P.t}" y2="${P.t + innerH}" stroke="#F5A623" stroke-width="1" stroke-dasharray="4 4" opacity="0.7"/>`;
+      html += `<text x="${xp + 6}" y="${P.t + m.yOff}" font-family="Geist Mono" font-size="10" fill="#F5A623">${m.label}</text>`;
     } else {
-      item.classList.add('hidden');
-      item.classList.remove('open');
+      html += `<line x1="${xp}" x2="${xp}" y1="${P.t}" y2="${P.t + innerH}" stroke="#A8A8AD" stroke-width="1" stroke-dasharray="4 4" opacity="0.5"/>`;
+      html += `<text x="${xp + 6}" y="${P.t + m.yOff}" font-family="Geist Mono" font-size="10" fill="#A8A8AD">${m.label}</text>`;
     }
+  });
+
+  // Series
+  if (view === 'both' || view === 'actions') {
+    html += `<path d="${buildArea('actions', yA)}" fill="rgba(61,107,255,0.08)"/>`;
+    html += `<path d="${buildPath('actions', yA)}" stroke="#3D6BFF" stroke-width="2" fill="none" stroke-linejoin="round" stroke-linecap="round"/>`;
+  }
+  if (view === 'both' || view === 'spend') {
+    html += `<path d="${buildArea('spend', yS)}" fill="rgba(245,166,35,0.06)"/>`;
+    html += `<path d="${buildPath('spend', yS)}" stroke="#F5A623" stroke-width="2" fill="none" stroke-linejoin="round" stroke-linecap="round"/>`;
+  }
+
+  // Hover hit areas
+  data.forEach((d, i) => {
+    const xp = x(i);
+    html += `<rect class="hit" data-i="${i}" x="${xp - innerW / xMax / 2}" y="${P.t}" width="${innerW / xMax}" height="${innerH}" fill="transparent"/>`;
+  });
+
+  // Hover indicators (hidden by default)
+  html += `<g id="hover-marker" style="display: none;">
+    <line id="hover-line" x1="0" x2="0" y1="${P.t}" y2="${P.t + innerH}" stroke="#F5F5F7" stroke-width="1" opacity="0.3"/>
+    <circle id="hover-dot-actions" r="5" fill="#3D6BFF" stroke="#0F0F11" stroke-width="2"/>
+    <circle id="hover-dot-spend" r="5" fill="#F5A623" stroke="#0F0F11" stroke-width="2"/>
+  </g>`;
+
+  svg.innerHTML = html;
+
+  const marker = document.getElementById('hover-marker');
+  const hoverLine = document.getElementById('hover-line');
+  const hoverDotA = document.getElementById('hover-dot-actions');
+  const hoverDotS = document.getElementById('hover-dot-spend');
+
+  svg.querySelectorAll('.hit').forEach(rect => {
+    rect.addEventListener('mouseenter', () => {
+      const i = parseInt(rect.getAttribute('data-i'));
+      const d = data[i];
+      const xp = x(i);
+      hoverLine.setAttribute('x1', xp);
+      hoverLine.setAttribute('x2', xp);
+      hoverDotA.setAttribute('cx', xp);
+      hoverDotA.setAttribute('cy', yA(d.actions));
+      hoverDotS.setAttribute('cx', xp);
+      hoverDotS.setAttribute('cy', yS(d.spend));
+      hoverDotA.style.display = (view === 'spend') ? 'none' : '';
+      hoverDotS.style.display = (view === 'actions') ? 'none' : '';
+      marker.style.display = '';
+      document.getElementById('ro-period').textContent = d.label;
+      document.getElementById('ro-actions').textContent = d.actions;
+      document.getElementById('ro-spend').textContent = '$' + d.spend.toFixed(1) + 'M';
+    });
+  });
+  svg.addEventListener('mouseleave', () => {
+    marker.style.display = 'none';
+    document.getElementById('ro-period').textContent = 'Hover the chart';
+    document.getElementById('ro-actions').textContent = '—';
+    document.getElementById('ro-spend').textContent = '—';
   });
 }
 
-filterButtons.forEach(btn => {
-  btn.addEventListener('click', () => applyFilter(btn.dataset.filter));
+render();
+
+document.querySelectorAll('.chart-toggle button').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.chart-toggle button').forEach(b => b.classList.remove('on'));
+    btn.classList.add('on');
+    view = btn.getAttribute('data-view');
+    render();
+  });
 });
 
-window.addEventListener('load', () => applyFilter('all'));
-window.addEventListener('resize', () => {
-  const active = Array.from(filterButtons).find(b => b.classList.contains('active'));
-  if (active) applyFilter(active.dataset.filter);
-});
+// =====================================================================
+// TOP RECIPIENTS BAR LIST
+// =====================================================================
+(function renderRecipients() {
+  const list = document.getElementById('recipientsList');
+  const max = Math.max(...DATA.recipients.map(r => r.obligation_m));
+  list.innerHTML = DATA.recipients.map(r => `
+    <div class="recipient-row">
+      <div class="recipient-row-top">
+        <span class="recipient-name">${r.name}</span>
+        <span class="recipient-amount">$${r.obligation_m.toFixed(1)}M</span>
+      </div>
+      <div class="recipient-bar-track">
+        <div class="recipient-bar-fill" style="width: 0%;" data-target="${(r.obligation_m / max * 100).toFixed(1)}"></div>
+      </div>
+      <div class="recipient-meta">${r.actions} contract action${r.actions !== 1 ? 's' : ''}</div>
+    </div>
+  `).join('');
 
-// ============ Featured marquee: duplicate content for a seamless loop ============
-(function () {
-  const track = document.getElementById('featuredTrack');
-  const marquee = track.parentElement;
-  const group = track.querySelector('.featured-group');
-
-  function buildLoop() {
-    // Reset to a single group
-    track.querySelectorAll('.featured-group').forEach((g, i) => { if (i > 0) g.remove(); });
-    const groupWidth = group.getBoundingClientRect().width;
-    const containerWidth = marquee.getBoundingClientRect().width;
-    if (!groupWidth) return;
-    // Each half must be at least as wide as the container; total = 2 halves
-    const perHalf = Math.max(1, Math.ceil(containerWidth / groupWidth));
-    const total = perHalf * 2;
-    for (let i = 1; i < total; i++) {
-      track.appendChild(group.cloneNode(true));
-    }
-  }
-  window.addEventListener('load', buildLoop);
-  let resizeTimer;
-  window.addEventListener('resize', () => {
-    clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(buildLoop, 200);
+  requestAnimationFrame(() => {
+    setTimeout(() => {
+      list.querySelectorAll('.recipient-bar-fill').forEach(el => {
+        el.style.width = el.getAttribute('data-target') + '%';
+      });
+    }, 100);
   });
 })();
 
-// ============ Featured links → scroll to work item, expand, flash (delegated) ============
-document.getElementById('featuredTrack').addEventListener('click', (e) => {
-  const link = e.target.closest('.featured-link-inline');
-  if (!link) return;
-  e.preventDefault();
-  const targetId = link.getAttribute('href').substring(1);
-  const targetEl = document.getElementById(targetId);
-  if (!targetEl) return;
-
-  applyFilter('all');
-
-  const yOffset = -24;
-  const yPos = targetEl.getBoundingClientRect().top + window.pageYOffset + yOffset;
-  window.scrollTo({ top: yPos, behavior: 'smooth' });
-
-  setTimeout(() => {
-    document.querySelectorAll('.work-item').forEach(i => i.classList.remove('open', 'flash'));
-    targetEl.classList.add('open', 'flash');
-    setTimeout(() => targetEl.classList.remove('flash'), 1200);
-  }, 600);
-});
+// =====================================================================
+// AGENCY SHARE STACKED BAR
+// =====================================================================
+(function renderAgencies() {
+  const bar = document.getElementById('agencyBar');
+  const legend = document.getElementById('agencyLegend');
+  bar.innerHTML = DATA.agencies.map(a =>
+    `<div class="agency-bar-segment" style="width: ${a.pct}%; background: ${a.color};" title="${a.name}: ${a.pct}%"></div>`
+  ).join('');
+  legend.innerHTML = DATA.agencies.map(a => `
+    <div class="agency-legend-row">
+      <div class="agency-swatch" style="background: ${a.color};"></div>
+      <span class="agency-name">${a.name}</span>
+      <span class="agency-pct">${a.pct}%</span>
+      <span class="agency-count">${a.count.toLocaleString()} actions</span>
+    </div>
+  `).join('');
+})();
 </script>
 
 </body>
