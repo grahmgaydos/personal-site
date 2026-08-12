@@ -6,24 +6,22 @@
 <title>Grahm Gaydos — AI policy, procurement, digital state capacity</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #0A0A0B;
-    --bg-2: #0F0F11;
-    --bg-3: #16161A;
-    --border: rgba(255, 255, 255, 0.08);
-    --border-2: rgba(255, 255, 255, 0.14);
-    --text: #F5F5F7;
-    --text-2: #A8A8AD;
-    --text-3: #6E6E76;
-    --accent: #2D55FF;
-    --accent-bright: #3D6BFF;
-    --accent-dim: #1E3FFF;
-    --warn: #F5A623;
+    --bg: #FFFFFF;
+    --bg-2: #F7F7F5;
+    --bg-3: #EFEFED;
+    --border: rgba(0, 0, 0, 0.09);
+    --border-2: rgba(0, 0, 0, 0.16);
+    --text: #1A1A1C;
+    --text-2: #45454C;
+    --text-3: #85858D;
+    --accent: #1B3358;
+    --accent-bright: #27476F;
+    --accent-tint: rgba(27, 51, 88, 0.07);
+    --accent-line: rgba(27, 51, 88, 0.3);
     --sans: "Geist", -apple-system, BlinkMacSystemFont, sans-serif;
-    --serif: "Instrument Serif", Georgia, serif;
-    --mono: "Geist Mono", ui-monospace, monospace;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
@@ -36,118 +34,91 @@
     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
   }
-  ::selection { background: var(--accent); color: var(--text); }
+  ::selection { background: var(--accent); color: #fff; }
   a { color: inherit; text-decoration: none; }
   button { font: inherit; background: none; border: 0; color: inherit; cursor: pointer; }
 
-  /* ============ STATUS BAR ============ */
-  .status-bar {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 200;
-    background: rgba(10, 10, 11, 0.9);
-    backdrop-filter: blur(12px);
+  /* ============ FEATURED (top banner) ============ */
+  .featured {
+    background: var(--bg-2);
+    padding: 20px 32px;
     border-bottom: 1px solid var(--border);
-    font-family: var(--mono);
-    font-size: 11px;
-    color: var(--text-3);
-    height: 28px;
-    display: grid;
-    grid-template-columns: 1fr auto 1fr;
-    align-items: center;
-    padding: 0 24px;
   }
-  .status-left, .status-right { display: flex; gap: 20px; align-items: center; }
-  .status-right { justify-content: flex-end; }
-  .status-dot {
-    display: inline-block;
-    width: 6px; height: 6px;
-    background: var(--accent-bright);
-    border-radius: 50%;
-    margin-right: 6px;
-    box-shadow: 0 0 8px var(--accent-bright);
-    animation: pulse 2s ease-in-out infinite;
-  }
-  @keyframes pulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.4; }
-  }
-  .status-divider { color: var(--text-3); opacity: 0.4; }
-
-  /* ============ NAV ============ */
-  .nav {
-    position: fixed;
-    top: 28px; left: 0; right: 0;
-    z-index: 100;
-    padding: 16px 32px;
-    display: grid;
-    grid-template-columns: auto 1fr auto;
-    align-items: center;
-    gap: 32px;
-    background: rgba(10, 10, 11, 0.7);
-    backdrop-filter: blur(16px);
-    border-bottom: 1px solid transparent;
-    transition: border-color 0.3s ease, background 0.3s ease;
-  }
-  .nav.scrolled {
-    border-bottom-color: var(--border);
-    background: rgba(10, 10, 11, 0.92);
-  }
-  .nav-mark {
+  .featured-inner {
     display: flex;
-    align-items: center;
-    gap: 10px;
-    font-family: var(--mono);
-    font-size: 13px;
-    font-weight: 500;
-    letter-spacing: -0.01em;
+    align-items: baseline;
+    gap: 24px;
   }
-  .nav-mark-icon {
-    width: 22px; height: 22px;
-    border-radius: 6px;
-    background: linear-gradient(135deg, var(--accent), var(--accent-dim));
-    display: grid;
-    place-items: center;
-    color: var(--text);
-    font-weight: 700;
-    font-size: 11px;
-  }
-  .nav-links {
-    display: flex;
-    gap: 4px;
-    justify-content: center;
-    font-family: var(--sans);
-    font-size: 13px;
-  }
-  .nav-links a {
-    padding: 6px 14px;
-    border-radius: 8px;
-    color: var(--text-2);
-    transition: all 0.2s ease;
-  }
-  .nav-links a:hover { color: var(--text); background: var(--bg-3); }
-  .nav-cta {
-    font-family: var(--mono);
+  .featured-label {
     font-size: 12px;
-    color: var(--text);
-    background: var(--accent);
-    padding: 8px 14px;
-    border-radius: 8px;
-    transition: all 0.2s ease;
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
+    font-weight: 600;
+    color: var(--text-3);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    flex-shrink: 0;
   }
-  .nav-cta:hover { background: var(--accent-bright); transform: translateY(-1px); box-shadow: 0 8px 24px -8px var(--accent); }
+  .featured-marquee {
+    flex: 1;
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 4%, #000 96%, transparent 100%);
+    mask-image: linear-gradient(90deg, transparent 0%, #000 4%, #000 96%, transparent 100%);
+  }
+  .featured-track {
+    display: flex;
+    align-items: baseline;
+    width: max-content;
+    font-size: 15px;
+    letter-spacing: -0.01em;
+    line-height: 1.4;
+    animation: featuredScroll 40s linear infinite;
+    will-change: transform;
+  }
+  .featured-marquee:hover .featured-track { animation-play-state: paused; }
+  .featured-group {
+    display: inline-flex;
+    align-items: baseline;
+    white-space: nowrap;
+  }
+  @keyframes featuredScroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .featured-track { animation: none; }
+  }
+  .featured-link-inline {
+    color: var(--text);
+    font-weight: 500;
+    display: inline-flex;
+    align-items: baseline;
+    gap: 6px;
+    padding: 4px 0;
+    border-bottom: 1px solid transparent;
+    transition: color 0.2s ease, border-bottom-color 0.2s ease;
+  }
+  .featured-link-inline:hover {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
+  }
+  .featured-link-inline .meta {
+    font-size: 12px;
+    color: var(--text-3);
+    font-weight: 400;
+  }
+  .featured-link-inline:hover .meta { color: var(--accent); }
+  .featured-divider {
+    color: var(--text-3);
+    margin: 0 14px;
+    user-select: none;
+  }
 
-  /* ============ HERO (editorial) ============ */
+  /* ============ HERO ============ */
   .hero {
     position: relative;
-    min-height: 100vh;
-    padding-top: 80px;
+    min-height: calc(100vh - 60px);
     overflow: hidden;
   }
- .hero-photo {
+  .hero-photo {
     position: absolute;
     top: 0;
     right: 0;
@@ -169,78 +140,37 @@
     position: absolute;
     inset: 0;
     background:
-      linear-gradient(90deg, var(--bg) 0%, transparent 25%, transparent 100%),
-      linear-gradient(180deg, transparent 0%, transparent 60%, rgba(10,10,11,0.85) 100%),
-      repeating-linear-gradient(45deg, transparent, transparent 30px, rgba(255,255,255,0.015) 30px, rgba(255,255,255,0.015) 31px);
+      linear-gradient(90deg, var(--bg) 0%, rgba(255,255,255,0.95) 20%, rgba(255,255,255,0.55) 35%, transparent 50%),
+      linear-gradient(180deg, transparent 0%, transparent 60%, rgba(255,255,255,0.9) 100%);
   }
-  .hero-photo-meta {
-    position: absolute;
-    top: 100px;
-    right: 32px;
-    z-index: 4;
-    font-family: var(--mono);
-    font-size: 10px;
-    color: var(--text-2);
-    text-align: right;
-    letter-spacing: 0.04em;
-    line-height: 1.7;
-  }
-  .hero-photo-meta strong { color: var(--text); display: block; font-weight: 500; }
-
   .hero-content {
     position: relative;
     z-index: 5;
     max-width: 1280px;
     margin: 0 auto;
     padding: 80px 32px 60px;
-    min-height: calc(100vh - 80px);
+    min-height: calc(100vh - 60px);
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
   }
-  .hero-eyebrow {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    font-family: var(--mono);
-    font-size: 11px;
-    color: var(--text-2);
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    margin-bottom: 24px;
-  }
-  .hero-eyebrow-dot {
-    width: 6px; height: 6px;
-    background: var(--accent-bright);
-    border-radius: 50%;
-    box-shadow: 0 0 8px var(--accent-bright);
-  }
   .hero-title {
-    font-family: var(--sans);
-    font-weight: 500;
-    font-size: clamp(46px, 7.2vw, 108px);
-    line-height: 0.95;
-    letter-spacing: -0.04em;
+    font-weight: 600;
+    font-size: clamp(42px, 6.5vw, 92px);
+    line-height: 1.0;
+    letter-spacing: -0.035em;
     margin-bottom: 32px;
     max-width: 1100px;
   }
-  .hero-title .serif {
-    font-family: var(--serif);
-    font-weight: 400;
-    font-style: italic;
-    letter-spacing: -0.02em;
-  }
-  .hero-title .accent {
-    color: var(--accent-bright);
-  }
+  .hero-title .accent { color: var(--accent); }
   .hero-bio {
-    max-width: 640px;
+    max-width: 500px;
     font-size: 17px;
     line-height: 1.55;
     color: var(--text-2);
     margin-bottom: 36px;
   }
-  .hero-bio strong { color: var(--text); font-weight: 500; }
+  .hero-bio strong { color: var(--text); font-weight: 600; }
 
   .hero-cta-row {
     display: flex;
@@ -254,7 +184,6 @@
     gap: 8px;
     padding: 13px 22px;
     border-radius: 10px;
-    font-family: var(--sans);
     font-size: 14px;
     font-weight: 500;
     transition: all 0.2s ease;
@@ -262,22 +191,19 @@
   }
   .btn-primary {
     background: var(--accent);
-    color: var(--text);
+    color: #fff;
   }
   .btn-primary:hover {
     background: var(--accent-bright);
     transform: translateY(-2px);
-    box-shadow: 0 12px 32px -8px var(--accent);
   }
   .btn-secondary {
-    background: rgba(255,255,255,0.04);
+    background: var(--bg);
     color: var(--text);
-    border-color: var(--border);
-    backdrop-filter: blur(8px);
+    border-color: var(--border-2);
   }
   .btn-secondary:hover {
-    background: var(--bg-3);
-    border-color: var(--border-2);
+    background: var(--bg-2);
     transform: translateY(-2px);
   }
   .btn .arrow { transition: transform 0.2s ease; }
@@ -292,64 +218,18 @@
     max-width: 880px;
   }
   .hero-stat-num {
-    font-family: var(--serif);
-    font-style: italic;
-    font-size: 30px;
-    font-weight: 400;
+    font-size: 28px;
+    font-weight: 600;
     color: var(--text);
     letter-spacing: -0.02em;
     line-height: 1;
     margin-bottom: 6px;
   }
   .hero-stat-label {
-    font-family: var(--mono);
-    font-size: 10px;
+    font-size: 11px;
     color: var(--text-3);
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    line-height: 1.4;
-  }
-
-  /* ============ MARQUEE ============ */
-  .marquee {
-    background: var(--accent);
-    color: var(--text);
-    padding: 22px 0;
-    overflow: hidden;
-    border-top: 1px solid var(--accent-dim);
-    border-bottom: 1px solid var(--accent-dim);
-    position: relative;
-  }
-  .marquee-track {
-    display: flex;
-    width: fit-content;
-    gap: 64px;
-    animation: scrollLeft 50s linear infinite;
-    will-change: transform;
-  }
-  @keyframes scrollLeft {
-    from { transform: translateX(0); }
-    to { transform: translateX(-50%); }
-  }
-  .marquee-item {
-    display: flex;
-    align-items: center;
-    gap: 24px;
-    font-family: var(--mono);
-    font-size: 14px;
     letter-spacing: 0.02em;
-    color: var(--text);
-    white-space: nowrap;
-  }
-  .marquee-item .serif {
-    font-family: var(--serif);
-    font-style: italic;
-    font-size: 18px;
-  }
-  .marquee-item::after {
-    content: "✦";
-    color: rgba(255,255,255,0.4);
-    margin-left: 24px;
+    line-height: 1.4;
   }
 
   /* ============ REVEAL ============ */
@@ -358,11 +238,14 @@
   .r2 { animation-delay: 0.18s; }
   .r3 { animation-delay: 0.32s; }
   .r4 { animation-delay: 0.46s; }
-  .r5 { animation-delay: 0.6s; }
   @keyframes reveal { to { opacity: 1; transform: translateY(0); } }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { animation: none; opacity: 1; transform: none; }
+    html { scroll-behavior: auto; }
+  }
 
   /* ============ SECTION ============ */
-  section { padding: 120px 32px; position: relative; }
+  section { padding: 110px 32px; position: relative; }
   .container { max-width: 1280px; margin: 0 auto; }
   .section-header {
     display: flex;
@@ -372,43 +255,17 @@
     gap: 32px;
     flex-wrap: wrap;
   }
-  .section-eyebrow {
-    font-family: var(--mono);
-    font-size: 11px;
-    color: var(--text-3);
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    margin-bottom: 14px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-  .section-eyebrow::before {
-    content: "";
-    width: 24px;
-    height: 1px;
-    background: var(--accent-bright);
-  }
   .section-title {
-    font-family: var(--sans);
-    font-weight: 500;
-    font-size: clamp(32px, 4vw, 56px);
+    font-weight: 600;
+    font-size: clamp(30px, 3.6vw, 48px);
     letter-spacing: -0.03em;
     line-height: 1.05;
     max-width: 800px;
   }
-  .section-title .serif {
-    font-family: var(--serif);
-    font-weight: 400;
-    font-style: italic;
-    letter-spacing: -0.02em;
-  }
-  .section-title .accent { color: var(--accent-bright); }
   .section-action {
-    font-family: var(--mono);
-    font-size: 12px;
+    font-size: 13px;
     color: var(--text-2);
-    border: 1px solid var(--border);
+    border: 1px solid var(--border-2);
     padding: 10px 16px;
     border-radius: 100px;
     transition: all 0.2s ease;
@@ -419,94 +276,14 @@
   .section-action:hover {
     color: var(--text);
     border-color: var(--accent);
-    background: rgba(45,85,255,0.08);
+    background: var(--accent-tint);
   }
 
-  /* ============ FEATURED RESEARCH (slim two-line, inline) ============ */
-  .featured {
-    background: var(--bg);
-    padding: 36px 32px 28px;
-    border-bottom: 1px solid var(--border);
-  }
-  .featured-inner {
-    max-width: 1280px;
-    margin: 0 auto;
-  }
-  .featured-label-line {
-    font-family: var(--mono);
-    font-size: 11px;
-    color: var(--text-3);
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    margin-bottom: 14px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-  .featured-label-line::before {
-    content: "";
-    width: 24px;
-    height: 1px;
-    background: var(--accent-bright);
-  }
-  .featured-label-line strong {
-    color: var(--text-2);
-    font-weight: 400;
-    text-transform: none;
-    letter-spacing: 0.02em;
-    font-size: 12px;
-  }
-  .featured-line {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: baseline;
-    justify-content: center;
-    gap: 0;
-    font-family: var(--sans);
-    font-size: 17px;
-    letter-spacing: -0.012em;
-    line-height: 1.4;
-  }
-  .featured-link-inline {
-    color: var(--text);
-    font-weight: 500;
-    transition: color 0.2s ease;
-    display: inline-flex;
-    align-items: baseline;
-    gap: 6px;
-    padding: 4px 0;
-    border-bottom: 1px solid transparent;
-    transition: color 0.2s ease, border-bottom-color 0.2s ease;
-  }
-  .featured-link-inline:hover {
-    color: var(--accent-bright);
-    border-bottom-color: var(--accent-bright);
-  }
-  .featured-link-inline em {
-    font-family: var(--serif);
-    font-style: italic;
-    font-weight: 400;
-  }
-  .featured-link-inline .meta {
-    font-family: var(--mono);
-    font-size: 11px;
-    color: var(--text-3);
-    font-weight: 400;
-    letter-spacing: 0.04em;
-  }
-  .featured-link-inline:hover .meta { color: var(--accent-bright); }
-  .featured-divider {
-    color: var(--text-3);
-    margin: 0 14px;
-    font-family: var(--mono);
-    user-select: none;
-  }
-
-  /* ============ WORK (unified table with auto-cycling filter) ============ */
+  /* ============ WORK ============ */
   .work {
     background: var(--bg);
     border-top: 1px solid var(--border);
-    padding-top: 64px;
+    padding-top: 90px;
   }
   .work-filter-wrap {
     display: flex;
@@ -522,8 +299,7 @@
     background: var(--bg-2);
     border: 1px solid var(--border);
     border-radius: 100px;
-    font-family: var(--mono);
-    font-size: 12px;
+    font-size: 13px;
     position: relative;
   }
   .work-filter button {
@@ -535,9 +311,7 @@
     z-index: 2;
     white-space: nowrap;
   }
-  .work-filter button.active {
-    color: var(--text);
-  }
+  .work-filter button.active { color: #fff; }
   .work-filter button:hover:not(.active) { color: var(--text); }
   .work-filter-pill {
     position: absolute;
@@ -545,61 +319,8 @@
     bottom: 4px;
     background: var(--accent);
     border-radius: 100px;
-    transition: all 0.5s cubic-bezier(0.65, 0, 0.35, 1);
+    transition: all 0.4s cubic-bezier(0.65, 0, 0.35, 1);
     z-index: 1;
-    box-shadow: 0 4px 16px -4px var(--accent);
-  }
-  .auto-toggle {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    font-family: var(--mono);
-    font-size: 11px;
-    color: var(--text-2);
-    letter-spacing: 0.04em;
-    cursor: pointer;
-    user-select: none;
-    padding: 6px 4px;
-  }
-  .auto-toggle-label {
-    color: var(--text-3);
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    font-size: 10px;
-  }
-  .auto-toggle-switch {
-    position: relative;
-    width: 32px;
-    height: 18px;
-    background: var(--bg-3);
-    border: 1px solid var(--border);
-    border-radius: 100px;
-    transition: all 0.3s cubic-bezier(0.65, 0, 0.35, 1);
-  }
-  .auto-toggle-switch::after {
-    content: "";
-    position: absolute;
-    top: 2px;
-    left: 2px;
-    width: 12px;
-    height: 12px;
-    background: var(--text-3);
-    border-radius: 50%;
-    transition: all 0.3s cubic-bezier(0.65, 0, 0.35, 1);
-  }
-  .auto-toggle.on .auto-toggle-switch {
-    background: var(--accent);
-    border-color: var(--accent);
-  }
-  .auto-toggle.on .auto-toggle-switch::after {
-    left: 16px;
-    background: var(--text);
-    box-shadow: 0 0 8px rgba(255,255,255,0.4);
-  }
-  .auto-toggle-state {
-    color: var(--text);
-    font-weight: 500;
-    min-width: 28px;
   }
 
   .work-list {
@@ -608,51 +329,41 @@
   }
   .work-item {
     border-bottom: 1px solid var(--border);
-    transition: background 0.3s ease, opacity 0.4s ease, transform 0.4s ease;
+    transition: background 0.3s ease;
     cursor: pointer;
     overflow: hidden;
   }
   .work-item:hover { background: var(--bg-2); }
   .work-item.open { background: var(--bg-2); }
-  .work-item.hidden {
-    display: none;
-  }
+  .work-item.hidden { display: none; }
   .work-row {
     display: grid;
-    grid-template-columns: 60px 90px 1fr 240px 110px 36px;
+    grid-template-columns: 90px 1fr 240px 110px 36px;
     gap: 24px;
     padding: 22px 16px;
     align-items: center;
   }
-  .work-num {
-    font-family: var(--mono);
-    font-size: 11px;
-    color: var(--text-3);
-  }
   .work-year {
-    font-family: var(--mono);
     font-size: 13px;
     color: var(--text);
-    font-weight: 500;
+    font-weight: 600;
   }
   .work-title {
-    font-family: var(--sans);
     font-size: 18px;
     font-weight: 500;
     letter-spacing: -0.015em;
     line-height: 1.3;
     transition: color 0.2s ease;
   }
-  .work-item:hover .work-title { color: var(--accent-bright); }
+  .work-item:hover .work-title { color: var(--accent); }
   .work-venue {
-    font-family: var(--mono);
-    font-size: 11px;
+    font-size: 12px;
     color: var(--text-3);
   }
   .work-cat {
-    font-family: var(--mono);
-    font-size: 10px;
-    letter-spacing: 0.06em;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
     text-transform: uppercase;
     padding: 4px 10px;
     border-radius: 100px;
@@ -660,14 +371,14 @@
     justify-self: start;
     white-space: nowrap;
   }
-  .work-cat.applied { background: rgba(45, 85, 255, 0.1); color: var(--accent-bright); border: 1px solid rgba(45, 85, 255, 0.3); }
-  .work-cat.published { background: rgba(245, 166, 35, 0.1); color: var(--warn); border: 1px solid rgba(245, 166, 35, 0.3); }
+  .work-cat.applied { background: var(--accent-tint); color: var(--accent); border: 1px solid var(--accent-line); }
+  .work-cat.published { background: rgba(140, 106, 40, 0.08); color: #7A5A1E; border: 1px solid rgba(140, 106, 40, 0.3); }
   .work-cat.research { background: var(--bg-3); color: var(--text-2); border: 1px solid var(--border); }
-  .work-cat.in-progress { background: rgba(50, 184, 114, 0.1); color: #5BD68F; border: 1px solid rgba(50, 184, 114, 0.35); }
+  .work-cat.in-progress { background: rgba(23, 105, 68, 0.08); color: #166341; border: 1px solid rgba(23, 105, 68, 0.3); }
   .work-toggle {
     width: 30px; height: 30px;
     border-radius: 50%;
-    border: 1px solid var(--border);
+    border: 1px solid var(--border-2);
     display: grid;
     place-items: center;
     color: var(--text-2);
@@ -677,14 +388,12 @@
   .work-item.open .work-toggle {
     transform: rotate(45deg);
     background: var(--accent);
-    color: var(--text);
+    color: #fff;
     border-color: var(--accent);
   }
-  .work-item.flash {
-    animation: flashHighlight 1.2s ease-out;
-  }
+  .work-item.flash { animation: flashHighlight 1.2s ease-out; }
   @keyframes flashHighlight {
-    0% { background: rgba(45, 85, 255, 0.18); }
+    0% { background: rgba(27, 51, 88, 0.1); }
     100% { background: var(--bg-2); }
   }
   .work-detail {
@@ -695,69 +404,42 @@
   .work-item.open .work-detail { max-height: 900px; }
   .work-detail-inner {
     display: grid;
-    grid-template-columns: 60px 90px 1fr 240px 110px 36px;
+    grid-template-columns: 90px 1fr 240px 110px 36px;
     gap: 24px;
     padding: 0 16px 32px;
   }
   .work-detail-body {
-    grid-column: 3 / 4;
+    grid-column: 2 / 3;
     font-size: 15px;
     line-height: 1.6;
     color: var(--text-2);
   }
   .work-detail-body p + p { margin-top: 12px; }
-  .work-detail-body strong { color: var(--text); font-weight: 500; }
-  .work-detail-body a { color: var(--accent-bright); border-bottom: 1px solid var(--accent-dim); padding-bottom: 1px; }
+  .work-detail-body strong { color: var(--text); font-weight: 600; }
+  .work-detail-body a { color: var(--accent); border-bottom: 1px solid var(--accent-line); padding-bottom: 1px; }
   .work-impact {
-    grid-column: 4 / 6;
+    grid-column: 3 / 5;
     background: var(--bg);
     border: 1px solid var(--border);
     border-radius: 10px;
     padding: 18px;
     align-self: start;
   }
-  .work-impact h4 {
-    font-family: var(--mono);
-    font-size: 10px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--text-3);
-    margin-bottom: 14px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid var(--border);
-  }
   .work-impact-row {
     display: flex;
     justify-content: space-between;
     align-items: baseline;
     padding: 6px 0;
-    font-family: var(--mono);
-    font-size: 11px;
+    font-size: 13px;
     gap: 12px;
   }
   .work-impact-row dt { color: var(--text-3); flex-shrink: 0; }
   .work-impact-row dd { color: var(--text); font-weight: 500; text-align: right; }
-  .work-impact-row dd a { color: var(--accent-bright); border-bottom: 1px solid var(--accent-dim); padding-bottom: 1px; }
-  .work-tags {
-    grid-column: 3 / 4;
-    margin-top: 16px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-  }
-  .work-tags span {
-    font-family: var(--mono);
-    font-size: 10px;
-    padding: 3px 9px;
-    background: var(--bg-3);
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    color: var(--text-2);
-  }
+  .work-impact-row dd a { color: var(--accent); border-bottom: 1px solid var(--accent-line); padding-bottom: 1px; }
 
-  /* ============ ABOUT (now below work) ============ */
+  /* ============ ABOUT ============ */
   .about {
-    background: var(--bg-2);
+    background: var(--bg);
     border-top: 1px solid var(--border);
   }
   .about-grid {
@@ -771,10 +453,9 @@
     border-radius: 12px;
     background: var(--bg-3);
     border: 1px solid var(--border);
-    position: relative;
     overflow: hidden;
     position: sticky;
-    top: 100px;
+    top: 24px;
   }
   .about-portrait-img {
     position: absolute;
@@ -790,13 +471,7 @@
     color: var(--text-2);
     margin-bottom: 18px;
   }
-  .about-text p strong { color: var(--text); font-weight: 500; }
-  .about-text p .serif {
-    font-family: var(--serif);
-    font-style: italic;
-    color: var(--text);
-  }
-  .about-text p .accent { color: var(--accent-bright); }
+  .about-text p strong { color: var(--text); font-weight: 600; }
   .about-cta-row {
     margin-top: 24px;
     display: flex;
@@ -843,35 +518,28 @@
     bottom: 12px;
     left: 12px;
     right: 12px;
-    font-family: var(--mono);
-    font-size: 10px;
-    color: var(--text-2);
+    font-size: 11px;
+    color: #fff;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.5);
     padding-top: 10px;
-    border-top: 1px solid rgba(255,255,255,0.15);
+    border-top: 1px solid rgba(255,255,255,0.35);
     z-index: 2;
     display: flex;
     justify-content: space-between;
   }
 
   /* ============ CONTACT ============ */
-  .contact { padding: 140px 32px 80px; }
+  .contact { padding: 130px 32px 80px; background: var(--bg-2); border-top: 1px solid var(--border); }
   .contact-inner {
     max-width: 1280px;
     margin: 0 auto;
   }
   .contact-title {
-    font-family: var(--sans);
-    font-weight: 500;
-    font-size: clamp(56px, 9vw, 140px);
+    font-weight: 600;
+    font-size: clamp(48px, 8vw, 120px);
     line-height: 0.95;
-    letter-spacing: -0.045em;
+    letter-spacing: -0.04em;
     margin-bottom: 32px;
-  }
-  .contact-title .serif {
-    font-family: var(--serif);
-    font-style: italic;
-    font-weight: 400;
-    color: var(--accent-bright);
   }
   .contact-meta {
     font-size: 18px;
@@ -890,27 +558,23 @@
   .contact-link {
     display: block;
     padding: 22px;
-    background: var(--bg-2);
+    background: var(--bg);
     border: 1px solid var(--border);
     border-radius: 12px;
     transition: all 0.3s ease;
   }
   .contact-link:hover {
-    background: var(--bg-3);
     border-color: var(--accent);
     transform: translateY(-2px);
-    box-shadow: 0 12px 32px -12px var(--accent);
   }
   .contact-link dt {
-    font-family: var(--mono);
-    font-size: 10px;
-    letter-spacing: 0.1em;
+    font-size: 11px;
+    letter-spacing: 0.06em;
     text-transform: uppercase;
     color: var(--text-3);
     margin-bottom: 8px;
   }
   .contact-link dd {
-    font-family: var(--sans);
     font-size: 16px;
     color: var(--text);
     font-weight: 500;
@@ -923,134 +587,101 @@
     color: var(--text-3);
     transition: all 0.2s ease;
   }
-  .contact-link:hover dd::after { color: var(--accent-bright); transform: translateX(4px); }
+  .contact-link:hover dd::after { color: var(--accent); transform: translateX(4px); }
 
   footer {
     padding: 32px;
     border-top: 1px solid var(--border);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-family: var(--mono);
-    font-size: 11px;
+    text-align: center;
+    font-size: 12px;
     color: var(--text-3);
-    flex-wrap: wrap;
-    gap: 16px;
+    background: var(--bg-2);
   }
 
   /* ============ MOBILE ============ */
   @media (max-width: 900px) {
-    .status-bar { font-size: 10px; padding: 0 16px; }
-    .status-left .hide-sm, .status-right .hide-sm { display: none; }
-    section, .nav, .contact, footer, .featured { padding-left: 20px; padding-right: 20px; }
-    .nav { gap: 12px; padding: 12px 20px; }
-    .nav-links { display: none; }
-    .nav-cta { font-size: 11px; padding: 6px 10px; }
+    section, .contact, footer, .featured { padding-left: 20px; padding-right: 20px; }
+    .featured { padding-top: 16px; padding-bottom: 16px; }
+    .featured-track { font-size: 14px; }
+    .featured-divider { margin: 0 8px; }
+    .featured-inner { gap: 14px; }
     .hero { min-height: auto; padding-bottom: 0; }
     .hero-photo { position: relative; width: 100%; height: 50vh; }
     .hero-photo::after {
       background: linear-gradient(180deg, transparent 0%, transparent 50%, var(--bg) 100%);
     }
-    .hero-photo-meta { top: 80px; right: 20px; font-size: 9px; }
     .hero-content { padding: 40px 20px; min-height: auto; }
-    .hero-title { font-size: 44px; }
+    .hero-title { font-size: 40px; }
     .hero-meta-strip { grid-template-columns: 1fr 1fr; gap: 20px; }
     .hero-stat-num { font-size: 24px; }
-    .marquee-item { font-size: 12px; gap: 16px; }
-    .marquee-item .serif { font-size: 14px; }
-    .featured { padding: 28px 20px 20px; }
-    .featured-line { font-size: 15px; }
-    .featured-divider { margin: 0 8px; }
     .section-header { flex-direction: column; align-items: stretch; }
     .work-row, .work-detail-inner {
       grid-template-columns: 1fr;
       gap: 6px;
       padding: 16px;
     }
-    .work-num, .work-toggle { display: none; }
+    .work-toggle { display: none; }
     .work-row .work-toggle, .work-row .work-cat { display: grid; }
     .work-row .work-cat { justify-self: start; margin-top: 6px; }
     .work-row .work-toggle { justify-self: end; margin-top: 8px; display: grid; }
-    .work-detail-body, .work-impact, .work-tags { grid-column: 1; }
+    .work-detail-body, .work-impact { grid-column: 1; }
     .work-impact { margin-top: 16px; }
     .about-grid { grid-template-columns: 1fr; gap: 32px; }
     .about-portrait { position: static; max-width: 320px; }
     .photo-strip-item { width: 220px; }
-    .contact-title { font-size: 56px; }
+    .contact-title { font-size: 48px; }
     .contact-links { grid-template-columns: 1fr 1fr; }
-    footer { flex-direction: column; align-items: flex-start; }
   }
 </style>
 </head>
 <body>
 
-<!-- ============ STATUS BAR ============ -->
-<div class="status-bar">
-  <div class="status-left">
-    <span><span class="status-dot"></span>Open to fellowships &amp; full-time roles · 2026</span>
-    <span class="status-divider hide-sm">·</span>
-    <span class="hide-sm">Oxford, UK</span>
+<!-- ============ FEATURED (top banner) ============ -->
+<section id="featured" class="featured">
+  <div class="featured-inner">
+    <span class="featured-label">Featured</span>
+    <div class="featured-marquee">
+      <div class="featured-track" id="featuredTrack">
+        <!-- half 1 (populated by script into two identical halves) -->
+        <span class="featured-group">
+          <a href="#work-ai4pm" class="featured-link-inline" data-target="work-ai4pm">
+            From Pilot to Policy <span class="meta">Oxford · 2026</span>
+          </a>
+          <span class="featured-divider">·</span>
+          <a href="#work-aisi" class="featured-link-inline" data-target="work-aisi">
+            Governed Opacity <span class="meta">Oxford · 2025</span>
+          </a>
+          <span class="featured-divider">·</span>
+          <a href="#work-digital-innovation" class="featured-link-inline" data-target="work-digital-innovation">
+            Digital Innovation &amp; Governance <span class="meta">Oxford · 2024</span>
+          </a>
+          <span class="featured-divider">·</span>
+        </span>
+      </div>
+    </div>
   </div>
-  <div id="statusTime">--:-- GMT</div>
-  <div class="status-right">
-    <span class="hide-sm">v4.0 · 30.04.26</span>
-    <span class="status-divider hide-sm">·</span>
-    <span>EN-GB</span>
-  </div>
-</div>
-
-<!-- ============ NAV ============ -->
-<nav class="nav" id="nav">
-  <div class="nav-mark">
-    <div class="nav-mark-icon">G</div>
-    <span>Grahm Gaydos</span>
-  </div>
-  <div class="nav-links">
-    <a href="#featured">Research</a>
-    <a href="#work">Work</a>
-    <a href="thesis.html">Thesis</a>
-    <a href="#about">About</a>
-  </div>
-  <a class="nav-cta" href="#contact">
-    Get in touch <span>↗</span>
-  </a>
-</nav>
+</section>
 
 <!-- ============ HERO ============ -->
 <header class="hero">
   <div class="hero-photo">
-     <img src="images/standing_casual.JPG" alt="Grahm Gaydos" class="hero-photo-img" />
-    <div class="hero-photo-meta">
-      <strong>GTG_001</strong>
-      Oxford · 2026<br/>
-      35mm · ƒ/1.8
-    </div>
+    <img src="images/standing_casual.JPG" alt="Grahm Gaydos" class="hero-photo-img" />
   </div>
   <div class="hero-content">
-    <div class="hero-eyebrow reveal r1">
-      <span class="hero-eyebrow-dot"></span>
-      AI policy researcher · Oxford Internet Institute
-    </div>
-    <h1 class="hero-title reveal r2">
+    <h1 class="hero-title reveal r1">
       I work on AI policy<br/>
-      at the <span class="serif">layer where</span><br/>
+      at the layer where<br/>
       <span class="accent">promises get tested.</span>
     </h1>
-    <p class="hero-bio reveal r3">
-      <strong>I'm Grahm Gaydos.</strong> AI and digital transformation policy lives or dies in the institutional layer beneath the press release—the procurement criteria, the assessment frameworks, the stakeholder negotiations that decide what gets bought, who builds it, and whether it actually works. That layer is where I thrive. I've done tool evaluation and governance design at Jefferson County, published research with the Westminster Foundation for Democracy, spoken at the UN, and I'm finishing an MSc at the Oxford Internet Institute on how federal procurement memoranda shape AI adoption.
+    <p class="hero-bio reveal r2">
+      <strong>I'm Grahm Gaydos</strong>, an AI policy researcher at the Oxford Internet Institute. My work concerns the institutional layer through which technology policy is actually delivered—the procurement criteria, assessment frameworks, and stakeholder negotiations that determine what governments acquire, who builds it, and whether it performs. I have led frontier-AI tool evaluation and governance design for Jefferson County, Colorado; published policy research with the Westminster Foundation for Democracy; addressed the United Nations; and am completing an MSc examining how federal procurement memoranda shape AI adoption.
     </p>
-    <div class="hero-cta-row reveal r4">
-      <a class="btn btn-primary" href="#featured">
-        Featured research <span class="arrow">→</span>
-      </a>
-      <a class="btn btn-secondary" href="#work">
-        Selected work <span class="arrow">→</span>
-      </a>
-      <a class="btn btn-secondary" href="#contact">
-        Contact <span class="arrow">→</span>
-      </a>
+    <div class="hero-cta-row reveal r3">
+      <a class="btn btn-primary" href="#work">Selected work <span class="arrow">→</span></a>
+      <a class="btn btn-secondary" href="#about">About <span class="arrow">→</span></a>
+      <a class="btn btn-secondary" href="#contact">Contact <span class="arrow">→</span></a>
     </div>
-    <div class="hero-meta-strip reveal r5">
+    <div class="hero-meta-strip reveal r4">
       <div>
         <div class="hero-stat-num">500K+</div>
         <div class="hero-stat-label">Residents Served · JeffCo Emerging Technologies Team</div>
@@ -1060,8 +691,8 @@
         <div class="hero-stat-label">Published Works</div>
       </div>
       <div>
-        <div class="hero-stat-num"> 1</div>
-        <div class="hero-stat-label">UN Floor address · ICT Working Group</div>
+        <div class="hero-stat-num">1</div>
+        <div class="hero-stat-label">UN Floor Address · ICT Working Group</div>
       </div>
       <div>
         <div class="hero-stat-num">2028</div>
@@ -1071,82 +702,29 @@
   </div>
 </header>
 
-<!-- ============ MARQUEE ============ -->
-<div class="marquee">
-  <div class="marquee-track">
-    <span class="marquee-item">Frontier AI tool evaluation</span>
-    <span class="marquee-item"><span class="serif">Governance frameworks</span> that ship</span>
-    <span class="marquee-item">Policy briefs &amp; reports</span>
-    <span class="marquee-item">Stakeholder interviews</span>
-    <span class="marquee-item"><span class="serif">Mixed-methods</span> research design</span>
-    <span class="marquee-item">Quantitative analysis · R · Stata</span>
-    <span class="marquee-item">Procurement assessment</span>
-    <span class="marquee-item"><span class="serif">Translating</span> tech to policy</span>
-    <!-- duplicate for seamless loop -->
-    <span class="marquee-item">Frontier AI tool evaluation</span>
-    <span class="marquee-item"><span class="serif">Governance frameworks</span> that ship</span>
-    <span class="marquee-item">Policy briefs &amp; reports</span>
-    <span class="marquee-item">Stakeholder interviews</span>
-    <span class="marquee-item"><span class="serif">Mixed-methods</span> research design</span>
-    <span class="marquee-item">Quantitative analysis · R · Stata</span>
-    <span class="marquee-item">Procurement assessment</span>
-    <span class="marquee-item"><span class="serif">Translating</span> tech to policy</span>
-  </div>
-</div>
-
-<!-- ============ FEATURED RESEARCH (slim, inline) ============ -->
-<section id="featured" class="featured">
-  <div class="featured-inner">
-    <div class="featured-label-line">
-      02 — Featured
-    </div>
-    <div class="featured-line">
-      <a href="#work-ai4pm" class="featured-link-inline" data-target="work-ai4pm">
-        From Pilot to Policy <span class="meta">Oxford · 2026</span>
-      </a>
-      <span class="featured-divider">·</span>
-      <a href="#work-aisi" class="featured-link-inline" data-target="work-aisi">
-        Governed Opacity <span class="meta">Oxford · 2025</span>
-      </a>
-      <span class="featured-divider">·</span>
-      <a href="#work-digital-innovation" class="featured-link-inline" data-target="work-digital-innovation">
-        Digital Innovation &amp; Governance <span class="meta">Oxford · 2024</span>
-      </a>
-    </div>
-  </div>
-</section>
-
-<!-- ============ WORK (unified table, auto-cycling filters) ============ -->
+<!-- ============ WORK ============ -->
 <section id="work" class="work">
   <div class="container">
     <div class="section-header">
-      <div>
-        <div class="section-eyebrow">03 — Selected work</div>
-        <h2 class="section-title">A selection of <span class="serif">my recent work.</span></h2>
-      </div>
+      <h2 class="section-title">Selected work</h2>
       <a class="section-action" href="files/GaydosResume2026Updated.pdf" target="_blank" rel="noopener">Download CV <span>↓</span></a>
     </div>
 
     <div class="work-filter-wrap">
       <div class="work-filter" id="workFilter">
         <div class="work-filter-pill" id="filterPill"></div>
-        <button class="active" data-filter="applied">Applied</button>
+        <button class="active" data-filter="all">All</button>
+        <button data-filter="applied">Applied</button>
         <button data-filter="published">Published</button>
         <button data-filter="research">Research</button>
-        <button data-filter="all">All</button>
       </div>
-      <button class="auto-toggle on" id="autoToggle" aria-label="Toggle auto-cycle">
-        <span class="auto-toggle-label">Auto</span>
-        <span class="auto-toggle-switch"></span>
-        <span class="auto-toggle-state" id="autoToggleState">ON</span>
-      </button>
     </div>
-      <div class="work-list" id="workList">
- 
+
+    <div class="work-list" id="workList">
+
   <!-- 2026 — MSc thesis (in progress) -->
   <article class="work-item" data-cat="published" id="work-thesis">
     <div class="work-row">
-      <div class="work-num">№ 01</div>
       <div class="work-year">2026</div>
       <h4 class="work-title">Procurement and Process: an interrupted time series analysis of federal AI contracting after the 2024 OMB AI procurement memoranda</h4>
       <div class="work-venue">Oxford Internet Institute · MSc thesis</div>
@@ -1160,28 +738,17 @@
           <p>Identifies AI-related contract actions across roughly 7,200 agency-months and tests for level shifts at the M-24-10 (March 2024) and M-24-18 (September 2024) intervention points. <strong>Distinguishes between extensive-margin (frequency) and intensive-margin (volume) responses</strong> — a distinction with direct implications for how administrative AI policy is read as a regulatory instrument. <a href="thesis.html">Full chart and methodology →</a></p>
         </div>
         <div class="work-impact">
-          <h4>Methodology</h4>
-          <div class="work-impact-row"><dt>Method</dt><dd>ITS · panel FE</dd></div>
+          <div class="work-impact-row"><dt>For</dt><dd>MSc thesis · OII</dd></div>
           <div class="work-impact-row"><dt>Tools</dt><dd>R · Stata · fixest</dd></div>
-          <div class="work-impact-row"><dt>Source</dt><dd>USAspending.gov</dd></div>
-          <div class="work-impact-row"><dt>Submission</dt><dd>Jun 2026</dd></div>
           <div class="work-impact-row"><dt>Read</dt><dd><a href="files/gaydos-procurement-and-process-thesis-2026.pdf" target="_blank" rel="noopener">Download (PDF) ↓</a></dd></div>
-        </div>
-        <div class="work-tags">
-          <span>Procurement</span>
-          <span>Causal inference</span>
-          <span>Federal data</span>
-          <span>R</span>
-          <span>Stata</span>
         </div>
       </div>
     </div>
   </article>
- 
+
   <!-- 2026 — AI4PM pilot scalability paper -->
   <article class="work-item" data-cat="research" id="work-ai4pm">
     <div class="work-row">
-      <div class="work-num">№ 02</div>
       <div class="work-year">2026</div>
       <h4 class="work-title">From Pilot to Policy: why government AI pilots stagnate, and what that tells us about institutional capacity</h4>
       <div class="work-venue">AI for Policymaking · Essay</div>
@@ -1195,17 +762,8 @@
           <p>The same exemptions that make pilots succeed are the conditions that prevent them from progressing. Stagnation is the system working precisely as the institutional environment has forced it to.</p>
         </div>
         <div class="work-impact">
-          <h4>Detail</h4>
-          <div class="work-impact-row"><dt>Course</dt><dd>AI for Policymaking</dd></div>
-          <div class="work-impact-row"><dt>Type</dt><dd>Argument essay</dd></div>
-          <div class="work-impact-row"><dt>Anchors</dt><dd>Mikhaylov · Wirtz · Kattel</dd></div>
+          <div class="work-impact-row"><dt>For</dt><dd>AI for Policymaking · coursework</dd></div>
           <div class="work-impact-row"><dt>Read</dt><dd><a href="files/gaydos-from-pilot-to-policy-ai4pm-2026.pdf" target="_blank" rel="noopener">Download (PDF) ↓</a></dd></div>
-        </div>
-        <div class="work-tags">
-          <span>Public-sector AI</span>
-          <span>Pilots</span>
-          <span>Institutional capacity</span>
-          <span>Procurement</span>
         </div>
       </div>
     </div>
@@ -1214,7 +772,6 @@
   <!-- 2026 — Governed Opacity -->
   <article class="work-item" data-cat="research" id="work-aisi">
     <div class="work-row">
-      <div class="work-num">№ 07</div>
       <div class="work-year">2026</div>
       <h4 class="work-title">Governed Opacity: the EU AI Act's unresolved tension between prohibiting and institutionalising information asymmetry</h4>
       <div class="work-venue">Law and the Internet · Coursework</div>
@@ -1228,25 +785,16 @@
           <p>The Act's boundary between the two is not principled but procedural and distributive: <strong>it calibrates who benefits from informational asymmetry and on what terms</strong>, rather than resolving the underlying tension.</p>
         </div>
         <div class="work-impact">
-          <h4>Detail</h4>
-          <div class="work-impact-row"><dt>Course</dt><dd>Law and the Internet</dd></div>
-          <div class="work-impact-row"><dt>Type</dt><dd>Argument essay</dd></div>
-          <div class="work-impact-row"><dt>Anchors</dt><dd>Mayer-Schönberger · Zarra · Bradford</dd></div>
+          <div class="work-impact-row"><dt>For</dt><dd>Law and the Internet · coursework</dd></div>
           <div class="work-impact-row"><dt>Read</dt><dd><a href="files/gaydos-governed-opacity-2026.pdf" target="_blank" rel="noopener">Download (PDF) ↓</a></dd></div>
-        </div>
-        <div class="work-tags">
-          <span>EU AI Act</span>
-          <span>Information asymmetry</span>
-          <span>Regulatory design</span>
         </div>
       </div>
     </div>
   </article>
- 
+
   <!-- 2025 — JeffCo governance framework -->
   <article class="work-item" data-cat="applied" id="work-jeffco">
     <div class="work-row">
-      <div class="work-num">№ 03</div>
       <div class="work-year">2025</div>
       <h4 class="work-title">Jefferson County's first frontier-AI governance framework</h4>
       <div class="work-venue">Jefferson Co. · Colorado</div>
@@ -1260,26 +808,15 @@
           <p>Led qualitative stakeholder interviews with department leads across government divisions and synthesised findings to shape the framework's evaluation, pilot, and scale-up procedures.</p>
         </div>
         <div class="work-impact">
-          <h4>Impact</h4>
-          <div class="work-impact-row"><dt>Residents</dt><dd>500,000+</dd></div>
-          <div class="work-impact-row"><dt>Status</dt><dd>Adopted</dd></div>
-          <div class="work-impact-row"><dt>Team</dt><dd>Innovation &amp; Emerging Tech</dd></div>
-          <div class="work-impact-row"><dt>Dates</dt><dd>Jun – Oct 2025</dd></div>
-        </div>
-        <div class="work-tags">
-          <span>Frontier AI</span>
-          <span>Governance</span>
-          <span>Local government</span>
-          <span>Implementation</span>
+          <div class="work-impact-row"><dt>For</dt><dd>Jefferson County · adopted</dd></div>
         </div>
       </div>
     </div>
   </article>
- 
+
   <!-- 2025 — JeffCo 8-criterion assessment framework -->
   <article class="work-item" data-cat="applied" id="work-jeffco-assessment">
     <div class="work-row">
-      <div class="work-num">№ 04</div>
       <div class="work-year">2025</div>
       <h4 class="work-title">An 8-criterion structured assessment framework for AI tool procurement</h4>
       <div class="work-venue">Jefferson Co. · Colorado</div>
@@ -1293,26 +830,15 @@
           <p>Used to assess frontier AI tools for County adoption; outputs informed leadership's technology decisions and were incorporated into the broader governance framework.</p>
         </div>
         <div class="work-impact">
-          <h4>Detail</h4>
-          <div class="work-impact-row"><dt>Criteria</dt><dd>8</dd></div>
-          <div class="work-impact-row"><dt>Method</dt><dd>Mixed (qual + quant scoring)</dd></div>
-          <div class="work-impact-row"><dt>Used in</dt><dd>Tool evaluation pilots</dd></div>
-          <div class="work-impact-row"><dt>Year</dt><dd>2025</dd></div>
-        </div>
-        <div class="work-tags">
-          <span>Tool evaluation</span>
-          <span>Procurement</span>
-          <span>Comparative scoring</span>
-          <span>Methods</span>
+          <div class="work-impact-row"><dt>For</dt><dd>Jefferson County tool evaluation</dd></div>
         </div>
       </div>
     </div>
   </article>
- 
+
   <!-- 2025 — JeffCo pilot proposals -->
   <article class="work-item" data-cat="applied" id="work-jeffco-pilots">
     <div class="work-row">
-      <div class="work-num">№ 05</div>
       <div class="work-year">2025</div>
       <h4 class="work-title">Five pilot proposals for departmental AI adoption</h4>
       <div class="work-venue">Jefferson Co. · Colorado</div>
@@ -1325,24 +851,15 @@
           <p>Authored <strong>five pilot proposals</strong> for the project management team evaluating frontier AI tools for departmental adoption. Each proposal assessed implementation feasibility, governance risk, and operational impact — translating abstract technology guidance into concrete pilot designs that the County could actually run.</p>
         </div>
         <div class="work-impact">
-          <h4>Detail</h4>
-          <div class="work-impact-row"><dt>Proposals</dt><dd>5</dd></div>
-          <div class="work-impact-row"><dt>For</dt><dd>Project mgmt team</dd></div>
-          <div class="work-impact-row"><dt>Assessed</dt><dd>Feasibility · risk · impact</dd></div>
-        </div>
-        <div class="work-tags">
-          <span>Pilot design</span>
-          <span>Frontier AI</span>
-          <span>Implementation</span>
+          <div class="work-impact-row"><dt>For</dt><dd>Jefferson County project management</dd></div>
         </div>
       </div>
     </div>
   </article>
- 
+
   <!-- 2025 — Healthcare.gov senior thesis -->
   <article class="work-item" data-cat="published" id="work-healthcare">
     <div class="work-row">
-      <div class="work-num">№ 06</div>
       <div class="work-year">2025</div>
       <h4 class="work-title">The 2013 Healthcare.gov Launch &amp; State Capacity in the Digital Age</h4>
       <div class="work-venue">Williams College · Senior thesis</div>
@@ -1356,26 +873,16 @@
           <p>The argument: the launch crisis was a procurement crisis before it was a software crisis. Sets up the procurement-as-governance frame extended in the MSc thesis.</p>
         </div>
         <div class="work-impact">
-          <h4>Detail</h4>
-          <div class="work-impact-row"><dt>Method</dt><dd>Qualitative · archival</dd></div>
-          <div class="work-impact-row"><dt>Programme</dt><dd>Political Science</dd></div>
-          <div class="work-impact-row"><dt>GPA</dt><dd>3.83 · Dean's List</dd></div>
+          <div class="work-impact-row"><dt>For</dt><dd>Senior thesis · Political Science</dd></div>
           <div class="work-impact-row"><dt>Read</dt><dd><a href="files/gaydos-healthcare-state-capacity-2025.pdf" target="_blank" rel="noopener">Download (PDF) ↓</a></dd></div>
-        </div>
-        <div class="work-tags">
-          <span>State capacity</span>
-          <span>Procurement</span>
-          <span>Healthcare.gov</span>
-          <span>Case study</span>
         </div>
       </div>
     </div>
   </article>
- 
+
   <!-- 2024 — WFD report -->
   <article class="work-item" data-cat="published" id="work-wfd">
     <div class="work-row">
-      <div class="work-num">№ 08</div>
       <div class="work-year">2024</div>
       <h4 class="work-title">AI &amp; Democracy: Landscape, Risks &amp; Opportunities for the Democracy Support Sector</h4>
       <div class="work-venue">Westminster Foundation for Democracy</div>
@@ -1389,26 +896,17 @@
           <p>Developed a working definition of AI for the democracy support sector and translated it into a briefing deck presented to WFD staff and external partners, packaging complex policy research for varied audiences.</p>
         </div>
         <div class="work-impact">
-          <h4>Detail</h4>
+          <div class="work-impact-row"><dt>For</dt><dd>Westminster Foundation for Democracy</dd></div>
           <div class="work-impact-row"><dt>Length</dt><dd>15,000 words</dd></div>
-          <div class="work-impact-row"><dt>Lit review</dt><dd>50+ sources</dd></div>
-          <div class="work-impact-row"><dt>Published</dt><dd>Sept 2024</dd></div>
           <div class="work-impact-row"><dt>Read</dt><dd><a href="https://www.wfd.org/what-we-do/resources/artificial-intelligence-ai-action-preliminary-review-ai-use-democracy-support" target="_blank" rel="noopener">wfd.org ↗</a></dd></div>
-        </div>
-        <div class="work-tags">
-          <span>AI governance</span>
-          <span>Democracy</span>
-          <span>Practitioner brief</span>
-          <span>International</span>
         </div>
       </div>
     </div>
   </article>
- 
+
   <!-- 2024 — AI & Electoral Integrity -->
   <article class="work-item" data-cat="published" id="work-elections">
     <div class="work-row">
-      <div class="work-num">№ 09</div>
       <div class="work-year">2024</div>
       <h4 class="work-title">AI &amp; Electoral Integrity</h4>
       <div class="work-venue">Williams Class of 1945 World Fellowship</div>
@@ -1421,25 +919,16 @@
           <p>Eight-week fellowship project on AI's impact on democratic practices and elections — synthesising primary sourcing, case studies, stakeholder interviews, and quantitative data collection. <strong>The report deliberately resists the genre's pull toward speculation</strong>; the goal was a usable baseline rather than scenario-building.</p>
         </div>
         <div class="work-impact">
-          <h4>Detail</h4>
-          <div class="work-impact-row"><dt>Fellowship</dt><dd>Class of 1945</dd></div>
-          <div class="work-impact-row"><dt>Method</dt><dd>Mixed</dd></div>
-          <div class="work-impact-row"><dt>Duration</dt><dd>8 weeks</dd></div>
+          <div class="work-impact-row"><dt>For</dt><dd>Class of 1945 Fellowship</dd></div>
           <div class="work-impact-row"><dt>Read</dt><dd><a href="files/gaydos-ai-electoral-integrity-2024.pdf" target="_blank" rel="noopener">Download (PDF) ↓</a></dd></div>
-        </div>
-        <div class="work-tags">
-          <span>Elections</span>
-          <span>Empirical</span>
-          <span>AI deployment</span>
         </div>
       </div>
     </div>
   </article>
- 
+
   <!-- 2024 — Digital Innovation & Governance -->
   <article class="work-item" data-cat="research" id="work-digital-innovation">
     <div class="work-row">
-      <div class="work-num">№ 10</div>
       <div class="work-year">2024</div>
       <h4 class="work-title">Digital Innovation and Governance: how states should respond to authority challenges from digital platforms</h4>
       <div class="work-venue">Oxford · Coursework</div>
@@ -1452,25 +941,17 @@
           <p>A 5,000-word essay produced under tutorial supervision at Oxford, examining how states — particularly those with limited means or resources — should respond to challenges to their authority from digital platforms. <strong>Treats sovereignty as a multidimensional resource rather than a binary status</strong>, and traces what kinds of state responses are actually viable across legal, physical, and political dimensions.</p>
         </div>
         <div class="work-impact">
-          <h4>Detail</h4>
+          <div class="work-impact-row"><dt>For</dt><dd>Williams-Exeter Programme (WEPO)</dd></div>
           <div class="work-impact-row"><dt>Length</dt><dd>~5,000 words</dd></div>
-          <div class="work-impact-row"><dt>Programme</dt><dd>Williams-Exeter (WEPO)</dd></div>
-          <div class="work-impact-row"><dt>Subject</dt><dd>Digital Era Innovation &amp; Governance</dd></div>
           <div class="work-impact-row"><dt>Read</dt><dd><a href="files/gaydos-digital-innovation-governance-2024.pdf" target="_blank" rel="noopener">Download (PDF) ↓</a></dd></div>
-        </div>
-        <div class="work-tags">
-          <span>Digital sovereignty</span>
-          <span>Platform regulation</span>
-          <span>State capacity</span>
         </div>
       </div>
     </div>
   </article>
- 
+
   <!-- 2023 — UN floor address -->
   <article class="work-item" data-cat="applied" id="work-un">
     <div class="work-row">
-      <div class="work-num">№ 11</div>
       <div class="work-year">2023</div>
       <h4 class="work-title">UN floor address &amp; youth statement on ICTs</h4>
       <div class="work-venue">2023 NPT PrepCom · NAPF</div>
@@ -1484,26 +965,16 @@
           <p>Prepared speech materials for civil society partners and UN representatives, helping communicate policy positions on AI governance, emerging technologies, and international security in clear, public-facing language.</p>
         </div>
         <div class="work-impact">
-          <h4>Impact</h4>
-          <div class="work-impact-row"><dt>Venue</dt><dd>UN floor</dd></div>
-          <div class="work-impact-row"><dt>Selected by</dt><dd>Youth delegation</dd></div>
-          <div class="work-impact-row"><dt>Hosted</dt><dd>NAPF · RTT</dd></div>
+          <div class="work-impact-row"><dt>For</dt><dd>2023 NPT PrepCom · UN floor</dd></div>
           <div class="work-impact-row"><dt>Watch</dt><dd><a href="https://youtu.be/Iinr2R1cWSs?si=qGpaLV6DiO2gLEYy" target="_blank" rel="noopener">youtube.com ↗</a></dd></div>
-        </div>
-        <div class="work-tags">
-          <span>Multilateral</span>
-          <span>AI–nuclear nexus</span>
-          <span>Disarmament</span>
-          <span>ICT policy</span>
         </div>
       </div>
     </div>
   </article>
- 
+
   <!-- 2023 — NAPF AI use policy guidance -->
   <article class="work-item" data-cat="applied" id="work-napf-ai-policy">
     <div class="work-row">
-      <div class="work-num">№ 12</div>
       <div class="work-year">2023</div>
       <h4 class="work-title">Generative-AI use policy guidance for the Nuclear Age Peace Foundation</h4>
       <div class="work-venue">NAPF · Reverse the Trend</div>
@@ -1517,24 +988,15 @@
           <p>Spearheaded internal discussions with NAPF staff about implementing the guidance in day-to-day work.</p>
         </div>
         <div class="work-impact">
-          <h4>Detail</h4>
-          <div class="work-impact-row"><dt>For</dt><dd>NAPF · internal</dd></div>
-          <div class="work-impact-row"><dt>Topic</dt><dd>Generative AI use</dd></div>
-          <div class="work-impact-row"><dt>Year</dt><dd>2023</dd></div>
-        </div>
-        <div class="work-tags">
-          <span>Generative AI</span>
-          <span>Internal policy</span>
-          <span>Civil society</span>
+          <div class="work-impact-row"><dt>For</dt><dd>NAPF · internal use</dd></div>
         </div>
       </div>
     </div>
   </article>
- 
+
   <!-- 2022 — Colorado Governor's Office -->
   <article class="work-item" data-cat="applied" id="work-gov">
     <div class="work-row">
-      <div class="work-num">№ 13</div>
       <div class="work-year">2022</div>
       <h4 class="work-title">Executive appointment orders &amp; board pipeline</h4>
       <div class="work-venue">Office of the Governor · Colorado</div>
@@ -1547,32 +1009,21 @@
           <p>Drafted executive appointment orders and governmental memos at the Office of Boards and Commissions; managed candidate pipeline across <strong>12 active board vacancies</strong>, coordinating with appointees and agency staff on state-level operations.</p>
         </div>
         <div class="work-impact">
-          <h4>Impact</h4>
-          <div class="work-impact-row"><dt>Vacancies</dt><dd>12 active</dd></div>
-          <div class="work-impact-row"><dt>Office</dt><dd>Boards &amp; Commissions</dd></div>
-          <div class="work-impact-row"><dt>Dates</dt><dd>May – Sep 2022</dd></div>
-        </div>
-        <div class="work-tags">
-          <span>State government</span>
-          <span>Appointments</span>
-          <span>Operations</span>
+          <div class="work-impact-row"><dt>For</dt><dd>Office of Boards &amp; Commissions</dd></div>
         </div>
       </div>
     </div>
   </article>
- 
-</div>
+
+    </div>
   </div>
 </section>
 
-<!-- ============ ABOUT (now below work) ============ -->
+<!-- ============ ABOUT ============ -->
 <section id="about" class="about">
   <div class="container">
     <div class="section-header">
-      <div>
-        <div class="section-eyebrow">04 — About</div>
-        <h2 class="section-title">A short <span class="serif">orientation.</span></h2>
-      </div>
+      <h2 class="section-title">About</h2>
     </div>
 
     <div class="about-grid">
@@ -1580,9 +1031,9 @@
         <img src="images/suit_standing.JPG" alt="Grahm Gaydos" class="about-portrait-img" />
       </div>
       <div class="about-text">
-        <p>I grew up in Colorado, ran NCAA Cross Country and Track at <strong>Williams College</strong>, and got into policy work because I kept being struck by how often the gap between what governments said about technology and what they actually did came down to <span class="serif">the unglamorous institutional infrastructure underneath</span>—who could translate a regulation into an implementation memo, who shaped requirements before any meeting convened, and who had the institutional standing to make a recommendation stick. I went looking for the work where those gaps get closed, and I have spent the last few years doing just that-in <strong>Jefferson County</strong>, at the <strong>Westminster Foundation for Democracy</strong>, at the <strong>UN</strong>, and now at the <strong>Oxford Internet Institute</strong>.</p>
-        <p>I'm someone equally comfortable in <span class="serif">a policy review, a stakeholder negotiation, or a research seminar</span>, and can translate cleanly across all three. I write quickly and tightly—<strong>I would rather hand a team a five-page brief that lands than a fifty-page report nobody opens</strong>. I am comfortable telling leadership that a recommendation will not survive contact with the institution it has to operate inside, and equally comfortable redrafting it until it does. Outside of my work, I race professionally on the <span class="accent">USA Triathlon National Development Team</span>, with an aim towards qualification for the 2028 Olympic Games.</p>
-        <p><strong>Open to fellowships, research roles, and policy positions</strong>—particularly with teams working on the institutional conditions of AI deployment.</p>
+        <p>I grew up in Colorado and studied Political Science at <strong>Williams College</strong>, where I also competed in NCAA Cross Country and Track. I was drawn to policy work by a recurring observation: the distance between what governments say about technology and what they deliver is usually determined by the institutional infrastructure underneath—who translates regulation into implementation, who shapes requirements before decisions are formalised, and who holds the standing to see a recommendation through. I have spent the past several years working precisely where those gaps close: in <strong>Jefferson County</strong>, at the <strong>Westminster Foundation for Democracy</strong>, at the <strong>United Nations</strong>, and now at the <strong>Oxford Internet Institute</strong>.</p>
+        <p>I am equally at home in a policy review, a stakeholder negotiation, or a research seminar, and I translate readily among the three. I write quickly and precisely—<strong>I would rather deliver a five-page brief that moves a decision than a fifty-page report that goes unread</strong>—and I am candid about whether a recommendation will survive contact with the institution it must operate within, and prepared to redraft it until it will. Beyond my research, I compete on the <strong>USA Triathlon National Development Team</strong>, with the aim of qualifying for the 2028 Olympic Games.</p>
+        <p><strong>I am open to fellowships, research roles, and policy positions</strong>—particularly with teams working on the institutional conditions of AI deployment.</p>
 
         <div class="about-cta-row">
           <a class="btn btn-primary" href="#contact">Get in touch <span class="arrow">→</span></a>
@@ -1606,16 +1057,16 @@
           <div class="caption"><span>2025</span><span>NDT</span></div>
         </div>
         <div class="photo-strip-item">
-          <img src="images/graduation.jpeg" alt="Williams Graduation" class="photo-strip-img" />
-          <div class="caption"><span>2025</span><span>NDT</span></div>
+          <img src="images/graduation.jpeg" alt="Williams graduation" class="photo-strip-img" />
+          <div class="caption"><span>2025</span><span>Williams</span></div>
         </div>
         <div class="photo-strip-item">
-          <img src="images/thinking.JPG" alt="Thinking Thoughtfully" class="photo-strip-img" />
-          <div class="caption"><span>2025</span><span>NDT</span></div>
+          <img src="images/thinking.JPG" alt="At work" class="photo-strip-img" />
+          <div class="caption"><span>2025</span><span>Oxford</span></div>
         </div>
         <div class="photo-strip-item">
           <img src="images/co_capital.jpeg" alt="At the Colorado Capitol" class="photo-strip-img" />
-          <div class="caption"><span>2025</span><span>NDT</span></div>
+          <div class="caption"><span>2022</span><span>Colorado Capitol</span></div>
         </div>
       </div>
     </div>
@@ -1625,8 +1076,7 @@
 <!-- ============ CONTACT ============ -->
 <section id="contact" class="contact">
   <div class="contact-inner">
-    <div class="section-eyebrow">06 — Get in touch</div>
-    <h2 class="contact-title">Let's <span class="serif">talk.</span></h2>
+    <h2 class="contact-title">Let's talk.</h2>
     <p class="contact-meta">
       Open to fellowships, research roles, and policy positions in 2026—particularly with teams working on AI procurement, governance, or the institutional conditions of frontier AI deployment. Reasonably fast on email.
     </p>
@@ -1648,30 +1098,10 @@
 </section>
 
 <footer>
-  <div>© 2026 Grahm Gaydos · v4.0</div>
-  <div>Set in Geist + Instrument Serif · Oxford</div>
-  <div>Source on request</div>
+  © 2026 Grahm Gaydos
 </footer>
 
 <script>
-// ============ Nav scroll ============
-const nav = document.getElementById('nav');
-window.addEventListener('scroll', () => {
-  if (window.scrollY > 24) nav.classList.add('scrolled');
-  else nav.classList.remove('scrolled');
-});
-
-// ============ Status bar time ============
-function updateTime() {
-  const now = new Date();
-  const opts = { timeZone: 'Europe/London', hour: '2-digit', minute: '2-digit', hour12: false };
-  const time = now.toLocaleTimeString('en-GB', opts);
-  const el = document.getElementById('statusTime');
-  if (el) el.textContent = time + ' GMT';
-}
-updateTime();
-setInterval(updateTime, 30000);
-
 // ============ Work item expand ============
 document.querySelectorAll('.work-item').forEach(item => {
   item.addEventListener('click', (e) => {
@@ -1682,18 +1112,10 @@ document.querySelectorAll('.work-item').forEach(item => {
   });
 });
 
-// ============ Work filter — toggle-controlled auto-cycle ============
+// ============ Work filter (manual) ============
 const filterButtons = document.querySelectorAll('#workFilter button');
 const filterPill = document.getElementById('filterPill');
 const filterWrap = document.getElementById('workFilter');
-const autoToggle = document.getElementById('autoToggle');
-const autoToggleState = document.getElementById('autoToggleState');
-
-// Cycle order: Applied → Published → Research → All
-const cycleOrder = ['applied', 'published', 'research', 'all'];
-let currentIdx = 0;
-let cycleInterval = null;
-let autoOn = true;
 
 function applyFilter(filter) {
   filterButtons.forEach(b => {
@@ -1716,90 +1138,63 @@ function applyFilter(filter) {
   });
 }
 
-function startCycle() {
-  if (cycleInterval) clearInterval(cycleInterval);
-  cycleInterval = setInterval(() => {
-    currentIdx = (currentIdx + 1) % cycleOrder.length;
-    applyFilter(cycleOrder[currentIdx]);
-  }, 7000);
-}
-
-function stopCycle() {
-  if (cycleInterval) {
-    clearInterval(cycleInterval);
-    cycleInterval = null;
-  }
-}
-
-// Toggle switch click handler
-autoToggle.addEventListener('click', (e) => {
-  e.stopPropagation();
-  autoOn = !autoOn;
-  autoToggle.classList.toggle('on', autoOn);
-  autoToggleState.textContent = autoOn ? 'ON' : 'OFF';
-  if (autoOn) {
-    startCycle();
-  } else {
-    stopCycle();
-  }
-});
-
-// Manual filter clicks turn off auto-cycle
 filterButtons.forEach(btn => {
-  btn.addEventListener('click', () => {
-    const filter = btn.dataset.filter;
-    // Update currentIdx to match what user picked
-    const idx = cycleOrder.indexOf(filter);
-    if (idx >= 0) currentIdx = idx;
-    applyFilter(filter);
-    // Turn auto-cycle off
-    autoOn = false;
-    autoToggle.classList.remove('on');
-    autoToggleState.textContent = 'OFF';
-    stopCycle();
-  });
+  btn.addEventListener('click', () => applyFilter(btn.dataset.filter));
 });
 
-// Init
-window.addEventListener('load', () => {
-  applyFilter(cycleOrder[currentIdx]);
-  if (autoOn) startCycle();
-});
+window.addEventListener('load', () => applyFilter('all'));
 window.addEventListener('resize', () => {
   const active = Array.from(filterButtons).find(b => b.classList.contains('active'));
   if (active) applyFilter(active.dataset.filter);
 });
 
-// ============ Featured links → scroll to work item, expand, flash ============
-document.querySelectorAll('.featured-link-inline').forEach(link => {
-  link.addEventListener('click', (e) => {
-    e.preventDefault();
-    const targetId = link.getAttribute('href').substring(1);
-    const targetEl = document.getElementById(targetId);
-    if (!targetEl) return;
+// ============ Featured marquee: duplicate content for a seamless loop ============
+(function () {
+  const track = document.getElementById('featuredTrack');
+  const marquee = track.parentElement;
+  const group = track.querySelector('.featured-group');
 
-    // Stop auto-cycle so the target stays visible
-    autoOn = false;
-    autoToggle.classList.remove('on');
-    autoToggleState.textContent = 'OFF';
-    stopCycle();
-
-    // Switch filter to All so target is visible
-    currentIdx = cycleOrder.indexOf('all');
-    applyFilter('all');
-
-    // Scroll to target
-    const yOffset = -100;
-    const yPos = targetEl.getBoundingClientRect().top + window.pageYOffset + yOffset;
-    window.scrollTo({ top: yPos, behavior: 'smooth' });
-
-    // Expand and flash after scroll settles
-    setTimeout(() => {
-      document.querySelectorAll('.work-item').forEach(i => i.classList.remove('open', 'flash'));
-      targetEl.classList.add('open', 'flash');
-      setTimeout(() => targetEl.classList.remove('flash'), 1200);
-    }, 600);
+  function buildLoop() {
+    // Reset to a single group
+    track.querySelectorAll('.featured-group').forEach((g, i) => { if (i > 0) g.remove(); });
+    const groupWidth = group.getBoundingClientRect().width;
+    const containerWidth = marquee.getBoundingClientRect().width;
+    if (!groupWidth) return;
+    // Each half must be at least as wide as the container; total = 2 halves
+    const perHalf = Math.max(1, Math.ceil(containerWidth / groupWidth));
+    const total = perHalf * 2;
+    for (let i = 1; i < total; i++) {
+      track.appendChild(group.cloneNode(true));
+    }
+  }
+  window.addEventListener('load', buildLoop);
+  let resizeTimer;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(buildLoop, 200);
   });
+})();
+
+// ============ Featured links → scroll to work item, expand, flash (delegated) ============
+document.getElementById('featuredTrack').addEventListener('click', (e) => {
+  const link = e.target.closest('.featured-link-inline');
+  if (!link) return;
+  e.preventDefault();
+  const targetId = link.getAttribute('href').substring(1);
+  const targetEl = document.getElementById(targetId);
+  if (!targetEl) return;
+
+  applyFilter('all');
+
+  const yOffset = -24;
+  const yPos = targetEl.getBoundingClientRect().top + window.pageYOffset + yOffset;
+  window.scrollTo({ top: yPos, behavior: 'smooth' });
+
+  setTimeout(() => {
+    document.querySelectorAll('.work-item').forEach(i => i.classList.remove('open', 'flash'));
+    targetEl.classList.add('open', 'flash');
+    setTimeout(() => targetEl.classList.remove('flash'), 1200);
+  }, 600);
 });
 </script>
 
